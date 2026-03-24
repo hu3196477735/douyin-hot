@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>抖音热点榜</title>
+    <title>全网热榜</title>
     <style>
         * {
             margin: 0;
@@ -12,188 +12,747 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
             padding: 20px;
         }
         
         .container {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
         
         .header {
-            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            margin-bottom: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%);
         }
         
         .header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
-        .header .date {
-            font-size: 0.9em;
+        .header .subtitle {
+            font-size: 13px;
+            margin-top: 8px;
             opacity: 0.9;
+            font-weight: 300;
         }
         
-        .hot-list {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        
-        .hot-item {
-            padding: 20px;
-            border-bottom: 1px solid #f0f0f0;
+        .refresh-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 15px;
-            transition: background 0.2s;
+            justify-content: center;
         }
         
-        .hot-item:hover {
+        .refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(180deg);
+        }
+        
+        .refresh-btn:active {
+            transform: rotate(360deg);
+        }
+        
+        .refresh-btn.loading {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .platform-selector {
+            padding: 20px;
             background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
         }
         
-        .hot-item:last-child {
-            border-bottom: none;
-        }
-        
-        .hot-item.top3 {
-            background: linear-gradient(135deg, #fff5e6 0%, #ffe8d6 100%);
-        }
-        
-        .rank {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #666;
-            min-width: 40px;
+        .platform-label {
             text-align: center;
+            color: #6c757d;
+            font-size: 13px;
+            margin-bottom: 12px;
+            font-weight: 500;
         }
         
-        .hot-item.top3 .rank {
-            color: #ff6b6b;
+        .platform-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .platform-btn {
+            padding: 14px 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .platform-btn:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .platform-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .platform-btn .emoji {
+            font-size: 20px;
         }
         
         .content {
+            padding: 25px 20px;
+            max-height: 65vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        .content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        
+        .content::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #adb5bd;
+        }
+        
+        .loading::before {
+            content: '⏳';
+            display: block;
+            font-size: 48px;
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .hot-list {
+            display: none;
+        }
+        
+        .hot-list.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hot-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hot-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .hot-item:hover {
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+        
+        .rank {
+            width: 40px;
+            text-align: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: #adb5bd;
+            flex-shrink: 0;
+        }
+        
+        .rank.top1 {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 22px;
+        }
+        
+        .rank.top2 {
+            background: linear-gradient(135deg, #c0c0c0 0%, #a8a8a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 20px;
+        }
+        
+        .rank.top3 {
+            background: linear-gradient(135deg, #cd7f32 0%, #b8860b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 20px;
+        }
+        
+        .hot-text {
             flex: 1;
+            padding: 0 15px;
+            font-size: 15px;
+            color: #2d3748;
+            line-height: 1.5;
+            font-weight: 500;
+            word-break: break-word;
         }
         
-        .title {
-            font-size: 1.1em;
+        .hot-text.very-hot {
+            font-size: 17px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hot-text.hot {
+            font-size: 16px;
             font-weight: 600;
-            margin-bottom: 5px;
-            color: #333;
+            color: #e74c3c;
         }
         
-        .title a {
-            color: #333;
-            text-decoration: none;
+        .hot-text.medium {
+            font-weight: 600;
         }
         
-        .title a:hover {
-            color: #667eea;
+        .hot-value {
+            font-size: 12px;
+            color: #868e96;
+            flex-shrink: 0;
+            min-width: 60px;
+            text-align: right;
+            font-weight: 500;
+            padding: 5px 10px;
+            background: #f8f9fa;
+            border-radius: 15px;
         }
         
-        .meta {
-            font-size: 0.85em;
-            color: #999;
+        .hot-value.very-hot {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .hot-value.hot {
+            background: #f8f9fa;
+            color: #e74c3c;
+            font-weight: 600;
+        }
+        
+        .hot-value.warm {
+            background: #fff3cd;
+            color: #f39c12;
+        }
+        
+        .hot-value.cool {
+            background: #e7f5ff;
+            color: #3498db;
+        }
+        
+        .go-btn {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .go-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .go-btn:active {
+            transform: scale(0.95);
         }
         
         .footer {
             text-align: center;
-            color: white;
-            margin-top: 30px;
-            opacity: 0.8;
-            font-size: 0.9em;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #adb5bd;
+            font-size: 13px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #adb5bd;
+        }
+        
+        .empty::before {
+            content: '😕';
+            display: block;
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+        
+        .empty div:first-of-type {
+            font-size: 18px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+        }
+        
+        .empty div:last-of-type {
+            font-size: 13px;
+            color: #adb5bd;
+        }
+        
+        @media (max-width: 480px) {
+            .platform-buttons {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            
+            .platform-btn {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+            
+            .hot-item {
+                padding: 14px 12px;
+            }
+            
+            .rank {
+                width: 35px;
+                font-size: 16px;
+            }
+            
+            .hot-text {
+                font-size: 14px;
+                padding: 0 10px;
+            }
+            
+            .hot-text.very-hot {
+                font-size: 16px;
+            }
+            
+            .hot-text.hot {
+                font-size: 15px;
+            }
+            
+            .go-btn {
+                width: 32px;
+                height: 32px;
+                min-width: 32px;
+                font-size: 14px;
+                margin-left: 8px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔥 抖音热点榜</h1>
-            <p class="date" id="date"></p>
+            <button class="refresh-btn" id="refreshBtn" onclick="refreshAllData()" title="刷新全部数据">🔄</button>
+            <h1>全网热榜</h1>
+            <div class="subtitle">实时热点 · 一触即达</div>
         </div>
         
-        <div class="hot-list" id="hotList">
-            <!-- 热点列表将在这里动态生成 -->
+        <div class="platform-selector">
+            <div class="platform-label">选择平台</div>
+            <div class="platform-buttons">
+                <button class="platform-btn active" data-platform="douyin">
+                    <span class="emoji">📱</span>
+                    <span>抖音</span>
+                </button>
+                <button class="platform-btn" data-platform="weibo">
+                    <span class="emoji">🔥</span>
+                    <span>微博</span>
+                </button>
+                <button class="platform-btn" data-platform="bilibili">
+                    <span class="emoji">📺</span>
+                    <span>B站</span>
+                </button>
+                <button class="platform-btn" data-platform="baidu">
+                    <span class="emoji">🔍</span>
+                    <span>百度</span>
+                </button>
+            </div>
         </div>
         
-        <div class="footer">
-            <p>📱 点击标题即可跳转抖音搜索</p>
-            <p>数据来源：抖音热搜榜 | 更新频率：约2小时/次</p>
+        <div class="content">
+            <div class="loading">加载中...</div>
         </div>
+        
+        <div class="footer" id="updateTime"></div>
     </div>
-    
+
     <script>
-        // 这里是你的热点数据
-        const hotData = [
-            {
-                word: "人民网评\"雪山救狐\"演绎",
-                hotValue: 12000000,
-                position: 1
+        // 平台配置
+        const platforms = {
+            douyin: {
+                name: '抖音',
+                emoji: '📱',
+                api: 'https://v2.xxapi.cn/api/douyinhot',
+                searchUrl: 'https://www.douyin.com/search/'
             },
-            {
-                word: "春茶奶茶大赛",
-                hotValue: 12000000,
-                position: 2
+            weibo: {
+                name: '微博',
+                emoji: '🔥',
+                api: 'https://v2.xxapi.cn/api/weibohot',
+                searchUrl: 'https://s.weibo.com/weibo?q='
             },
-            {
-                word: "中国发现世界第二大轻稀土矿",
-                hotValue: 12000000,
-                position: 3
+            bilibili: {
+                name: 'B站',
+                emoji: '📺',
+                api: 'https://v2.xxapi.cn/api/bilibilihot',
+                searchUrl: 'https://search.bilibili.com/all?keyword='
             },
-            {
-                word: "那朵名叫张赞英的月季花",
-                hotValue: 11000000,
-                position: 4
-            },
-            {
-                word: "实探\"涨价潮\"下的手机市场",
-                hotValue: 11000000,
-                position: 5
+            baidu: {
+                name: '百度',
+                emoji: '🔍',
+                api: 'https://v2.xxapi.cn/api/baiduhot',
+                searchUrl: 'https://www.baidu.com/s?wd='
             }
-        ];
-        
-        // 设置当前日期
-        document.getElementById('date').textContent = new Date().toLocaleDateString('zh-CN', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-        
-        // 生成热点列表
-        const hotList = document.getElementById('hotList');
-        
-        hotData.forEach(item => {
-            const isTop3 = item.position <= 3;
-            const hotStr = item.hotValue >= 10000000 
-                ? (item.hotValue / 10000000).toFixed(1) + '千万'
-                : (item.hotValue / 10000).toFixed(1) + '万';
+        };
+
+        let hotData = {
+            douyin: [],
+            weibo: [],
+            bilibili: [],
+            baidu: []
+        };
+        let currentPlatform = 'douyin';
+        let lastUpdateTime = null;
+
+        // 初始化
+        async function init() {
+            await loadAllData();
+            renderPlatform(currentPlatform);
+        }
+
+        // 加载所有平台数据
+        async function loadAllData() {
+            const promises = Object.keys(platforms).map(platform => fetchPlatformData(platform));
+            await Promise.all(promises);
+            updateFooterTime();
+        }
+
+        // 获取单个平台数据
+        async function fetchPlatformData(platform) {
+            try {
+                const config = platforms[platform];
+                const response = await fetch(config.api + '?t=' + Date.now());
+                const result = await response.json();
+                
+                if (result.code === 200 && result.data) {
+                    hotData[platform] = parsePlatformData(platform, result.data);
+                } else {
+                    hotData[platform] = [];
+                }
+            } catch (error) {
+                console.error(`获取${platforms[platform].name}数据失败:`, error);
+                hotData[platform] = [];
+            }
+        }
+
+        // 解析不同平台的数据格式
+        function parsePlatformData(platform, data) {
+            let list = [];
             
-            const encodedWord = encodeURIComponent(item.word);
-            const searchUrl = `https://www.douyin.com/search/${encodedWord}`;
+            if (platform === 'douyin') {
+                // 抖音数据格式
+                if (Array.isArray(data)) {
+                    list = data.slice(0, 30).map((item, index) => ({
+                        word: item.word || item,
+                        hotValue: item.hot_value || 0,
+                        position: item.position || index + 1
+                    }));
+                } else if (data.list && Array.isArray(data.list)) {
+                    list = data.list.slice(0, 30).map((item, index) => ({
+                        word: item.word || item,
+                        hotValue: item.hot_value || 0,
+                        position: item.position || index + 1
+                    }));
+                }
+            } else if (platform === 'weibo') {
+                // 微博数据格式
+                if (Array.isArray(data)) {
+                    list = data.slice(0, 30).map((item, index) => ({
+                        word: item.title || item.word,
+                        hotValue: parseHotValue(item.hot),
+                        position: item.index || index + 1
+                    }));
+                }
+            } else if (platform === 'bilibili') {
+                // B站数据格式
+                if (Array.isArray(data)) {
+                    list = data.slice(0, 30).map((item, index) => ({
+                        word: item.word || item.title || item,
+                        hotValue: 0,
+                        position: index + 1
+                    }));
+                }
+            } else if (platform === 'baidu') {
+                // 百度数据格式
+                if (Array.isArray(data)) {
+                    list = data.slice(0, 30).map((item, index) => ({
+                        word: item.word || item.title,
+                        hotValue: item.hotValue || item.hot || 0,
+                        position: index + 1
+                    }));
+                }
+            }
             
-            const hotItem = document.createElement('div');
-            hotItem.className = `hot-item ${isTop3 ? 'top3' : ''}`;
+            return list;
+        }
+
+        // 解析热度值字符串（如"100万"）
+        function parseHotValue(hotStr) {
+            if (!hotStr) return 0;
             
-            hotItem.innerHTML = `
-                <div class="rank">#${item.position}</div>
-                <div class="content">
-                    <div class="title">
-                        <a href="${searchUrl}" target="_blank">${item.word}</a>
+            if (typeof hotStr === 'number') return hotStr;
+            
+            const str = String(hotStr).toLowerCase();
+            const num = parseFloat(str.replace(/[^0-9.]/g, ''));
+            
+            if (str.includes('亿')) {
+                return num * 100000000;
+            } else if (str.includes('万')) {
+                return num * 10000;
+            }
+            
+            return num || 0;
+        }
+
+        // 根据热度值获取样式类
+        function getHotStyle(hotValue, rank) {
+            if (hotValue > 0) {
+                if (hotValue >= 5000000) return 'very-hot';
+                else if (hotValue >= 1000000) return 'hot';
+                else if (hotValue >= 100000) return 'warm';
+                else return 'cool';
+            }
+            
+            if (rank <= 3) return 'very-hot';
+            else if (rank <= 10) return 'hot';
+            else if (rank <= 20) return 'warm';
+            else return 'cool';
+        }
+
+        // 渲染指定平台的热榜
+        function renderPlatform(platform) {
+            currentPlatform = platform;
+            const list = hotData[platform];
+            const contentDiv = document.querySelector('.content');
+            
+            if (!list || list.length === 0) {
+                contentDiv.innerHTML = `
+                    <div class="empty">
+                        <div>暂无数据</div>
+                        <div>该平台API暂时不可用，请稍后再试</div>
                     </div>
-                    <div class="meta">🔥 ${hotStr} | 排名 #${item.position}</div>
-                </div>
-            `;
+                `;
+                return;
+            }
+
+            let html = `<div class="hot-list active">`;
             
-            hotList.appendChild(hotItem);
+            list.forEach((item, index) => {
+                const rank = item.position || index + 1;
+                let rankClass = '';
+                if (rank === 1) rankClass = 'top1';
+                else if (rank === 2) rankClass = 'top2';
+                else if (rank === 3) rankClass = 'top3';
+                
+                const hotValue = item.hotValue || 0;
+                const hotValueText = hotValue > 0 ? formatHotValue(hotValue) : '热搜';
+                const hotStyle = getHotStyle(hotValue, rank);
+                
+                html += `
+                    <div class="hot-item">
+                        <div class="rank ${rankClass}">${rank}</div>
+                        <div class="hot-text ${hotStyle}">${item.word}</div>
+                        <div class="hot-value ${hotStyle}">${hotValueText}</div>
+                        <button class="go-btn" onclick="searchKeyword('${platform}', '${encodeURIComponent(item.word)}')" title="前往搜索">
+                            →
+                        </button>
+                    </div>
+                `;
+            });
+            
+            html += `</div>
+                <div style="text-align: center; padding-top: 20px; color: #adb5bd; font-size: 13px;">
+                    共 ${list.length} 条热点
+                </div>`;
+            
+            contentDiv.innerHTML = html;
+        }
+
+        // 格式化热度值
+        function formatHotValue(value) {
+            if (value >= 100000000) return (value / 100000000).toFixed(1) + '亿';
+            else if (value >= 10000) return (value / 10000).toFixed(0) + '万';
+            return value;
+        }
+
+        // 搜索关键词
+        function searchKeyword(platform, keyword) {
+            const config = platforms[platform];
+            const url = config.searchUrl + keyword;
+            window.open(url, '_blank');
+        }
+
+        // 刷新所有数据
+        async function refreshAllData() {
+            const refreshBtn = document.getElementById('refreshBtn');
+            refreshBtn.classList.add('loading');
+            
+            document.querySelector('.content').innerHTML = '<div class="loading">刷新中...</div>';
+            
+            await loadAllData();
+            renderPlatform(currentPlatform);
+            
+            refreshBtn.classList.remove('loading');
+            
+            // 显示刷新成功提示
+            const originalText = refreshBtn.textContent;
+            refreshBtn.textContent = '✓';
+            setTimeout(() => {
+                refreshBtn.textContent = originalText;
+            }, 1000);
+        }
+
+        // 更新底部时间
+        function updateFooterTime() {
+            lastUpdateTime = new Date();
+            document.getElementById('updateTime').innerHTML = 
+                '更新时间: ' + lastUpdateTime.toLocaleString('zh-CN', {
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                }) + ' (刚刚)';
+        }
+
+        // 切换平台
+        function switchPlatform(platform) {
+            document.querySelectorAll('.platform-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.platform === platform) {
+                    btn.classList.add('active');
+                }
+            });
+            renderPlatform(platform);
+        }
+
+        // 绑定按钮事件
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchPlatform(btn.dataset.platform);
+            });
         });
+
+        // 页面加载
+        init();
     </script>
 </body>
 </html>

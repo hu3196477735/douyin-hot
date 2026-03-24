@@ -1,0 +1,614 @@
+{
+  "updateTime": "2026-03-24T20:53:02.972658",
+  "platforms": {
+    "抖音": [
+      {
+        "word": "人民网评“雪山救狐”演绎",
+        "hotValue": 0,
+        "position": 1
+      },
+      {
+        "word": "春茶奶茶大赛",
+        "hotValue": 0,
+        "position": 2
+      },
+      {
+        "word": "中国发现世界第二大轻稀土矿",
+        "hotValue": 0,
+        "position": 3
+      },
+      {
+        "word": "那朵名叫张赞英的月季花",
+        "hotValue": 0,
+        "position": 4
+      },
+      {
+        "word": "实探“涨价潮”下的手机市场",
+        "hotValue": 0,
+        "position": 5
+      },
+      {
+        "word": "西班牙首相或将于4月访华",
+        "hotValue": 0,
+        "position": 6
+      },
+      {
+        "word": "废旧手机回收价暴涨",
+        "hotValue": 0,
+        "position": 7
+      },
+      {
+        "word": "学术期刊评价有了中国标准",
+        "hotValue": 0,
+        "position": 8
+      },
+      {
+        "word": "WWDC26定档6月",
+        "hotValue": 0,
+        "position": 9
+      },
+      {
+        "word": "周杰伦太阳之子MV",
+        "hotValue": 0,
+        "position": 10
+      },
+      {
+        "word": "哥伦比亚军机坠毁已造成66人死亡",
+        "hotValue": 0,
+        "position": 11
+      },
+      {
+        "word": "网传梅姨本人照片是假的",
+        "hotValue": 0,
+        "position": 12
+      },
+      {
+        "word": "日本人闯入中国大使馆 中方表态",
+        "hotValue": 0,
+        "position": 13
+      },
+      {
+        "word": "环球时报评比利时首相涉华言论",
+        "hotValue": 0,
+        "position": 14
+      },
+      {
+        "word": "活塞终结湖人9连胜",
+        "hotValue": 0,
+        "position": 15
+      },
+      {
+        "word": "姜甲儒被拐卖案维持原判",
+        "hotValue": 0,
+        "position": 16
+      },
+      {
+        "word": "姐姐寻弟33年终团圆",
+        "hotValue": 0,
+        "position": 17
+      },
+      {
+        "word": "金饰克价集体回落",
+        "hotValue": 0,
+        "position": 18
+      },
+      {
+        "word": "《怦然心动20岁冬季》开播",
+        "hotValue": 0,
+        "position": 19
+      },
+      {
+        "word": "周楷恒进行曲舞蹈挑战",
+        "hotValue": 0,
+        "position": 20
+      },
+      {
+        "word": "RED全员校园风造型",
+        "hotValue": 0,
+        "position": 21
+      },
+      {
+        "word": "甜妹的夏天是小白裙",
+        "hotValue": 0,
+        "position": 22
+      },
+      {
+        "word": "杨瀚森4分3篮板",
+        "hotValue": 0,
+        "position": 23
+      },
+      {
+        "word": "穆迪受伤",
+        "hotValue": 0,
+        "position": 24
+      },
+      {
+        "word": "贺思慕段胥初遇全是试探",
+        "hotValue": 0,
+        "position": 25
+      },
+      {
+        "word": "奋斗吧人生定档",
+        "hotValue": 0,
+        "position": 26
+      },
+      {
+        "word": "这么情绪稳定的猫你居然有两个",
+        "hotValue": 0,
+        "position": 27
+      },
+      {
+        "word": "逐玉宋砚的前途黑的睁不开眼",
+        "hotValue": 0,
+        "position": 28
+      },
+      {
+        "word": "刘亦菲深V流苏裙造型",
+        "hotValue": 0,
+        "position": 29
+      },
+      {
+        "word": "李维刚帮助处理麻阳滞销冰糖橙",
+        "hotValue": 0,
+        "position": 30
+      }
+    ],
+    "微博": [
+      {
+        "word": "张雪峰",
+        "hotValue": 18200000,
+        "position": 1
+      },
+      {
+        "word": "53岁独身女子去世留下600万遗产",
+        "hotValue": 2930000,
+        "position": 2
+      },
+      {
+        "word": "七彩云南万千气象",
+        "hotValue": 2390000,
+        "position": 3
+      },
+      {
+        "word": "张雪峰近日在朋友圈打卡跑步7公里",
+        "hotValue": 740000,
+        "position": 4
+      },
+      {
+        "word": "中方要求日方立即彻查严惩",
+        "hotValue": 590000,
+        "position": 5
+      },
+      {
+        "word": "法医刘良近20年不做婴儿和小孩尸检",
+        "hotValue": 530000,
+        "position": 6
+      },
+      {
+        "word": "以色列被打穿了",
+        "hotValue": 410000,
+        "position": 7
+      },
+      {
+        "word": "4岁女童就诊177次患者是母亲",
+        "hotValue": 400000,
+        "position": 8
+      },
+      {
+        "word": "一组对比图看雄安巨变",
+        "hotValue": 270000,
+        "position": 9
+      },
+      {
+        "word": "草莓下火锅",
+        "hotValue": 250000,
+        "position": 10
+      },
+      {
+        "word": "助理回应张雪峰心脏骤停抢救传闻",
+        "hotValue": 11110000,
+        "position": 11
+      },
+      {
+        "word": "张凌赫陈哲远将军造型对比",
+        "hotValue": 250000,
+        "position": 12
+      },
+      {
+        "word": "张雪峰社媒仍在更新",
+        "hotValue": 250000,
+        "position": 13
+      },
+      {
+        "word": "孔雪儿逐玉红利",
+        "hotValue": 240000,
+        "position": 14
+      },
+      {
+        "word": "外交部回应日方拟将中日关系降级",
+        "hotValue": 240000,
+        "position": 15
+      },
+      {
+        "word": "日本",
+        "hotValue": 240000,
+        "position": 16
+      },
+      {
+        "word": "地铁吐血女孩一天打三份工赚三四百",
+        "hotValue": 240000,
+        "position": 17
+      },
+      {
+        "word": "文淇 年轻女演员演主角等于没票房",
+        "hotValue": 170000,
+        "position": 18
+      },
+      {
+        "word": "合伙人回应张雪峰心脏骤停抢救传闻",
+        "hotValue": 170000,
+        "position": 19
+      },
+      {
+        "word": "95后回村用拼多多爆改40年老房",
+        "hotValue": 170000,
+        "position": 20
+      },
+      {
+        "word": "邓凯 鲁迅美院",
+        "hotValue": 170000,
+        "position": 21
+      },
+      {
+        "word": "张凌赫知道热巴白宇退出开推的反应",
+        "hotValue": 170000,
+        "position": 22
+      },
+      {
+        "word": "恭喜你发明了劳务派遣",
+        "hotValue": 170000,
+        "position": 23
+      },
+      {
+        "word": "难听",
+        "hotValue": 170000,
+        "position": 24
+      },
+      {
+        "word": "关晓彤剧组生菜减脂餐",
+        "hotValue": 170000,
+        "position": 25
+      },
+      {
+        "word": "蜜雪35岁新CEO",
+        "hotValue": 160000,
+        "position": 26
+      },
+      {
+        "word": "面筋哥女儿自曝遭继父持续4年性骚扰",
+        "hotValue": 150000,
+        "position": 27
+      },
+      {
+        "word": "种地吧直播",
+        "hotValue": 150000,
+        "position": 28
+      },
+      {
+        "word": "美国5名顶尖科学家接连失踪死亡",
+        "hotValue": 140000,
+        "position": 29
+      },
+      {
+        "word": "周杰伦太阳之子MV",
+        "hotValue": 140000,
+        "position": 30
+      }
+    ],
+    "知乎": [],
+    "B站": [
+      {
+        "word": "周杰伦太阳之子MV上线",
+        "hotValue": 0,
+        "position": 1
+      },
+      {
+        "word": "库克说想玩逃离鸭科夫",
+        "hotValue": 0,
+        "position": 2
+      },
+      {
+        "word": "GTC为行业指明了哪些方向",
+        "hotValue": 0,
+        "position": 3
+      },
+      {
+        "word": "当某幻偶遇林宥嘉",
+        "hotValue": 0,
+        "position": 4
+      },
+      {
+        "word": "BLG先锋赛队内语音释出",
+        "hotValue": 0,
+        "position": 5
+      },
+      {
+        "word": "跟Coser玩一天是什么体验",
+        "hotValue": 0,
+        "position": 6
+      },
+      {
+        "word": "盘点vintage艺人活人感名场面",
+        "hotValue": 0,
+        "position": 7
+      },
+      {
+        "word": "中方要求日方立即彻查严惩",
+        "hotValue": 0,
+        "position": 8
+      },
+      {
+        "word": "苹果为何要出8G内存电脑",
+        "hotValue": 0,
+        "position": 9
+      },
+      {
+        "word": "1万元MPV赛道大PK",
+        "hotValue": 0,
+        "position": 10
+      },
+      {
+        "word": "给AI龙虾装上双手打游戏",
+        "hotValue": 0,
+        "position": 11
+      },
+      {
+        "word": "周杰伦史上最贵MV",
+        "hotValue": 0,
+        "position": 12
+      },
+      {
+        "word": "锐评周杰伦新歌MV",
+        "hotValue": 0,
+        "position": 13
+      },
+      {
+        "word": "Bin夺冠曲世界第一上",
+        "hotValue": 0,
+        "position": 14
+      },
+      {
+        "word": "万字解析G2零封GEN背后原因",
+        "hotValue": 0,
+        "position": 15
+      },
+      {
+        "word": "李大霄解读美股反弹",
+        "hotValue": 0,
+        "position": 16
+      },
+      {
+        "word": "解读美国金融市场波动背后",
+        "hotValue": 0,
+        "position": 17
+      },
+      {
+        "word": "DeepSeek郭达雅被曝离职",
+        "hotValue": 0,
+        "position": 18
+      },
+      {
+        "word": "王者万象棋终极测试",
+        "hotValue": 0,
+        "position": 19
+      },
+      {
+        "word": "童年三小只魔法城堡回来洛",
+        "hotValue": 0,
+        "position": 20
+      },
+      {
+        "word": "Bin夺冠之路高燃混剪",
+        "hotValue": 0,
+        "position": 21
+      },
+      {
+        "word": "穆迪重伤",
+        "hotValue": 0,
+        "position": 22
+      },
+      {
+        "word": "逐玉的剧情有多少槽点",
+        "hotValue": 0,
+        "position": 23
+      },
+      {
+        "word": "英特尔两款新CPU评测",
+        "hotValue": 0,
+        "position": 24
+      },
+      {
+        "word": "对对子战神",
+        "hotValue": 0,
+        "position": 25
+      },
+      {
+        "word": "Zywoo史诗级1v5残局",
+        "hotValue": 0,
+        "position": 26
+      },
+      {
+        "word": "绝区零南宫羽攻略",
+        "hotValue": 0,
+        "position": 27
+      },
+      {
+        "word": "沉浸式体验F1至尊待遇",
+        "hotValue": 0,
+        "position": 28
+      },
+      {
+        "word": "英特尔新CPU能打败X3D吗",
+        "hotValue": 0,
+        "position": 29
+      },
+      {
+        "word": "体验印度二次元初中生的一天",
+        "hotValue": 0,
+        "position": 30
+      }
+    ],
+    "百度": [
+      {
+        "word": "习近平总书记雄安行",
+        "hotValue": 7900000,
+        "position": 1
+      },
+      {
+        "word": "外交部回应日方拟将中日关系降级",
+        "hotValue": 7800000,
+        "position": 2
+      },
+      {
+        "word": "旧手机回收一天一个价",
+        "hotValue": 7710000,
+        "position": 3
+      },
+      {
+        "word": "中国发现世界第二大轻稀土矿",
+        "hotValue": 7610000,
+        "position": 4
+      },
+      {
+        "word": "中方回应日本自卫队人员闯驻日使馆",
+        "hotValue": 7520000,
+        "position": 5
+      },
+      {
+        "word": "第一次看懂中文是因为看懂了英文",
+        "hotValue": 7420000,
+        "position": 6
+      },
+      {
+        "word": "网传张雪峰心脏骤停抢救 助理回应",
+        "hotValue": 7320000,
+        "position": 7
+      },
+      {
+        "word": "伊朗重申结束战争条件",
+        "hotValue": 7230000,
+        "position": 8
+      },
+      {
+        "word": "公安大学耿飞桐同学记个人三等功",
+        "hotValue": 7140000,
+        "position": 9
+      },
+      {
+        "word": "53岁独身女子去世留下600万遗产",
+        "hotValue": 7040000,
+        "position": 10
+      },
+      {
+        "word": "少刷手机就是在保养气血",
+        "hotValue": 6950000,
+        "position": 11
+      },
+      {
+        "word": "网传的“梅姨”照片不实",
+        "hotValue": 6840000,
+        "position": 12
+      },
+      {
+        "word": "张雪峰曾因胸闷心悸强制住院",
+        "hotValue": 6760000,
+        "position": 13
+      },
+      {
+        "word": "第一批丁克夫妻现状",
+        "hotValue": 6650000,
+        "position": 14
+      },
+      {
+        "word": "看到车上有这种装置请立即报警",
+        "hotValue": 6550000,
+        "position": 15
+      },
+      {
+        "word": "伊朗任命新任最高国家安全委员会秘书",
+        "hotValue": 6470000,
+        "position": 16
+      },
+      {
+        "word": "夫妻办极简婚礼 没有仪式人齐就开饭",
+        "hotValue": 6370000,
+        "position": 17
+      },
+      {
+        "word": "林诗栋退出2026澳门世界杯",
+        "hotValue": 6280000,
+        "position": 18
+      },
+      {
+        "word": "内存价格暴涨 旧手机成“香饽饽”",
+        "hotValue": 6180000,
+        "position": 19
+      },
+      {
+        "word": "中方回应美方推迟打击伊朗发电设施",
+        "hotValue": 6090000,
+        "position": 20
+      },
+      {
+        "word": "周杰伦新歌《太阳之子》MV公开",
+        "hotValue": 5980000,
+        "position": 21
+      },
+      {
+        "word": "金店店员：按九百多的价格宁愿不卖",
+        "hotValue": 5880000,
+        "position": 22
+      },
+      {
+        "word": "女孩乘地铁吐血 怕影响乘客立即擦拭",
+        "hotValue": 5800000,
+        "position": 23
+      },
+      {
+        "word": "花3万网购19台电视只收到1支笔",
+        "hotValue": 5690000,
+        "position": 24
+      },
+      {
+        "word": "男子爬黄山把老婆扛在肩上",
+        "hotValue": 5610000,
+        "position": 25
+      },
+      {
+        "word": "中使馆向日方提出严正交涉",
+        "hotValue": 5510000,
+        "position": 26
+      },
+      {
+        "word": "中国驻日本大使馆向日方提出强烈抗议",
+        "hotValue": 5410000,
+        "position": 27
+      },
+      {
+        "word": "美军一架轰炸机发出紧急情况信号",
+        "hotValue": 5310000,
+        "position": 28
+      },
+      {
+        "word": "学生穿过人群抱起将上台领誓班主任",
+        "hotValue": 5230000,
+        "position": 29
+      },
+      {
+        "word": "菲律宾宣布进入国家能源紧急状态",
+        "hotValue": 5140000,
+        "position": 30
+      }
+    ]
+  }
+}
