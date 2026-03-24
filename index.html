@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抖音热点榜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header .date {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .hot-list {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .hot-item {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: background 0.2s;
+        }
+        
+        .hot-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .hot-item:last-child {
+            border-bottom: none;
+        }
+        
+        .hot-item.top3 {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe8d6 100%);
+        }
+        
+        .rank {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #666;
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .hot-item.top3 .rank {
+            color: #ff6b6b;
+        }
+        
+        .content {
+            flex: 1;
+        }
+        
+        .title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .title a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .title a:hover {
+            color: #667eea;
+        }
+        
+        .meta {
+            font-size: 0.85em;
+            color: #999;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 抖音热点榜</h1>
+            <p class="date" id="date"></p>
+        </div>
+        
+        <div class="hot-list" id="hotList">
+            <!-- 热点列表将在这里动态生成 -->
+        </div>
+        
+        <div class="footer">
+            <p>📱 点击标题即可跳转抖音搜索</p>
+            <p>数据来源：抖音热搜榜 | 更新频率：约2小时/次</p>
+        </div>
+    </div>
+    
+    <script>
+        // 这里是你的热点数据
+        const hotData = [
+            {
+                word: "人民网评\"雪山救狐\"演绎",
+                hotValue: 12000000,
+                position: 1
+            },
+            {
+                word: "春茶奶茶大赛",
+                hotValue: 12000000,
+                position: 2
+            },
+            {
+                word: "中国发现世界第二大轻稀土矿",
+                hotValue: 12000000,
+                position: 3
+            },
+            {
+                word: "那朵名叫张赞英的月季花",
+                hotValue: 11000000,
+                position: 4
+            },
+            {
+                word: "实探\"涨价潮\"下的手机市场",
+                hotValue: 11000000,
+                position: 5
+            }
+        ];
+        
+        // 设置当前日期
+        document.getElementById('date').textContent = new Date().toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // 生成热点列表
+        const hotList = document.getElementById('hotList');
+        
+        hotData.forEach(item => {
+            const isTop3 = item.position <= 3;
+            const hotStr = item.hotValue >= 10000000 
+                ? (item.hotValue / 10000000).toFixed(1) + '千万'
+                : (item.hotValue / 10000).toFixed(1) + '万';
+            
+            const encodedWord = encodeURIComponent(item.word);
+            const searchUrl = `https://www.douyin.com/search/${encodedWord}`;
+            
+            const hotItem = document.createElement('div');
+            hotItem.className = `hot-item ${isTop3 ? 'top3' : ''}`;
+            
+            hotItem.innerHTML = `
+                <div class="rank">#${item.position}</div>
+                <div class="content">
+                    <div class="title">
+                        <a href="${searchUrl}" target="_blank">${item.word}</a>
+                    </div>
+                    <div class="meta">🔥 ${hotStr} | 排名 #${item.position}</div>
+                </div>
+            `;
+            
+            hotList.appendChild(hotItem);
+        });
+    </script>
+</body>
+</html>

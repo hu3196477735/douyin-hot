@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抖音热点榜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        .hot-list {
+            padding: 20px;
+        }
+        .hot-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .hot-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .rank {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .rank.top3 {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        .content {
+            flex: 1;
+        }
+        .title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+        .hot-value {
+            color: #ff6b6b;
+            font-weight: 500;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 13px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 0;
+                margin: -20px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .hot-item {
+                padding: 12px;
+            }
+            .rank {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            .title {
+                font-size: 14px;
+            }
+            .meta {
+                font-size: 12px;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 抖音热点榜</h1>
+            <p id="date">2026-03-24</p>
+        </div>
+        <div class="hot-list" id="hotList">
+            <!-- 热点列表将通过JS动态加载 -->
+        </div>
+        <div class="footer">
+            <p>点击热点即可跳转到抖音搜索页面</p>
+            <p>数据来源：抖音热搜榜 | 更新频率：约2小时/次</p>
+        </div>
+    </div>
+
+    <script>
+        // 热点数据
+        const hotData = [
+            { word: '人民网评"雪山救狐"演绎', hotValue: 12000000, rank: 1 },
+            { word: '春茶奶茶大赛', hotValue: 12000000, rank: 2 },
+            { word: '中国发现世界第二大轻稀土矿', hotValue: 12000000, rank: 3 },
+            { word: '那朵名叫张赞英的月季花', hotValue: 11000000, rank: 4 },
+            { word: '实探"涨价潮"下的手机市场', hotValue: 11000000, rank: 5 },
+            { word: '西班牙首相或将于4月访华', hotValue: 11000000, rank: 6 },
+            { word: '废旧手机回收价暴涨', hotValue: 9280000, rank: 7 },
+            { word: '学术期刊评价有了中国标准', hotValue: 9126000, rank: 8 },
+            { word: 'WWDC26定档6月', hotValue: 9126000, rank: 9 },
+            { word: '周杰伦太阳之子MV', hotValue: 8848000, rank: 10 },
+            { word: '哥伦比亚军机坠毁已造成66人死亡', hotValue: 8821000, rank: 11 },
+            { word: '网传梅姨本人照片是假的', hotValue: 8458000, rank: 12 },
+            { word: '日本人闯入中国大使馆 中方表态', hotValue: 8366000, rank: 13 },
+            { word: '环球时报评比利时首相涉华言论', hotValue: 8156000, rank: 14 },
+            { word: '活塞终结湖人9连胜', hotValue: 7813000, rank: 15 }
+        ];
+
+        // 格式化热度值
+        function formatHotValue(value) {
+            if (value >= 10000000) {
+                return (value / 10000000).toFixed(1) + '千万';
+            } else if (value >= 10000) {
+                return (value / 10000).toFixed(1) + '万';
+            }
+            return value.toString();
+        }
+
+        // URL编码
+        function encodeText(text) {
+            return encodeURIComponent(text);
+        }
+
+        // 渲染热点列表
+        function renderHotList() {
+            const container = document.getElementById('hotList');
+            const list = hotData.map(item => {
+                const rankClass = item.rank <= 3 ? 'rank top3' : 'rank';
+                const hotValueStr = formatHotValue(item.hotValue);
+                const douyinUrl = `https://www.douyin.com/search/${encodeText(item.word)}`;
+
+                return `
+                    <a href="${douyinUrl}" class="hot-item">
+                        <div class="${rankClass}">${item.rank}</div>
+                        <div class="content">
+                            <div class="title">${item.word}</div>
+                            <div class="meta">
+                                <span class="hot-value">🔥 ${hotValueStr}</span>
+                                <span>排名 #${item.rank}</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+
+            container.innerHTML = list;
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('zh-CN');
+            document.getElementById('date').textContent = dateStr;
+            renderHotList();
+        });
+    </script>
+</body>
+</html>

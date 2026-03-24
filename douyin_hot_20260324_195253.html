@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抖音热点榜 - 2026-03-24</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        .hot-list {
+            padding: 20px;
+        }
+        .hot-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .hot-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .rank {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .rank.top3 {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        }
+        .content {
+            flex: 1;
+        }
+        .title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+        .hot-value {
+            color: #ff6b6b;
+            font-weight: 500;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 13px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 0;
+                margin: -20px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .hot-item {
+                padding: 12px;
+            }
+            .rank {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            .title {
+                font-size: 14px;
+            }
+            .meta {
+                font-size: 12px;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 抖音热点榜</h1>
+            <p>2026-03-24</p>
+        </div>
+        <div class="hot-list" id="hotList"></div>
+        <div class="footer">
+            <p>点击热点即可跳转到抖音搜索页面</p>
+            <p>数据来源：抖音热搜榜 | 更新频率：约2小时/次</p>
+            <p>更新时间：19:52:53</p>
+        </div>
+    </div>
+
+    <script>
+        const hotData = [
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774338745,
+    "group_id": "7619386483224794378",
+    "hot_value": 12128781,
+    "hotlist_param": "{\"version\":1}",
+    "label": 0,
+    "position": 1,
+    "related_words": null,
+    "sentence_id": "2441930",
+    "sentence_tag": 20002,
+    "video_count": 2,
+    "word": "人民网评“雪山救狐”演绎",
+    "word_cover": {
+      "uri": "tos-cn-i-jm8ajry58r/ea084cd8de254e1aa07828541e771f98",
+      "url_list": [
+        "https://p26-sign.douyinpic.com/tos-cn-i-jm8ajry58r/ea084cd8de254e1aa07828541e771f98~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=yg4g8luX%2BBzLiKN09646Y%2BbIXx8%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-i-jm8ajry58r/ea084cd8de254e1aa07828541e771f98~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=TFVeiE0BYbBRQqQjXB%2BImRj9OnM%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-i-jm8ajry58r/ea084cd8de254e1aa07828541e771f98~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=JWITanTujzU7pj19ip%2F%2Bg%2F3ebyU%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774337762,
+    "group_id": "7617381330355148058",
+    "hot_value": 11839002,
+    "hotlist_param": "{\"version\":1}",
+    "label": 0,
+    "position": 2,
+    "related_words": null,
+    "sentence_id": "2441900",
+    "sentence_tag": 9000,
+    "video_count": 3,
+    "word": "春茶奶茶大赛",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/owQ7f7CTuhEP3FvljMGDgAHBEABfAfLJMQERED",
+      "url_list": [
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/owQ7f7CTuhEP3FvljMGDgAHBEABfAfLJMQERED~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=rJr4goz%2BpooXYjfAIyNhXSG9mG4%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/owQ7f7CTuhEP3FvljMGDgAHBEABfAfLJMQERED~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=J46mgRYAbFt1V7PHOlV83avTxkQ%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/owQ7f7CTuhEP3FvljMGDgAHBEABfAfLJMQERED~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=QlRgDWilr7%2Fav8%2FcnXHWnyBS2Ew%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774337111,
+    "group_id": "7618516596394890515",
+    "hot_value": 11582706,
+    "hotlist_param": "{\"version\":1}",
+    "label": 3,
+    "position": 3,
+    "related_words": null,
+    "sentence_id": "2441894",
+    "sentence_tag": 3001,
+    "video_count": 1,
+    "word": "中国发现世界第二大轻稀土矿",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/o8lAVvEVbFQWABNYBpnE9Xg2bEQrfAaDQeVtYh",
+      "url_list": [
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/o8lAVvEVbFQWABNYBpnE9Xg2bEQrfAaDQeVtYh~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=OWG9dSxfSc0R5AY%2FasXON5PytVU%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/o8lAVvEVbFQWABNYBpnE9Xg2bEQrfAaDQeVtYh~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=25uHPQcJrCVQHf3ayyBs64uqg3Q%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/o8lAVvEVbFQWABNYBpnE9Xg2bEQrfAaDQeVtYh~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=%2BgFTrnI8XC3DCFLSP6hKcTarYyE%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774330566,
+    "group_id": "7619257338825938227",
+    "hot_value": 11447997,
+    "hotlist_param": "{\"version\":1}",
+    "label": 3,
+    "position": 4,
+    "related_words": null,
+    "sentence_id": "2441731",
+    "sentence_tag": 20001,
+    "video_count": 2,
+    "word": "那朵名叫张赞英的月季花",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/oo3Q0BIiVivgP2I8BkJTxFccI1iArwmwJaAPP",
+      "url_list": [
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/oo3Q0BIiVivgP2I8BkJTxFccI1iArwmwJaAPP~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=ZBQTldpPibbBCKTg0q58HOoakmk%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/oo3Q0BIiVivgP2I8BkJTxFccI1iArwmwJaAPP~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=4yYIohI4D35ycUlnLyKEAEa7Bqk%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/oo3Q0BIiVivgP2I8BkJTxFccI1iArwmwJaAPP~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=CrNMPHCdxhm5ZNzLSwAbScsYl40%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774260440,
+    "group_id": "7618916020199281946",
+    "hot_value": 10791018,
+    "hotlist_param": "{\"version\":1}",
+    "label": 3,
+    "position": 5,
+    "related_words": null,
+    "sentence_id": "2440928",
+    "sentence_tag": 6000,
+    "video_count": 3,
+    "word": "实探“涨价潮”下的手机市场",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/osWBAA2cFCB9GiI034ifABgb5pmHG3ExeGB1AQ",
+      "url_list": [
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/osWBAA2cFCB9GiI034ifABgb5pmHG3ExeGB1AQ~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=Z%2FdSJNyW8IQTVR2iOhlreTNoyHI%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/osWBAA2cFCB9GiI034ifABgb5pmHG3ExeGB1AQ~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=x7CeW0OLDd269j78LM%2B62zddoy0%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/osWBAA2cFCB9GiI034ifABgb5pmHG3ExeGB1AQ~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=GYgqzfchDN%2F3iLeLa1oh9QPLQXo%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774316301,
+    "group_id": "7619338485036029218",
+    "hot_value": 10704208,
+    "hotlist_param": "{\"version\":1}",
+    "label": 0,
+    "position": 6,
+    "related_words": null,
+    "sentence_id": "2441415",
+    "sentence_tag": 3002,
+    "video_count": 3,
+    "word": "西班牙首相或将于4月访华",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/oQ7BEKDWFNlfg6Byx7FtACkB8iwIIEEfAT9fOE",
+      "url_list": [
+        "https://p9-sign.douyinpic.com/tos-cn-p-0015/oQ7BEKDWFNlfg6Byx7FtACkB8iwIIEEfAT9fOE~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=mkBL4vyQQc5ZhpIvNccE8YR4IAw%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/oQ7BEKDWFNlfg6Byx7FtACkB8iwIIEEfAT9fOE~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=jTdqdA%2BiHUmR29YHpCeVGYAqL08%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/oQ7BEKDWFNlfg6Byx7FtACkB8iwIIEEfAT9fOE~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=2hcNLXMWUFcsIpbkFUmdBNun5KA%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774340023,
+    "group_id": "7615446708817958170",
+    "hot_value": 9280323,
+    "hotlist_param": "{\"version\":1}",
+    "label": 1,
+    "position": 7,
+    "related_words": null,
+    "sentence_id": "2441963",
+    "sentence_tag": 7000,
+    "video_count": 3,
+    "word": "废旧手机回收价暴涨",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/ogPCIRRE8i9BBItEcBFpAB3DgnNkiAbHfgwAgf",
+      "url_list": [
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/ogPCIRRE8i9BBItEcBFpAB3DgnNkiAbHfgwAgf~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=UhvTkjYRWmv82iJv217iu2CRPxU%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/ogPCIRRE8i9BBItEcBFpAB3DgnNkiAbHfgwAgf~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=23%2BFyIzRPfXNrrfyjVTHUj17HRI%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/ogPCIRRE8i9BBItEcBFpAB3DgnNkiAbHfgwAgf~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=5XSDbtfyIC0bSJOuRbIzWZLXnT8%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774327868,
+    "group_id": "7620432670511027508",
+    "hot_value": 9125622,
+    "hotlist_param": "{\"version\":1}",
+    "label": 0,
+    "position": 8,
+    "related_words": null,
+    "sentence_id": "2441691",
+    "sentence_tag": 14000,
+    "video_count": 1,
+    "word": "学术期刊评价有了中国标准",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/oY0BiBcpQA2px7oCIEPDif1cCF4L0IA3LAbeg5",
+      "url_list": [
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/oY0BiBcpQA2px7oCIEPDif1cCF4L0IA3LAbeg5~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=Rj5X7eYroU4ywVXXn99FXqpuXGE%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/oY0BiBcpQA2px7oCIEPDif1cCF4L0IA3LAbeg5~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=lMWpeLhhuZNw85M5i5ji3MYXKAA%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/oY0BiBcpQA2px7oCIEPDif1cCF4L0IA3LAbeg5~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=%2FvuVmJyF0mr2MzAgj%2Beu8MLQAXg%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774326673,
+    "group_id": "7619295902813902126",
+    "hot_value": 9125618,
+    "hotlist_param": "{\"version\":1}",
+    "label": 3,
+    "position": 9,
+    "related_words": null,
+    "sentence_id": "2441665",
+    "sentence_tag": 6000,
+    "video_count": 3,
+    "word": "WWDC26定档6月",
+    "word_cover": {
+      "uri": "tos-cn-p-0015c000-ce/oMdA8ri4BEBBV2CAWnUwfuiG0CI9eFQEnx0QCB",
+      "url_list": [
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015c000-ce/oMdA8ri4BEBBV2CAWnUwfuiG0CI9eFQEnx0QCB~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=pfAYRu8HnLALftdAy10YV70BRHs%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015c000-ce/oMdA8ri4BEBBV2CAWnUwfuiG0CI9eFQEnx0QCB~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=cZ8fcWtJ0fqNe99S2FKyDQNoP1c%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015c000-ce/oMdA8ri4BEBBV2CAWnUwfuiG0CI9eFQEnx0QCB~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=R%2F8%2BZf%2BXJf6ZvxKGj%2FeUUr08Sx8%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774334202,
+    "group_id": "7615309245051868467",
+    "hot_value": 8848342,
+    "hotlist_param": "{\"version\":1}",
+    "label": 0,
+    "position": 10,
+    "related_words": null,
+    "sentence_id": "2441833",
+    "sentence_tag": 2005,
+    "video_count": 6,
+    "word": "周杰伦太阳之子MV",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/oI75BfjqBAXpivBAfCiIiKIFwBCIBPwg3y9QAA",
+      "url_list": [
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/oI75BfjqBAXpivBAfCiIiKIFwBCIBPwg3y9QAA~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=N7qcRa%2BE7p7H2R33V8gTHYN7b8E%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/oI75BfjqBAXpivBAfCiIiKIFwBCIBPwg3y9QAA~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=gjEXlyPum6jSyO1hRfTi5aMvaXQ%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/oI75BfjqBAXpivBAfCiIiKIFwBCIBPwg3y9QAA~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=h%2BLC0%2BBUNQFwkKLgQyk3QmEca54%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774345790,
+    "group_id": "7619323495764595994",
+    "hot_value": 8820933,
+    "hotlist_param": "{\"version\":1}",
+    "label": 1,
+    "position": 11,
+    "related_words": null,
+    "sentence_id": "2442104",
+    "sentence_tag": 4006,
+    "video_count": 3,
+    "word": "哥伦比亚军机坠毁已造成66人死亡",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/oo82gDuRgudde4ED07EJgSefANWdCnAfBIMIMQ",
+      "url_list": [
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/oo82gDuRgudde4ED07EJgSefANWdCnAfBIMIMQ~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=F3CGuuhcj2W5XAQn5V1G%2Fw6nF4c%3D&from=3218412987",
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/oo82gDuRgudde4ED07EJgSefANWdCnAfBIMIMQ~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=RF%2F5xXf8UqpFu5WTsf1cfJpEfJE%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/oo82gDuRgudde4ED07EJgSefANWdCnAfBIMIMQ~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=rxqeKUy7gxRz%2BWyhWWDMXabwUsQ%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774327401,
+    "group_id": "7619339442970809659",
+    "hot_value": 8457551,
+    "hotlist_param": "{\"version\":1}",
+    "label": 16,
+    "position": 12,
+    "related_words": null,
+    "sentence_id": "2441686",
+    "sentence_tag": 4003,
+    "video_count": 1,
+    "word": "网传梅姨本人照片是假的",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/oQ1vCQqQDBUn5BmFgEflAIES1F8x5pAAF509uf",
+      "url_list": [
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/oQ1vCQqQDBUn5BmFgEflAIES1F8x5pAAF509uf~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=sj8hTXskwOANia4gWjWXJhANq3c%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/oQ1vCQqQDBUn5BmFgEflAIES1F8x5pAAF509uf~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=ixGh5B9JPKaMkzd2ee%2BZNW%2F%2BDdQ%3D&from=3218412987",
+        "https://p9-sign.douyinpic.com/tos-cn-p-0015/oQ1vCQqQDBUn5BmFgEflAIES1F8x5pAAF509uf~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=HdVC%2BXj0CTfBJcgeLf3rO8ufLrc%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774338879,
+    "group_id": "7619205356946380051",
+    "hot_value": 8365658,
+    "hotlist_param": "{\"version\":1}",
+    "label": 0,
+    "position": 13,
+    "related_words": null,
+    "sentence_id": "2441936",
+    "sentence_tag": 3001,
+    "video_count": 1,
+    "word": "日本人闯入中国大使馆 中方表态",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/oACkAhGENQTdLfehXaeC7mhsDWsuRIBdAIBI0Q",
+      "url_list": [
+        "https://p11-sign.douyinpic.com/tos-cn-p-0015/oACkAhGENQTdLfehXaeC7mhsDWsuRIBdAIBI0Q~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=1erCR99uuV8J9rblpU9U6b0CTr0%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/oACkAhGENQTdLfehXaeC7mhsDWsuRIBdAIBI0Q~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=D1fkW1f9D5aORH0KEexcgWfCpAE%3D&from=3218412987",
+        "https://p9-sign.douyinpic.com/tos-cn-p-0015/oACkAhGENQTdLfehXaeC7mhsDWsuRIBdAIBI0Q~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=5InJeKFy5TZO8Ow5qqdXqUlJjnQ%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774311734,
+    "group_id": "7619432905639630120",
+    "hot_value": 8156192,
+    "hotlist_param": "{\"version\":1}",
+    "label": 3,
+    "position": 14,
+    "related_words": null,
+    "sentence_id": "2441328",
+    "sentence_tag": 3002,
+    "video_count": 3,
+    "word": "环球时报评比利时首相涉华言论",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/o8DqqAfENwICf09zAQgaIPFErg3n7pBNDyAdBp",
+      "url_list": [
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/o8DqqAfENwICf09zAQgaIPFErg3n7pBNDyAdBp~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=qlpDVTyAfnAEmwptbRvYNVUA%2F70%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/o8DqqAfENwICf09zAQgaIPFErg3n7pBNDyAdBp~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=uPubmFYnsxSFo%2BqsEMnglCVk2E0%3D&from=3218412987",
+        "https://p9-sign.douyinpic.com/tos-cn-p-0015/o8DqqAfENwICf09zAQgaIPFErg3n7pBNDyAdBp~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=%2ByQaqbXKj42cZ1nJHtlqOGF99BA%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  },
+  {
+    "article_detail_count": 0,
+    "aweme_infos": null,
+    "can_extend_detail": false,
+    "discuss_video_count": 1,
+    "display_style": 0,
+    "drift_info": null,
+    "event_time": 1774316962,
+    "group_id": "7618758713398662410",
+    "hot_value": 7813382,
+    "hotlist_param": "{\"version\":1}",
+    "label": 0,
+    "position": 15,
+    "related_words": null,
+    "sentence_id": "2441430",
+    "sentence_tag": 5000,
+    "video_count": 4,
+    "word": "活塞终结湖人9连胜",
+    "word_cover": {
+      "uri": "tos-cn-p-0015/oo2ZaBjE9fI0g1JTANCI77fFHfDklABGBD5CAm",
+      "url_list": [
+        "https://p9-sign.douyinpic.com/tos-cn-p-0015/oo2ZaBjE9fI0g1JTANCI77fFHfDklABGBD5CAm~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=gydhQ3DyhokRcq%2F4MV0HcVXSTQc%3D&from=3218412987",
+        "https://p3-sign.douyinpic.com/tos-cn-p-0015/oo2ZaBjE9fI0g1JTANCI77fFHfDklABGBD5CAm~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=wkJ90CHiOuLFQ4hVQWS%2Bwbf7xNQ%3D&from=3218412987",
+        "https://p26-sign.douyinpic.com/tos-cn-p-0015/oo2ZaBjE9fI0g1JTANCI77fFHfDklABGBD5CAm~noop.jpeg?lk3s=bfd515bb&x-expires=1774368000&x-signature=d60VTepg5WrimTiJ%2B%2FT%2FsCEkFjw%3D&from=3218412987"
+      ]
+    },
+    "word_sub_board": null,
+    "word_type": 1
+  }
+];
+
+        function formatHotValue(value) {
+            if (value >= 10000000) {
+                return (value / 10000000).toFixed(1) + '千万';
+            } else if (value >= 10000) {
+                return (value / 10000).toFixed(1) + '万';
+            }
+            return value.toString();
+        }
+
+        function encodeText(text) {
+            return encodeURIComponent(text);
+        }
+
+        function renderHotList() {
+            const container = document.getElementById('hotList');
+            const list = hotData.map(item => {
+                const rankClass = item.rank <= 3 ? 'rank top3' : 'rank';
+                const hotValueStr = formatHotValue(item.hotValue);
+                const douyinUrl = `https://www.douyin.com/search/${encodeText(item.word)}`;
+
+                return `
+                    <a href="${douyinUrl}" class="hot-item">
+                        <div class="${rankClass}">${item.rank}</div>
+                        <div class="content">
+                            <div class="title">${item.word}</div>
+                            <div class="meta">
+                                <span class="hot-value">🔥 ${hotValueStr}</span>
+                                <span>排名 #${item.rank}</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+
+            container.innerHTML = list;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderHotList);
+    </script>
+</body>
+</html>
