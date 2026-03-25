@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>微博API测试</title>
+</head>
+<body>
+    <h1>微博热搜API测试</h1>
+    <div id="result"></div>
+    
+    <script>
+        async function testWeiboAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '加载中...';
+            
+            try {
+                const response = await fetch('https://v2.xxapi.cn/api/weibohot?t=' + Date.now());
+                const data = await response.json();
+                
+                if (data.code === 200 && data.data) {
+                    let html = '<h2>API返回数据（前10条）：</h2><table border="1" cellpadding="8">';
+                    html += '<tr><th>排名</th><th>标题</th><th>热度</th></tr>';
+                    
+                    data.data.slice(0, 10).forEach((item, index) => {
+                        html += `<tr>
+                            <td>${item.index || index + 1}</td>
+                            <td>${item.title}</td>
+                            <td>${item.hot}</td>
+                        </tr>`;
+                    });
+                    
+                    html += '</table>';
+                    html += '<h3>原始数据结构：</h3><pre>' + JSON.stringify(data.data[0], null, 2) + '</pre>';
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = 'API返回错误: ' + JSON.stringify(data);
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '请求失败: ' + error.message;
+            }
+        }
+        
+        testWeiboAPI();
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+    <div id="content">Loading...</div>
+    
+    <script>
+        console.log('Script started');
+        
+        async function init() {
+            console.log('init() called');
+            document.getElementById('content').innerHTML = 'Init works!';
+        }
+        
+        window.addEventListener('load', function() {
+            console.log('Window loaded');
+            init();
+        });
+    </script>
+</body>
+</html>

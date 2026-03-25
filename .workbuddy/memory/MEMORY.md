@@ -18,6 +18,11 @@
 - GitHub 仓库：https://github.com/hu3196477735/douyin-hot
 - 网站地址：https://hu3196477735.github.io/douyin-hot/
 
+## 已创建的网站
+- 生辰八字算命网站：`bazi.html`（天机阁，含四柱八字、五行分析、格局判断、纳音、生肖详解、五大运势、今日宜忌、综合批语）
+- 小说阅读网站：`novel.html`（墨香书阁，全网小说聚合搜索，接入5个笔趣阁书源API，含首页/分类/排行/书架/搜索/阅读，搜索历史和书架本地存储）
+- 全网热榜网站：`index.html`（自定义域名：https://chunchenghu.xyz）
+
 ## 已创建的工具和脚本
 
 ### 1. 实时查询技能
@@ -25,21 +30,21 @@
 - 功能：查询互联网实时信息
 
 ### 2. 每日新闻早报
-- 脚本：`.workbuddy/scripts/morning_report.py`
+- 自动化ID：automation-4
 - 自动化：每天 8:30 运行
+- 流程：先搜索当天最新新闻（国内/国际/科技/财经），再整理发送
+- 要求：所有新闻必须来自搜索结果，不得编造
 - 保存位置：`.workbuddy/memory/daily_reports/morning_report_YYYY-MM-DD.txt`
 
-### 3. 抖音热点整合
-- 脚本：`.workbuddy/scripts/douyin_hot.py`
-- 自动化：每天 8:30 运行
-- 保存位置：`.workbuddy/memory/daily_reports/douyin_hot_YYYY-MM-DD.txt`
-- API：https://v2.xxapi.cn/api/douyinhot
+### ~~3. 抖音热点整合~~（2026-03-24 用户要求停用，已暂停）
+- 自动化ID：automation-5（状态：PAUSED）
 
 ### 4. 全网热榜网站
 - HTML 文件：`index.html`
 - 包含平台：抖音、微博、知乎、B站、小红书、百度
 - 功能：每个平台显示 TOP 10，点击跳转搜索
 - GitHub Pages：https://hu3196477735.github.io/douyin-hot/
+- **微博热搜API**：经测试对比，XXAPI (v2.xxapi.cn/api/weibohot) 数据最准确，已确定为首选数据源
 
 ## 重要日期记录
 

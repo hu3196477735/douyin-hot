@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微博热搜API对比测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        .refresh-btn {
+            background: #ff8200;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+        .refresh-btn:hover {
+            background: #e67500;
+            transform: translateY(-2px);
+        }
+        .refresh-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+        .api-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .api-header {
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #ff8200 0%, #ff6b00 100%);
+            color: white;
+        }
+        .api-header h2 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .api-header .url {
+            font-size: 12px;
+            opacity: 0.9;
+            word-break: break-all;
+        }
+        .api-status {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .status-loading {
+            background: #ffc107;
+            color: #333;
+        }
+        .status-success {
+            background: #4caf50;
+        }
+        .status-error {
+            background: #f44336;
+        }
+        .api-content {
+            padding: 15px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .hot-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .hot-item:hover {
+            background: #f9f9f9;
+        }
+        .rank {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .rank-1 { background: #ff6b6b; color: white; }
+        .rank-2 { background: #ffa94d; color: white; }
+        .rank-3 { background: #ffd43b; color: #333; }
+        .rank-other { background: #f1f3f5; color: #666; }
+        .hot-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .hot-title {
+            font-size: 14px;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .hot-value {
+            font-size: 12px;
+            color: #ff8200;
+            margin-top: 3px;
+        }
+        .error-msg {
+            color: #f44336;
+            text-align: center;
+            padding: 30px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff8200;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .meta-info {
+            font-size: 12px;
+            color: #999;
+            padding: 10px 15px;
+            background: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+        .compare-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            max-width: 1800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .compare-section h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .compare-table th,
+        .compare-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .compare-table th {
+            background: #f5f5f5;
+            font-weight: 600;
+            color: #666;
+        }
+        .compare-table tr:hover {
+            background: #f9f9f9;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-right: 5px;
+        }
+        .tag-free { background: #e8f5e9; color: #2e7d32; }
+        .tag-key { background: #fff3e0; color: #e65100; }
+        .tag-nocors { background: #fce4ec; color: #c2185b; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔥 微博热搜API对比测试</h1>
+        <p>同时调用多个免费API，对比数据准确性（建议打开手机微博App同步对比）</p>
+        <button class="refresh-btn" onclick="fetchAll()">🔄 刷新所有API</button>
+    </div>
+
+    <div class="compare-section">
+        <h3>📊 API接口信息</h3>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>API名称</th>
+                    <th>接口地址</th>
+                    <th>特点</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>XXAPI</strong></td>
+                    <td>v2.xxapi.cn/api/weibohot</td>
+                    <td><span class="tag tag-free">免费</span><span class="tag">免Key</span></td>
+                    <td id="status-xxapi">待测试</td>
+                </tr>
+                <tr>
+                    <td><strong>Star API</strong></td>
+                    <td>api.xhus.cn/api/rweibo</td>
+                    <td><span class="tag tag-free">免费</span><span class="tag">免Key</span></td>
+                    <td id="status-star">待测试</td>
+                </tr>
+                <tr>
+                    <td><strong>OIOWeb</strong></td>
+                    <td>api.oioweb.cn/api/social/weibo-hot-search</td>
+                    <td><span class="tag tag-free">免费</span><span class="tag">免Key</span></td>
+                    <td id="status-oio">待测试</td>
+                </tr>
+                <tr>
+                    <td><strong>FreeApis</strong></td>
+                    <td>www.freeapis.cn/api/hot/weiboresou</td>
+                    <td><span class="tag tag-key">需Key</span></td>
+                    <td id="status-free">待测试</td>
+                </tr>
+                <tr>
+                    <td><strong>星达聚合</strong></td>
+                    <td>u.api.xdapi.com/api/v2/WeiboHotList/hotsearch</td>
+                    <td><span class="tag tag-key">需Key</span><span class="tag tag-nocors">可能跨域</span></td>
+                    <td id="status-xd">待测试</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <!-- XXAPI -->
+        <div class="api-card">
+            <div class="api-header">
+                <h2>1️⃣ XXAPI</h2>
+                <div class="url">v2.xxapi.cn/api/weibohot</div>
+                <span class="api-status status-loading" id="badge-xxapi">加载中...</span>
+            </div>
+            <div class="api-content" id="content-xxapi">
+                <div class="loading">正在获取数据</div>
+            </div>
+            <div class="meta-info" id="meta-xxapi">请求时间: --</div>
+        </div>
+
+        <!-- Star API -->
+        <div class="api-card">
+            <div class="api-header">
+                <h2>2️⃣ Star API</h2>
+                <div class="url">api.xhus.cn/api/rweibo</div>
+                <span class="api-status status-loading" id="badge-star">加载中...</span>
+            </div>
+            <div class="api-content" id="content-star">
+                <div class="loading">正在获取数据</div>
+            </div>
+            <div class="meta-info" id="meta-star">请求时间: --</div>
+        </div>
+
+        <!-- OIOWeb -->
+        <div class="api-card">
+            <div class="api-header">
+                <h2>3️⃣ OIOWeb</h2>
+                <div class="url">api.oioweb.cn/api/social/weibo-hot-search</div>
+                <span class="api-status status-loading" id="badge-oio">加载中...</span>
+            </div>
+            <div class="api-content" id="content-oio">
+                <div class="loading">正在获取数据</div>
+            </div>
+            <div class="meta-info" id="meta-oio">请求时间: --</div>
+        </div>
+
+        <!-- FreeApis (需要Key，可能无法测试) -->
+        <div class="api-card">
+            <div class="api-header">
+                <h2>4️⃣ FreeApis</h2>
+                <div class="url">www.freeapis.cn/api/hot/weiboresou</div>
+                <span class="api-status status-loading" id="badge-free">加载中...</span>
+            </div>
+            <div class="api-content" id="content-free">
+                <div class="loading">正在获取数据</div>
+            </div>
+            <div class="meta-info" id="meta-free">请求时间: --</div>
+        </div>
+
+        <!-- 星达聚合 (需要Key，可能无法测试) -->
+        <div class="api-card">
+            <div class="api-header">
+                <h2>5️⃣ 星达聚合</h2>
+                <div class="url">u.api.xdapi.com/api/v2/WeiboHotList/hotsearch</div>
+                <span class="api-status status-loading" id="badge-xd">加载中...</span>
+            </div>
+            <div class="api-content" id="content-xd">
+                <div class="loading">正在获取数据</div>
+            </div>
+            <div class="meta-info" id="meta-xd">请求时间: --</div>
+        </div>
+    </div>
+
+    <script>
+        // API配置
+        const apiConfigs = [
+            {
+                id: 'xxapi',
+                name: 'XXAPI',
+                url: 'https://v2.xxapi.cn/api/weibohot',
+                parser: (data) => {
+                    if (data.code === 200 && data.data) {
+                        return data.data.map(item => ({
+                            rank: item.index,
+                            title: item.title,
+                            hot: item.hot,
+                            url: item.url
+                        }));
+                    }
+                    throw new Error('数据格式错误');
+                }
+            },
+            {
+                id: 'star',
+                name: 'Star API',
+                url: 'https://api.xhus.cn/api/rweibo?encode=json',
+                parser: (data) => {
+                    if (Array.isArray(data)) {
+                        return data.map((item, index) => ({
+                            rank: index + 1,
+                            title: item.word || item.title,
+                            hot: item.num ? formatHot(item.num) : '',
+                            url: item.url
+                        }));
+                    }
+                    throw new Error('数据格式错误');
+                }
+            },
+            {
+                id: 'oio',
+                name: 'OIOWeb',
+                url: 'https://api.oioweb.cn/api/social/weibo-hot-search',
+                parser: (data) => {
+                    if (data.code === 200 && data.result) {
+                        return data.result.map((item, index) => ({
+                            rank: index + 1,
+                            title: item.title,
+                            hot: item.hot,
+                            url: item.url
+                        }));
+                    }
+                    throw new Error('数据格式错误');
+                }
+            },
+            {
+                id: 'free',
+                name: 'FreeApis',
+                url: 'https://www.freeapis.cn/api/hot/weiboresou',
+                parser: (data) => {
+                    // 需要API Key，可能返回错误
+                    if (data.code === 200 && data.data) {
+                        return data.data.map((item, index) => ({
+                            rank: index + 1,
+                            title: item.title,
+                            hot: item.hot,
+                            url: item.url
+                        }));
+                    }
+                    throw new Error(data.msg || '需要API Key');
+                }
+            },
+            {
+                id: 'xd',
+                name: '星达聚合',
+                url: 'http://u.api.xdapi.com/api/v2/WeiboHotList/hotsearch',
+                parser: (data) => {
+                    // 需要API Key，可能跨域
+                    if (data.code === 200 && data.data) {
+                        return data.data.map((item, index) => ({
+                            rank: index + 1,
+                            title: item.title,
+                            hot: item.hot,
+                            url: item.url
+                        }));
+                    }
+                    throw new Error(data.msg || '需要API Key');
+                }
+            }
+        ];
+
+        // 格式化热度值
+        function formatHot(num) {
+            if (typeof num === 'string') return num;
+            if (num >= 10000) {
+                return (num / 10000).toFixed(1) + '万';
+            }
+            return num.toString();
+        }
+
+        // 获取排名样式
+        function getRankClass(rank) {
+            if (rank === 1) return 'rank-1';
+            if (rank === 2) return 'rank-2';
+            if (rank === 3) return 'rank-3';
+            return 'rank-other';
+        }
+
+        // 渲染列表
+        function renderList(containerId, items) {
+            const container = document.getElementById(containerId);
+            if (!items || items.length === 0) {
+                container.innerHTML = '<div class="error-msg">暂无数据</div>';
+                return;
+            }
+            
+            const html = items.map(item => `
+                <div class="hot-item">
+                    <div class="rank ${getRankClass(item.rank)}">${item.rank}</div>
+                    <div class="hot-info">
+                        <div class="hot-title">${item.title}</div>
+                        ${item.hot ? `<div class="hot-value">🔥 ${item.hot}</div>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = html;
+        }
+
+        // 更新状态
+        function updateStatus(id, success, message) {
+            const badge = document.getElementById(`badge-${id}`);
+            const status = document.getElementById(`status-${id}`);
+            
+            if (badge) {
+                badge.className = `api-status ${success ? 'status-success' : 'status-error'}`;
+                badge.textContent = success ? '成功' : '失败';
+            }
+            if (status) {
+                status.innerHTML = success 
+                    ? '<span style="color: #4caf50;">✓ 正常</span>' 
+                    : `<span style="color: #f44336;">✗ ${message}</span>`;
+            }
+        }
+
+        // 更新时间
+        function updateTime(id) {
+            const meta = document.getElementById(`meta-${id}`);
+            if (meta) {
+                meta.textContent = `请求时间: ${new Date().toLocaleTimeString()}`;
+            }
+        }
+
+        // 获取单个API数据
+        async function fetchAPI(config) {
+            const contentEl = document.getElementById(`content-${config.id}`);
+            contentEl.innerHTML = '<div class="loading">正在获取数据</div>';
+            
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 10000);
+                
+                const response = await fetch(config.url, {
+                    signal: controller.signal,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                clearTimeout(timeout);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                const items = config.parser(data);
+                
+                renderList(`content-${config.id}`, items);
+                updateStatus(config.id, true, '成功');
+                updateTime(config.id);
+                
+                return { success: true, items };
+            } catch (error) {
+                const errorMsg = error.name === 'AbortError' ? '请求超时' : error.message;
+                contentEl.innerHTML = `<div class="error-msg">❌ ${errorMsg}</div>`;
+                updateStatus(config.id, false, errorMsg);
+                updateTime(config.id);
+                return { success: false, error: errorMsg };
+            }
+        }
+
+        // 获取所有API
+        async function fetchAll() {
+            const btn = document.querySelector('.refresh-btn');
+            btn.disabled = true;
+            btn.textContent = '🔄 刷新中...';
+            
+            // 并行请求所有API
+            await Promise.all(apiConfigs.map(config => fetchAPI(config)));
+            
+            btn.disabled = false;
+            btn.textContent = '🔄 刷新所有API';
+        }
+
+        // 页面加载时自动获取
+        window.onload = fetchAll;
+    </script>
+</body>
+</html>

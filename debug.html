@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Debug</title>
+</head>
+<body>
+    <h1>Debug Console</h1>
+    <div id="log"></div>
+    
+    <script>
+        const log = document.getElementById('log');
+        function addLog(msg) {
+            log.innerHTML += '<p>' + msg + '</p>';
+        }
+        
+        try {
+            addLog('Step 1: Starting...');
+            
+            // Test 1: Basic object
+            const test1 = { a: 1, b: 2 };
+            addLog('✓ Test 1 passed: Basic object');
+            
+            // Test 2: Array
+            const test2 = [1, 2, 3];
+            addLog('✓ Test 2 passed: Array');
+            
+            // Test 3: Function
+            function test3() { return 1; }
+            addLog('✓ Test 3 passed: Function');
+            
+            // Test 4: Async function
+            async function test4() { return 1; }
+            addLog('✓ Test 4 passed: Async function');
+            
+            // Test 5: Object with arrays
+            const test5 = {
+                apis: ['url1', 'url2'],
+                name: 'test'
+            };
+            addLog('✓ Test 5 passed: Object with arrays');
+            
+            addLog('<b>All tests passed! JavaScript is working.</b>');
+            
+        } catch (e) {
+            addLog('<b style="color:red">ERROR: ' + e.message + '</b>');
+            addLog('Stack: ' + e.stack);
+        }
+    </script>
+</body>
+</html>
