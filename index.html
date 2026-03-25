@@ -1303,13 +1303,15 @@
                 };
             });
             
-            // 先按热度降序排序
-            fullList.sort((a, b) => b.hotValue - a.hotValue);
-            
-            // 重新设置排名
-            fullList.forEach((item, index) => {
-                item.position = index + 1;
-            });
+            // 对于微博平台，保留API返回的原始排名（更权威）
+            // 其他平台按热度排序
+            if (platform !== 'weibo') {
+                fullList.sort((a, b) => b.hotValue - a.hotValue);
+                // 重新设置排名
+                fullList.forEach((item, index) => {
+                    item.position = index + 1;
+                });
+            }
             
             // 保存完整数据
             hotData[platform + '_raw'] = [...fullList];
