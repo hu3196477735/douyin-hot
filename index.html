@@ -15,17 +15,88 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 0;
+        }
+        
+        .main-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background: rgba(30, 30, 50, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .sidebar-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background: rgba(102, 126, 234, 0.3);
+            color: white;
+            border-left-color: #667eea;
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .nav-text {
+            font-size: 14px;
+            font-weight: 500;
         }
         
         .container {
-            max-width: 700px;
-            margin: 0 auto;
+            flex: 1;
+            margin-left: 200px;
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            min-height: 100vh;
             overflow: hidden;
             backdrop-filter: blur(10px);
+        }
+        
+        .content-area {
+            display: none;
+        }
+        
+        .content-area.active {
+            display: block;
         }
         
         .header {
@@ -97,36 +168,62 @@
         }
         
         .platform-selector {
-            padding: 20px;
+            padding: 10px 15px;
             background: #f8f9fa;
             border-bottom: 1px solid #e9ecef;
+            position: relative;
         }
         
         .platform-label {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             color: #6c757d;
-            font-size: 13px;
-            margin-bottom: 12px;
+            font-size: 12px;
+            margin-bottom: 8px;
             font-weight: 500;
         }
         
+        .toggle-btn {
+            background: #e9ecef;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 11px;
+            color: #495057;
+            transition: all 0.2s;
+        }
+        
+        .toggle-btn:hover {
+            background: #dee2e6;
+        }
+        
         .platform-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .platform-buttons.collapsed {
+            max-height: 40px;
+            overflow: hidden;
         }
         
         .platform-btn {
-            padding: 14px 10px;
+            padding: 8px 16px;
             border: 2px solid transparent;
-            border-radius: 12px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
+            white-space: nowrap;
         }
         
         .platform-btn:hover {
@@ -222,6 +319,86 @@
             background: linear-gradient(135deg, #00f2ea 0%, #ff0050 50%, #000000 100%);
             box-shadow: 0 4px 15px rgba(255,0,80,0.4);
         }
+        
+        .platform-btn.zhihu {
+            background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%);
+            color: white;
+            border-color: #0084ff;
+        }
+        
+        .platform-btn.zhihu:hover,
+        .platform-btn.zhihu.active {
+            background: linear-gradient(135deg, #0066cc 0%, #0084ff 100%);
+            box-shadow: 0 4px 15px rgba(0,132,255,0.4);
+        }
+        
+        .platform-btn.xiaohongshu {
+            background: linear-gradient(135deg, #ff2442 0%, #ff6b7a 100%);
+            color: white;
+            border-color: #ff2442;
+        }
+        
+        .platform-btn.xiaohongshu:hover,
+        .platform-btn.xiaohongshu.active {
+            background: linear-gradient(135deg, #ff6b7a 0%, #ff2442 100%);
+            box-shadow: 0 4px 15px rgba(255,36,66,0.4);
+        }
+        
+        .platform-btn.placeholder {
+            background: #e9ecef;
+            color: #adb5bd;
+            border-color: #dee2e6;
+        }
+        
+        .platform-btn.hupu {
+            background: linear-gradient(135deg, #c01e2f 0%, #e03a4d 100%);
+            color: white;
+            border-color: #c01e2f;
+        }
+        
+        .platform-btn.hupu:hover,
+        .platform-btn.hupu.active {
+            background: linear-gradient(135deg, #e03a4d 0%, #c01e2f 100%);
+            box-shadow: 0 4px 15px rgba(192,30,47,0.4);
+        }
+        
+        .platform-btn.douban {
+            background: linear-gradient(135deg, #007722 0%, #00a040 100%);
+            color: white;
+            border-color: #007722;
+        }
+        
+        .platform-btn.douban:hover,
+        .platform-btn.douban.active {
+            background: linear-gradient(135deg, #00a040 0%, #007722 100%);
+            box-shadow: 0 4px 15px rgba(0,119,34,0.4);
+        }
+        
+        .platform-btn.thepaper {
+            background: linear-gradient(135deg, #004098 0%, #0066cc 100%);
+            color: white;
+            border-color: #004098;
+        }
+        
+        .platform-btn.thepaper:hover,
+        .platform-btn.thepaper.active {
+            background: linear-gradient(135deg, #0066cc 0%, #004098 100%);
+            box-shadow: 0 4px 15px rgba(0,64,152,0.4);
+        }
+        
+        .platform-btn.netease {
+            background: linear-gradient(135deg, #cc0000 0%, #ff3333 100%);
+            color: white;
+            border-color: #cc0000;
+        }
+        
+        .platform-btn.netease:hover,
+        .platform-btn.netease.active {
+            background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+            box-shadow: 0 4px 15px rgba(204,0,0,0.4);
+        }
+        
+
         
         .content {
             padding: 25px 20px;
@@ -651,21 +828,52 @@
         }
         
         @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+                padding: 15px 0;
+            }
+            
+            .sidebar-title {
+                font-size: 12px;
+                padding: 0 5px 15px;
+            }
+            
+            .nav-item {
+                padding: 15px 10px;
+                justify-content: center;
+            }
+            
+            .nav-icon {
+                margin-right: 0;
+                font-size: 20px;
+            }
+            
+            .nav-text {
+                display: none;
+            }
+            
+            .container {
+                margin-left: 60px;
+            }
+            
             .platform-buttons {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
+                gap: 6px;
+            }
+            
+            .platform-btn {
+                padding: 6px 12px;
+                font-size: 12px;
             }
         }
         
         @media (max-width: 480px) {
             .platform-buttons {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
+                gap: 5px;
             }
             
             .platform-btn {
-                padding: 12px 6px;
-                font-size: 13px;
+                padding: 5px 10px;
+                font-size: 11px;
             }
             
             .hot-item {
@@ -711,6 +919,1339 @@
                 padding: 12px 18px;
                 font-size: 14px;
             }
+        }
+        
+        /* 星座运势样式 */
+        .horoscope-container {
+            padding: 20px;
+        }
+        
+        .horoscope-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        
+        .horoscope-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .horoscope-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .horoscope-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .horoscope-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .horoscope-date {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .horoscope-detail {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+        }
+        
+        .horoscope-back {
+            background: #f8f9fa;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .horoscope-back:hover {
+            background: #e9ecef;
+        }
+        
+        .horoscope-detail-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .horoscope-detail-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+        
+        .horoscope-detail-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .horoscope-detail-date {
+            font-size: 14px;
+            color: #999;
+        }
+        
+        .horoscope-scores {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .horoscope-score-item {
+            text-align: center;
+            padding: 15px 10px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .horoscope-score-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .horoscope-score-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .horoscope-score-value {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .horoscope-score-stars {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #f1c40f;
+        }
+        
+        .horoscope-overall-score {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50px;
+            display: inline-block;
+        }
+        
+        .overall-score-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .overall-score-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            margin-top: 2px;
+        }
+        
+        .horoscope-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .horoscope-section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s;
+        }
+        
+        .horoscope-section-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .horoscope-section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .section-icon {
+            font-size: 24px;
+        }
+        
+        .section-title {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .section-score {
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .horoscope-section-body {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .horoscope-section-body p {
+            margin-bottom: 12px;
+        }
+        
+        .section-advice {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff5d6 100%);
+            padding: 12px 15px;
+            border-radius: 10px;
+            border-left: 3px solid #f1c40f;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .horoscope-lucky-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .lucky-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .lucky-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .lucky-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .lucky-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .lucky-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+        
+        .lucky-value {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .lucky-desc {
+            font-size: 11px;
+            color: #999;
+            line-height: 1.4;
+        }
+        
+        .horoscope-daily-advice {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+        
+        .advice-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+        
+        .advice-content {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .horoscope-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .horoscope-scores {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .lucky-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .horoscope-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .horoscope-scores {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .lucky-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 答案之书样式 */
+        .answerbook-container {
+            padding: 10px 20px 20px;
+            text-align: center;
+            min-height: auto;
+            perspective: 1500px;
+            margin-top: -10px;
+        }
+        
+        .answerbook-intro {
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .answerbook-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .answerbook-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .answerbook-desc {
+            font-size: 13px;
+            color: #999;
+            line-height: 1.6;
+        }
+        
+        /* 3D书本效果 */
+        .book-scene {
+            width: 200px;
+            height: 270px;
+            margin: 0 auto 20px;
+            perspective: 1000px;
+        }
+        
+        .answerbook-book {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        
+        .answerbook-book:hover {
+            transform: rotateY(-10deg);
+        }
+        
+        .answerbook-book.opening {
+            animation: openBook 1.5s ease forwards;
+        }
+        
+        @keyframes openBook {
+            0% { transform: rotateY(0deg); }
+            30% { transform: rotateY(-30deg); }
+            60% { transform: rotateY(-150deg); }
+            100% { transform: rotateY(-180deg); }
+        }
+        
+        .book-front, .book-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 4px 12px 12px 4px;
+        }
+        
+        .book-front {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.4),
+                inset 3px 0 8px rgba(255,255,255,0.1),
+                inset -3px 0 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 8px solid #d4af37;
+        }
+        
+        .book-back {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            transform: rotateY(180deg);
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.4),
+                inset -3px 0 8px rgba(255,255,255,0.1),
+                inset 3px 0 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .book-spine {
+            position: absolute;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37 0%, #b8941f 50%, #d4af37 100%);
+            left: -20px;
+            transform: rotateY(-90deg);
+            transform-origin: right;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .book-cover-content {
+            text-align: center;
+            color: #d4af37;
+            padding: 20px;
+        }
+        
+        .book-cover-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            font-family: 'SimSun', serif;
+        }
+        
+        .book-cover-subtitle {
+            font-size: 11px;
+            letter-spacing: 3px;
+            opacity: 0.9;
+            color: rgba(212, 175, 55, 0.8);
+        }
+        
+        .book-cover-hint {
+            margin-top: 30px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .book-page-content {
+            text-align: center;
+            color: #333;
+        }
+        
+        .page-number {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 30px;
+        }
+        
+        .page-answer {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a2e;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-family: 'SimSun', serif;
+        }
+        
+        .page-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 20px auto;
+        }
+        
+        .page-hint {
+            font-size: 13px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* 答案结果展示 */
+        .answerbook-result {
+            animation: fadeInScale 0.5s ease;
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .answer-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin-bottom: 15px;
+            box-shadow: 
+                0 10px 40px rgba(0,0,0,0.1),
+                0 0 0 1px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .answer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+        }
+        
+        .answer-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .answer-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        
+        .answer-meaning {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.7;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-align: left;
+        }
+        
+        .answer-hint {
+            font-size: 12px;
+            color: #999;
+            margin: 10px 0 15px;
+            font-style: italic;
+        }
+        
+        .answerbook-retry {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        .answerbook-retry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+        }
+        
+        /* 思考动画 */
+        .thinking-animation {
+            display: none;
+            margin: 30px 0;
+        }
+        
+        .thinking-animation.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .thinking-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .thinking-dot {
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            animation: thinking 1.4s infinite ease-in-out both;
+        }
+        
+        .thinking-dot:nth-child(1) { animation-delay: -0.32s; }
+        .thinking-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes thinking {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .thinking-text {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #999;
+        }
+        
+        /* AI算命样式 */
+        .fortune-container {
+            padding: 30px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .fortune-intro {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .fortune-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        
+        .fortune-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .fortune-desc {
+            font-size: 14px;
+            color: #999;
+            line-height: 1.6;
+        }
+        
+        .fortune-form {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .fortune-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .fortune-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .gender-select {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .gender-option {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .gender-option input {
+            display: none;
+        }
+        
+        .gender-option span {
+            display: block;
+            padding: 12px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .gender-option input:checked + span {
+            border-color: #667eea;
+            background: #f0f3ff;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .fortune-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .fortune-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.4);
+        }
+        
+        .fortune-result {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .bazi-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .bazi-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .bazi-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .bazi-pillars {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .bazi-pillar {
+            text-align: center;
+            padding: 15px 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .bazi-pillar-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+        
+        .bazi-pillar-gan {
+            font-size: 20px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .bazi-pillar-zhi {
+            font-size: 20px;
+            font-weight: 700;
+            color: #764ba2;
+            margin-top: 5px;
+        }
+        
+        .bazi-analysis {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .fortune-retry {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+        
+        .fortune-retry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+        }
+        
+        /* 增强的AI算命样式 */
+        .fortune-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .fortune-zodiac {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .fortune-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .fortune-subtitle {
+            font-size: 14px;
+            color: #999;
+        }
+        
+        .bazi-section-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #f5f5f5;
+        }
+        
+        .bazi-section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        
+        .bazi-section-header .section-icon {
+            font-size: 20px;
+        }
+        
+        .bazi-section-header .section-title {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .fortune-level {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        
+        .fortune-level.excellent {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+        
+        .fortune-level.good {
+            background: linear-gradient(135deg, #3498db, #5dade2);
+            color: white;
+        }
+        
+        .fortune-level.normal {
+            background: linear-gradient(135deg, #f39c12, #f5b041);
+            color: white;
+        }
+        
+        .fortune-level.bad {
+            background: linear-gradient(135deg, #e74c3c, #ec7063);
+            color: white;
+        }
+        
+        /* 四柱八字详细样式 */
+        .bazi-pillars-detailed {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .bazi-pillar-item {
+            text-align: center;
+            padding: 15px 8px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+        }
+        
+        .pillar-label {
+            font-size: 11px;
+            color: #999;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .pillar-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .pillar-gan, .pillar-zhi {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .pillar-gan[data-element="金"] { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .pillar-gan[data-element="木"] { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .pillar-gan[data-element="水"] { background: linear-gradient(135deg, #3498db, #5dade2); }
+        .pillar-gan[data-element="火"] { background: linear-gradient(135deg, #e74c3c, #ec7063); }
+        .pillar-gan[data-element="土"] { background: linear-gradient(135deg, #8b7355, #a0826d); }
+        
+        .pillar-zhi[data-element="金"] { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .pillar-zhi[data-element="木"] { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .pillar-zhi[data-element="水"] { background: linear-gradient(135deg, #3498db, #5dade2); }
+        .pillar-zhi[data-element="火"] { background: linear-gradient(135deg, #e74c3c, #ec7063); }
+        .pillar-zhi[data-element="土"] { background: linear-gradient(135deg, #8b7355, #a0826d); }
+        
+        .pillar-gan.highlight {
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.3);
+        }
+        
+        .pillar-nayin {
+            font-size: 10px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        /* 五行分析样式 */
+        .elements-analysis {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .elements-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .element-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .element-label {
+            width: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .element-bar-wrapper {
+            flex: 1;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .element-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+        
+        .element-bar.金 { background: linear-gradient(90deg, #f1c40f, #f39c12); }
+        .element-bar.木 { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .element-bar.水 { background: linear-gradient(90deg, #3498db, #5dade2); }
+        .element-bar.火 { background: linear-gradient(90deg, #e74c3c, #ec7063); }
+        .element-bar.土 { background: linear-gradient(90deg, #8b7355, #a0826d); }
+        
+        .element-value {
+            width: 80px;
+            font-size: 12px;
+            color: #666;
+            text-align: right;
+        }
+        
+        .elements-summary {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        
+        .element-highlight {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .highlight-label {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .highlight-value {
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .highlight-value.金 { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .highlight-value.木 { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .highlight-value.水 { background: linear-gradient(135deg, #3498db, #5dade2); }
+        .highlight-value.火 { background: linear-gradient(135deg, #e74c3c, #ec7063); }
+        .highlight-value.土 { background: linear-gradient(135deg, #8b7355, #a0826d); }
+        
+        .element-advice {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* 性格分析样式 */
+        .personality-analysis {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .personality-type {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #667eea;
+            padding: 10px;
+            background: linear-gradient(135deg, #f0f3ff 0%, #e8ecff 100%);
+            border-radius: 10px;
+        }
+        
+        .personality-traits {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .trait-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 12px;
+        }
+        
+        .trait-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .trait-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .trait-tag {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .trait-tag.good {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+        }
+        
+        .trait-tag.caution {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            color: #856404;
+        }
+        
+        .personality-career, .personality-love {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 3px solid #667eea;
+        }
+        
+        /* 今日运势样式 */
+        .today-fortune {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .today-fortune-content {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .today-fortune-content p {
+            margin-bottom: 12px;
+        }
+        
+        .fortune-advice-box {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border-left: 3px solid #667eea;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* 五大运势样式 */
+        .five-fortunes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .fortune-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+        }
+        
+        .fortune-item-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .fortune-icon {
+            font-size: 20px;
+        }
+        
+        .fortune-name {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .fortune-score-bar {
+            width: 80px;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .fortune-score-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+        
+        .fortune-score-value {
+            width: 40px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #667eea;
+            text-align: right;
+        }
+        
+        .fortune-item-detail {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            padding-left: 28px;
+        }
+        
+        /* 宜忌样式 */
+        .yiji-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .yiji-box {
+            border-radius: 12px;
+            padding: 15px;
+        }
+        
+        .yiji-box.yi {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        }
+        
+        .yiji-box.ji {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+        }
+        
+        .yiji-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .yiji-box.yi .yiji-title {
+            color: #155724;
+        }
+        
+        .yiji-box.ji .yiji-title {
+            color: #721c24;
+        }
+        
+        .yiji-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .yiji-item {
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            background: rgba(255,255,255,0.7);
+        }
+        
+        .yiji-box.yi .yiji-item {
+            color: #155724;
+        }
+        
+        .yiji-box.ji .yiji-item {
+            color: #721c24;
+        }
+        
+        @media (max-width: 480px) {
+            .bazi-pillars-detailed {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .yiji-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .video-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+        
+        .video-loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f0f0f0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 功能开发中样式 */
+        .coming-soon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .coming-soon-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.6;
+        }
+        
+        .coming-soon-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .coming-soon-sub {
+            font-size: 14px;
+            color: #adb5bd;
         }
         
         /* 搜索框样式 */
@@ -780,11 +2321,37 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <button class="refresh-btn" id="refreshBtn" onclick="refreshAllData()" title="刷新全部数据">🔄</button>
-            <h1>全网热榜</h1>
-            <div class="subtitle">实时热点 · 一触即达</div>
+    <div class="main-wrapper">
+        <!-- 左侧导航栏 -->
+        <div class="sidebar">
+            <div class="sidebar-title">🔥 热点导航</div>
+            <div class="nav-item active" data-page="hot" onclick="switchPage('hot')">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">全网热榜</span>
+            </div>
+
+            <div class="nav-item" data-page="horoscope" onclick="switchPage('horoscope')">
+                <span class="nav-icon">♈</span>
+                <span class="nav-text">星座运势</span>
+            </div>
+            <div class="nav-item" data-page="answerbook" onclick="switchPage('answerbook')">
+                <span class="nav-icon">📖</span>
+                <span class="nav-text">答案之书</span>
+            </div>
+            <div class="nav-item" data-page="fortune" onclick="switchPage('fortune')">
+                <span class="nav-icon">🔮</span>
+                <span class="nav-text">AI算命</span>
+            </div>
+
+        </div>
+        
+        <div class="container">
+            <!-- 全网热榜页面 -->
+            <div id="page-hot" class="content-area active">
+                <div class="header">
+                    <button class="refresh-btn" id="refreshBtn" onclick="refreshAllData()" title="刷新全部数据">🔄</button>
+                    <h1>全网热榜</h1>
+                    <div class="subtitle">实时热点 · 一触即达</div>
         </div>
         
         <!-- 搜索框区域 -->
@@ -801,19 +2368,44 @@
         </div>
         
         <div class="platform-selector">
-            <div class="platform-label">选择平台</div>
-            <div class="platform-buttons">
+            <div class="platform-label">
+                <span>选择平台</span>
+                <button class="toggle-btn" id="togglePlatforms" onclick="togglePlatforms()">收起 ▲</button>
+            </div>
+            <div class="platform-buttons" id="platformButtons">
                 <button class="platform-btn active douyin" data-platform="douyin">
                     <span>抖音</span>
                 </button>
                 <button class="platform-btn weibo" data-platform="weibo">
                     <span>微博</span>
                 </button>
+                <button class="platform-btn zhihu" data-platform="zhihu">
+                    <span>知乎</span>
+                </button>
                 <button class="platform-btn bilibili" data-platform="bilibili">
                     <span>B站</span>
                 </button>
+                <button class="platform-btn xiaohongshu" data-platform="xiaohongshu">
+                    <span>小红书</span>
+                </button>
                 <button class="platform-btn baidu" data-platform="baidu">
                     <span>百度</span>
+                </button>
+                <button class="platform-btn hupu" data-platform="hupu">
+                    <span>虎扑</span>
+                </button>
+                <button class="platform-btn douban" data-platform="douban">
+                    <span>豆瓣</span>
+                </button>
+                <button class="platform-btn thepaper" data-platform="thepaper">
+                    <span>澎湃新闻</span>
+                </button>
+                <button class="platform-btn netease" data-platform="netease">
+                    <span>网易新闻</span>
+                </button>
+                <!-- 预留更多平台位置 -->
+                <button class="platform-btn placeholder" onclick="event.stopPropagation(); return false;" style="opacity: 0.5; cursor: default;">
+                    <span>+ 更多</span>
                 </button>
             </div>
         </div>
@@ -829,7 +2421,146 @@
             <div class="loading">加载中...</div>
         </div>
         
-        <div class="footer" id="updateTime"></div>
+                <div class="footer" id="updateTime"></div>
+            </div>
+            
+            <!-- 星座运势页面 -->
+            <div id="page-horoscope" class="content-area">
+                <div class="header">
+                    <h1>♈ 星座运势</h1>
+                    <div class="subtitle">每日运势 · 星座解析</div>
+                </div>
+                <div class="horoscope-container">
+                    <div class="horoscope-grid" id="horoscopeGrid">
+                        <!-- 星座卡片由JS生成 -->
+                    </div>
+                    <div class="horoscope-detail" id="horoscopeDetail" style="display: none;">
+                        <button class="horoscope-back" onclick="backToHoroscopeGrid()">← 返回星座列表</button>
+                        <div class="horoscope-detail-content" id="horoscopeDetailContent">
+                            <!-- 详细内容由JS生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 答案之书页面 -->
+            <div id="page-answerbook" class="content-area">
+                <div class="header">
+                    <h1>📖 答案之书</h1>
+                    <div class="subtitle">心中默念问题 · 翻开答案</div>
+                </div>
+                <div class="answerbook-container">
+                    <div class="answerbook-intro" id="answerbookIntro">
+                        <div class="answerbook-icon">📖</div>
+                        <div class="answerbook-title">答案之书</div>
+                        <div class="answerbook-desc">在心中默念你的问题，然后点击翻开书页<br>让命运给你指引</div>
+                    </div>
+                    
+                    <!-- 3D书本 -->
+                    <div class="book-scene" id="bookScene">
+                        <div class="answerbook-book" id="answerbookBook" onclick="openAnswerBook()">
+                            <div class="book-spine"></div>
+                            <div class="book-front">
+                                <div class="book-cover-content">
+                                    <div class="book-cover-title">答案之书</div>
+                                    <div class="book-cover-subtitle">THE BOOK OF ANSWERS</div>
+                                    <div class="book-cover-hint">点击翻开</div>
+                                </div>
+                            </div>
+                            <div class="book-back">
+                                <div class="book-page-content">
+                                    <div class="page-number">— 第 <span id="pageNumber">?</span> 页 —</div>
+                                    <div class="page-answer" id="pageAnswer">...</div>
+                                    <div class="page-divider"></div>
+                                    <div class="page-hint">答案就在你心中</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 思考动画 -->
+                    <div class="thinking-animation" id="thinkingAnimation">
+                        <div class="thinking-dots">
+                            <div class="thinking-dot"></div>
+                            <div class="thinking-dot"></div>
+                            <div class="thinking-dot"></div>
+                        </div>
+                        <div class="thinking-text">正在寻找答案...</div>
+                    </div>
+                    
+                    <!-- 答案结果 -->
+                    <div class="answerbook-result" id="answerbookResult" style="display: none;">
+                        <div class="answer-card">
+                            <div class="answer-label">命运的指引</div>
+                            <div class="answer-text" id="answerText"></div>
+                            <div class="answer-meaning" id="answerMeaning"></div>
+                        </div>
+                        <div class="answer-hint">这是命运给你的答案，请用心体会</div>
+                        <button class="answerbook-retry" onclick="resetAnswerBook()">🔄 再问一次</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI算命页面 -->
+            <div id="page-fortune" class="content-area">
+                <div class="header">
+                    <h1>🔮 AI算命</h1>
+                    <div class="subtitle">生辰八字 · 智能解析</div>
+                </div>
+                <div class="fortune-container">
+                    <div class="fortune-intro">
+                        <div class="fortune-icon">🔮</div>
+                        <div class="fortune-title">天机阁</div>
+                        <div class="fortune-desc">输入您的生辰八字，AI为您解析命理运势<br>四柱八字、五行分析、今日运势</div>
+                    </div>
+                    <div class="fortune-form" id="fortuneForm">
+                        <div class="form-group">
+                            <label>您的姓名</label>
+                            <input type="text" id="fortuneName" class="fortune-input" placeholder="请输入您的姓名（选填）">
+                        </div>
+                        <div class="form-group">
+                            <label>出生日期</label>
+                            <input type="date" id="fortuneDate" class="fortune-input">
+                        </div>
+                        <div class="form-group">
+                            <label>出生时辰</label>
+                            <select id="fortuneTime" class="fortune-input">
+                                <option value="0">子时 (23:00-01:00)</option>
+                                <option value="1">丑时 (01:00-03:00)</option>
+                                <option value="2">寅时 (03:00-05:00)</option>
+                                <option value="3">卯时 (05:00-07:00)</option>
+                                <option value="4">辰时 (07:00-09:00)</option>
+                                <option value="5">巳时 (09:00-11:00)</option>
+                                <option value="6">午时 (11:00-13:00)</option>
+                                <option value="7">未时 (13:00-15:00)</option>
+                                <option value="8">申时 (15:00-17:00)</option>
+                                <option value="9">酉时 (17:00-19:00)</option>
+                                <option value="10">戌时 (19:00-21:00)</option>
+                                <option value="11">亥时 (21:00-23:00)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>性别</label>
+                            <div class="gender-select">
+                                <label class="gender-option">
+                                    <input type="radio" name="gender" value="male" checked>
+                                    <span>男</span>
+                                </label>
+                                <label class="gender-option">
+                                    <input type="radio" name="gender" value="female">
+                                    <span>女</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button class="fortune-submit" onclick="calculateFortune()">开始测算</button>
+                    </div>
+                    <div class="fortune-result" id="fortuneResult" style="display: none;">
+                        <!-- 结果由JS生成 -->
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
 
     <script>
@@ -911,7 +2642,6 @@
         const platforms = {
             douyin: {
                 name: '抖音',
-                emoji: '📱',
                 apis: [
                     'https://v2.xxapi.cn/api/douyinhot'
                 ],
@@ -920,33 +2650,76 @@
             },
             weibo: {
                 name: '微博',
-                emoji: '🔥',
-                // 多API聚合配置 - 按优先级排序
+                // XXAPI - 经测试数据最准确
                 apis: [
-                    'https://v2.xxapi.cn/api/weibohot',
-                    // 备用API（当主API数据不新鲜时尝试）
-                    'https://api.oioweb.cn/api/social/weibo-hot-search'
+                    'https://v2.xxapi.cn/api/weibohot'
                 ],
                 api: 'https://v2.xxapi.cn/api/weibohot',
                 searchUrl: 'https://s.weibo.com/weibo?q='
             },
+            zhihu: {
+                name: '知乎',
+                apis: [
+                    'https://v2.xxapi.cn/api/zhihu'
+                ],
+                api: 'https://v2.xxapi.cn/api/zhihu',
+                searchUrl: 'https://www.zhihu.com/search?type=content&q='
+            },
             bilibili: {
                 name: 'B站',
-                emoji: '📺',
                 apis: [
                     'https://v2.xxapi.cn/api/bilibilihot'
                 ],
                 api: 'https://v2.xxapi.cn/api/bilibilihot',
                 searchUrl: 'https://search.bilibili.com/all?keyword='
             },
+            xiaohongshu: {
+                name: '小红书',
+                apis: [
+                    'https://api.oioweb.cn/api/social/xiaohongshu-hot-search'
+                ],
+                api: 'https://api.oioweb.cn/api/social/xiaohongshu-hot-search',
+                searchUrl: 'https://www.xiaohongshu.com/search_result?keyword='
+            },
             baidu: {
                 name: '百度',
-                emoji: '🔍',
                 apis: [
                     'https://v2.xxapi.cn/api/baiduhot'
                 ],
                 api: 'https://v2.xxapi.cn/api/baiduhot',
                 searchUrl: 'https://www.baidu.com/s?wd='
+            },
+            hupu: {
+                name: '虎扑',
+                apis: [
+                    'https://v2.xxapi.cn/api/hupu'
+                ],
+                api: 'https://v2.xxapi.cn/api/hupu',
+                searchUrl: 'https://bbs.hupu.com/search?q='
+            },
+            douban: {
+                name: '豆瓣',
+                apis: [
+                    'https://v2.xxapi.cn/api/douban'
+                ],
+                api: 'https://v2.xxapi.cn/api/douban',
+                searchUrl: 'https://www.douban.com/search?q='
+            },
+            thepaper: {
+                name: '澎湃新闻',
+                apis: [
+                    'https://v2.xxapi.cn/api/thepaper'
+                ],
+                api: 'https://v2.xxapi.cn/api/thepaper',
+                searchUrl: 'https://www.thepaper.cn/searchResult.jsp?searchWord='
+            },
+            netease: {
+                name: '网易新闻',
+                apis: [
+                    'https://v2.xxapi.cn/api/netease'
+                ],
+                api: 'https://v2.xxapi.cn/api/netease',
+                searchUrl: 'https://www.163.com/search?keyword='
             },
 
         };
@@ -956,10 +2729,23 @@
             douyin_raw: [],
             weibo: [],
             weibo_raw: [],
+            zhihu: [],
+            zhihu_raw: [],
             bilibili: [],
             bilibili_raw: [],
+            xiaohongshu: [],
+            xiaohongshu_raw: [],
             baidu: [],
-            baidu_raw: []
+            baidu_raw: [],
+            hupu: [],
+            hupu_raw: [],
+            douban: [],
+            douban_raw: [],
+            thepaper: [],
+            thepaper_raw: [],
+            netease: [],
+            netease_raw: [],
+
         };
         let currentPlatform = 'douyin';
         let currentCategory = 'all';
@@ -1006,7 +2792,22 @@
 
         // 初始化
         async function init() {
+            // 先尝试从缓存加载数据
+            Object.keys(platforms).forEach(platform => {
+                const cached = dataFreshness.getCache(platform);
+                if (cached && cached.data) {
+                    hotData[platform] = cached.data;
+                    console.log(`[${platform}] 从缓存加载数据`);
+                }
+            });
+            
+            // 先渲染页面，让用户能立即看到内容
+            renderCategoryButtons(currentPlatform);
+            renderPlatform(currentPlatform);
+            
+            // 后台加载最新数据
             await loadAllData();
+            // 数据加载完成后重新渲染
             renderCategoryButtons(currentPlatform);
             renderPlatform(currentPlatform);
         }
@@ -1979,6 +3780,23 @@
             renderPlatform(currentPlatform);
         }
 
+        // 展开/收起平台按钮
+        let isPlatformsExpanded = true;
+        function togglePlatforms() {
+            const buttons = document.getElementById('platformButtons');
+            const toggleBtn = document.getElementById('togglePlatforms');
+            
+            isPlatformsExpanded = !isPlatformsExpanded;
+            
+            if (isPlatformsExpanded) {
+                buttons.classList.remove('collapsed');
+                toggleBtn.textContent = '收起 ▲';
+            } else {
+                buttons.classList.add('collapsed');
+                toggleBtn.textContent = '展开 ▼';
+            }
+        }
+
         // 绑定按钮事件
         document.querySelectorAll('.platform-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1986,8 +3804,985 @@
             });
         });
 
-        // 页面加载
-        init();
+        // 页面加载 - 使用非阻塞方式，让页面先渲染
+        init().catch(err => console.error('初始化错误:', err));
+        
+        // 页面切换功能
+        function switchPage(page) {
+            // 更新导航栏激活状态
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`.nav-item[data-page="${page}"]`).classList.add('active');
+            
+            // 切换内容区域
+            document.querySelectorAll('.content-area').forEach(area => {
+                area.classList.remove('active');
+            });
+            document.getElementById(`page-${page}`).classList.add('active');
+            
+            // 初始化页面数据
+            if (page === 'horoscope' && !window.horoscopeInitialized) {
+                initHoroscope();
+                window.horoscopeInitialized = true;
+            } else if (page === 'answerbook' && !window.answerbookInitialized) {
+                initAnswerBook();
+                window.answerbookInitialized = true;
+            } else if (page === 'fortune' && !window.fortuneInitialized) {
+                initFortune();
+                window.fortuneInitialized = true;
+            }
+        }
+        
+        // ==================== 星座运势功能 ====================
+        const horoscopeData = [
+            { name: '白羊座', icon: '♈', date: '3.21-4.19', element: '火' },
+            { name: '金牛座', icon: '♉', date: '4.20-5.20', element: '土' },
+            { name: '双子座', icon: '♊', date: '5.21-6.21', element: '风' },
+            { name: '巨蟹座', icon: '♋', date: '6.22-7.22', element: '水' },
+            { name: '狮子座', icon: '♌', date: '7.23-8.22', element: '火' },
+            { name: '处女座', icon: '♍', date: '8.23-9.22', element: '土' },
+            { name: '天秤座', icon: '♎', date: '9.23-10.23', element: '风' },
+            { name: '天蝎座', icon: '♏', date: '10.24-11.22', element: '水' },
+            { name: '射手座', icon: '♐', date: '11.23-12.21', element: '火' },
+            { name: '摩羯座', icon: '♑', date: '12.22-1.19', element: '土' },
+            { name: '水瓶座', icon: '♒', date: '1.20-2.18', element: '风' },
+            { name: '双鱼座', icon: '♓', date: '2.19-3.20', element: '水' }
+        ];
+        
+        const fortuneTexts = {
+            love: [
+                { status: '桃花运旺盛', detail: '单身者今日魅力值爆表，容易吸引异性目光。已有伴侣者感情甜蜜，适合安排浪漫约会。晚上7-9点是表白或求婚的黄金时段，成功率极高。', advice: '主动出击，不要错过良缘' },
+                { status: '感情平稳', detail: '今日适合与伴侣进行深度交流，聊聊未来的规划和期待。单身者可以通过朋友介绍认识新对象，不要拒绝社交邀约。', advice: '多倾听，少争辩' },
+                { status: '需谨慎处理', detail: '今日容易因小事产生误会，可能因为一句话就引发争吵。建议遇到分歧时先冷静10分钟，等情绪平复后再沟通。', advice: '避免冷战，及时沟通' },
+                { status: '旧情复燃', detail: '前任可能会主动联系你，或者你会突然想起过去的感情。不要冲动做决定，先想清楚自己真正想要的是什么。', advice: '理性对待，不要被情绪左右' },
+                { status: '暗恋有望', detail: '你暗恋的对象今天可能会注意到你，或者给你们创造独处的机会。保持自然，展现真实的自己。', advice: '把握机会，适度表现' },
+                { status: '感情考验', detail: '今天可能会面临感情上的考验，比如异地恋的思念、父母的不认可等。只要两个人心意相通，这些困难都能克服。', advice: '坚定信心，共同面对' }
+            ],
+            career: [
+                { status: '事业上升期', detail: '今日工作效率极高，思维敏捷，容易提出创新性的想法。上午10-12点是处理重要事务的最佳时段，重要会议尽量安排在这个时间。领导对你的表现很满意，升职加薪指日可待。', advice: '大胆提出你的想法' },
+                { status: '贵人相助', detail: '今天会遇到愿意帮助你的贵人，可能是上司、同事或客户。保持谦逊的态度，虚心请教，会有意想不到的收获。合作项目进展顺利，有望提前完成。', advice: '主动寻求合作机会' },
+                { status: '稳中求进', detail: '今日不宜做重大决策，适合处理日常事务和整理资料。可能会遇到一些小麻烦，但只要保持耐心都能解决。财运平稳，没有大的开销也没有意外收入。', advice: '稳扎稳打，不要冒进' },
+                { status: '突破瓶颈', detail: '困扰你很久的问题今天可能会找到解决方案。下午3-5点灵感迸发，适合进行创意工作。学生党考试成绩理想，求职者有望收到好消息。', advice: '保持专注，不要分心' },
+                { status: '压力较大', detail: '今天工作任务繁重，可能会加班到很晚。注意劳逸结合，每隔一小时起来活动一下。虽然辛苦，但你的努力会被看见。', advice: '合理安排时间，注意身体' },
+                { status: '财运亨通', detail: '今日偏财运不错，可能会有意外之财，比如中奖、收到红包或投资回报。但切记不要贪心，见好就收。适合进行理财规划。', advice: '把握机会，但别贪心' }
+            ],
+            health: [
+                { status: '精力充沛', detail: '今日身体状态极佳，精力充沛，适合进行高强度运动。可以尝试跑步、游泳或健身。饮食方面注意营养均衡，多吃蔬菜水果。', advice: '多运动，保持活力' },
+                { status: '注意休息', detail: '最近可能睡眠不足，今天容易感到疲劳。建议午休20-30分钟，晚上尽量在11点前入睡。眼睛可能会干涩，注意用眼卫生。', advice: '早睡早起，规律作息' },
+                { status: '肠胃敏感', detail: '今日肠胃较为敏感，避免吃生冷、辛辣刺激的食物。饮食以清淡为主，多喝温水。如果有应酬，注意不要饮酒过量。', advice: '清淡饮食，保护肠胃' },
+                { status: '情绪管理', detail: '今天情绪可能会有波动，容易焦虑或烦躁。可以通过冥想、瑜伽或听音乐来放松心情。不要压抑情绪，找信任的人倾诉。', advice: '学会释放压力' },
+                { status: '注意保暖', detail: '今日容易受凉感冒，注意增减衣物。空调温度不要调太低，避免直吹。可以喝些姜茶或红糖水驱寒。', advice: '注意保暖，预防感冒' },
+                { status: '整体平稳', detail: '今日健康状况良好，没有明显不适。保持现有的生活习惯即可，可以适当增加户外活动，呼吸新鲜空气。', advice: '保持现状，适度运动' }
+            ],
+            wealth: [
+                { status: '正财稳定', detail: '工资收入稳定，没有意外支出。适合制定储蓄计划，每月固定存下一部分收入。不要冲动消费，购物前问自己是否真的需要。', advice: '理性消费，多储蓄' },
+                { status: '偏财旺盛', detail: '今日偏财运佳，可能会有意外收入，比如投资收益、奖金或红包。但投资需谨慎，不要盲目跟风。小赌怡情，大赌伤身。', advice: '见好就收，不要贪心' },
+                { status: '开销较大', detail: '今天可能会有计划外支出，比如朋友聚会、突发维修或医疗开销。建议预留一部分应急资金，避免捉襟见肘。', advice: '控制开销，预留备用金' },
+                { status: '投资良机', detail: '今日适合研究投资项目，可能会有不错的投资机会出现。但切记不要投入全部身家，分散投资降低风险。', advice: '谨慎投资，分散风险' },
+                { status: '借贷谨慎', detail: '今日不宜借钱给他人，也可能有人来向你借钱。借钱容易要钱难，建议量力而行。如果必须借，一定要写借条。', advice: '量力而行，保护财产' },
+                { status: '理财规划', detail: '适合今天做财务规划，整理收支情况，制定下月预算。可以考虑学习理财知识，让钱生钱。', advice: '学习理财，规划未来' }
+            ],
+            social: [
+                { status: '人缘极佳', detail: '今日社交运势旺盛，容易结识新朋友，与旧友关系也更加融洽。适合参加聚会、应酬或社交活动。你的幽默感和亲和力会感染身边的人。', advice: '多参加社交活动' },
+                { status: '谨言慎行', detail: '今日容易说错话得罪人，说话前要三思。不要在背后议论他人，以免传话变味。保持低调，避免卷入是非。', advice: '多听少说，谨言慎行' },
+                { status: '化解矛盾', detail: '今天是化解误会的好时机，如果有和朋友或同事的不愉快，主动沟通可以冰释前嫌。真诚是最好的解药。', advice: '主动沟通，化解误会' },
+                { status: '贵人出现', detail: '今天可能会遇到对你事业或生活有帮助的贵人。保持开放的心态，不要拒绝陌生人的善意。 networking很重要。', advice: '把握机会，拓展人脉' },
+                { status: '独处为佳', detail: '今日不适合社交活动，更适合独处充电。可以看书、看电影或做自己喜欢的事。拒绝不必要的应酬，给自己一些空间。', advice: '享受独处时光' },
+                { status: '团队合作', detail: '今日在团队中表现突出，容易获得同事的认可和支持。适合推进团队项目，大家的配合会很默契。', advice: '发挥团队精神' }
+            ],
+            lucky: ['红色', '蓝色', '绿色', '黄色', '紫色', '橙色', '粉色', '白色', '黑色', '金色'],
+            numbers: ['3', '7', '8', '9', '12', '18', '21', '28', '33', '66', '88', '99'],
+            directions: ['东南', '西北', '正南', '正北', '东北', '西南', '正东', '正西'],
+            times: ['上午9-11点', '下午1-3点', '下午3-5点', '晚上7-9点', '晚上9-11点', '凌晨1-3点'],
+            items: ['水晶', '玉石', '红绳', '护身符', '钱包', '手表', '项链', '手链'],
+            colors: {
+                '红色': '代表热情、活力，能增强自信和魅力',
+                '蓝色': '代表冷静、理智，有助于思考和决策',
+                '绿色': '代表生机、希望，能带来好运和健康',
+                '黄色': '代表财富、权力，有助于事业和财运',
+                '紫色': '代表高贵、神秘，能提升气质和灵感',
+                '橙色': '代表活力、创造，有助于社交和表达',
+                '粉色': '代表温柔、爱情，能增进感情运势',
+                '白色': '代表纯洁、简单，有助于净化心灵',
+                '黑色': '代表稳重、神秘，能增强气场和权威',
+                '金色': '代表富贵、成功，有助于招财进宝'
+            },
+            advice: [
+                '保持乐观心态，相信美好的事情即将发生',
+                '今日宜静不宜动，重要决定可以推迟几天',
+                '把握当下，勇敢追求自己想要的东西',
+                '与人为善，你的善意会得到回报',
+                '坚持就是胜利，不要轻易放弃',
+                '学会放下，过去的就让它过去',
+                '相信自己，你比想象中更强大',
+                '珍惜眼前人，不要等到失去才后悔'
+            ]
+        };
+        
+        function initHoroscope() {
+            renderHoroscopeGrid();
+        }
+        
+        function renderHoroscopeGrid() {
+            const grid = document.getElementById('horoscopeGrid');
+            grid.innerHTML = horoscopeData.map((sign, index) => `
+                <div class="horoscope-card" onclick="showHoroscopeDetail(${index})">
+                    <div class="horoscope-icon">${sign.icon}</div>
+                    <div class="horoscope-name">${sign.name}</div>
+                    <div class="horoscope-date">${sign.date}</div>
+                </div>
+            `).join('');
+            grid.style.display = 'grid';
+            document.getElementById('horoscopeDetail').style.display = 'none';
+        }
+        
+        function showHoroscopeDetail(index) {
+            const sign = horoscopeData[index];
+            const today = new Date().toLocaleDateString('zh-CN');
+            
+            // 基于日期和星座生成固定运势（同一天同一星座运势相同）
+            const seed = today + sign.name;
+            const random = seededRandom(seed);
+            
+            const love = fortuneTexts.love[Math.floor(random() * fortuneTexts.love.length)];
+            const career = fortuneTexts.career[Math.floor(random() * fortuneTexts.career.length)];
+            const health = fortuneTexts.health[Math.floor(random() * fortuneTexts.health.length)];
+            const wealth = fortuneTexts.wealth[Math.floor(random() * fortuneTexts.wealth.length)];
+            const social = fortuneTexts.social[Math.floor(random() * fortuneTexts.social.length)];
+            const luckyColor = fortuneTexts.lucky[Math.floor(random() * fortuneTexts.lucky.length)];
+            const luckyNumber = fortuneTexts.numbers[Math.floor(random() * fortuneTexts.numbers.length)];
+            const luckyDirection = fortuneTexts.directions[Math.floor(random() * fortuneTexts.directions.length)];
+            const luckyTime = fortuneTexts.times[Math.floor(random() * fortuneTexts.times.length)];
+            const luckyItem = fortuneTexts.items[Math.floor(random() * fortuneTexts.items.length)];
+            const advice = fortuneTexts.advice[Math.floor(random() * fortuneTexts.advice.length)];
+            
+            const loveScore = Math.floor(random() * 30) + 70;
+            const careerScore = Math.floor(random() * 30) + 70;
+            const wealthScore = Math.floor(random() * 30) + 70;
+            const healthScore = Math.floor(random() * 30) + 70;
+            const socialScore = Math.floor(random() * 30) + 70;
+            const overallScore = Math.floor((loveScore + careerScore + wealthScore + healthScore + socialScore) / 5);
+            
+            const colorMeaning = fortuneTexts.colors[luckyColor];
+            
+            const detailContent = document.getElementById('horoscopeDetailContent');
+            detailContent.innerHTML = `
+                <div class="horoscope-detail-header">
+                    <div class="horoscope-detail-icon">${sign.icon}</div>
+                    <div class="horoscope-detail-name">${sign.name}</div>
+                    <div class="horoscope-detail-date">${sign.date} · ${sign.element}象星座 · ${today}</div>
+                    <div class="horoscope-overall-score">
+                        <div class="overall-score-value">${overallScore}</div>
+                        <div class="overall-score-label">今日综合运势</div>
+                    </div>
+                </div>
+                
+                <div class="horoscope-scores">
+                    <div class="horoscope-score-item">
+                        <div class="horoscope-score-label">💕 爱情</div>
+                        <div class="horoscope-score-value">${loveScore}</div>
+                        <div class="horoscope-score-stars">${'★'.repeat(Math.floor(loveScore/20))}${'☆'.repeat(5-Math.floor(loveScore/20))}</div>
+                    </div>
+                    <div class="horoscope-score-item">
+                        <div class="horoscope-score-label">💼 事业</div>
+                        <div class="horoscope-score-value">${careerScore}</div>
+                        <div class="horoscope-score-stars">${'★'.repeat(Math.floor(careerScore/20))}${'☆'.repeat(5-Math.floor(careerScore/20))}</div>
+                    </div>
+                    <div class="horoscope-score-item">
+                        <div class="horoscope-score-label">💰 财富</div>
+                        <div class="horoscope-score-value">${wealthScore}</div>
+                        <div class="horoscope-score-stars">${'★'.repeat(Math.floor(wealthScore/20))}${'☆'.repeat(5-Math.floor(wealthScore/20))}</div>
+                    </div>
+                    <div class="horoscope-score-item">
+                        <div class="horoscope-score-label">🏃 健康</div>
+                        <div class="horoscope-score-value">${healthScore}</div>
+                        <div class="horoscope-score-stars">${'★'.repeat(Math.floor(healthScore/20))}${'☆'.repeat(5-Math.floor(healthScore/20))}</div>
+                    </div>
+                    <div class="horoscope-score-item">
+                        <div class="horoscope-score-label">👥 人际</div>
+                        <div class="horoscope-score-value">${socialScore}</div>
+                        <div class="horoscope-score-stars">${'★'.repeat(Math.floor(socialScore/20))}${'☆'.repeat(5-Math.floor(socialScore/20))}</div>
+                    </div>
+                </div>
+                
+                <div class="horoscope-sections">
+                    <div class="horoscope-section-card">
+                        <div class="horoscope-section-header">
+                            <span class="section-icon">💕</span>
+                            <span class="section-title">爱情运势 · ${love.status}</span>
+                            <span class="section-score">${loveScore}分</span>
+                        </div>
+                        <div class="horoscope-section-body">
+                            <p>${love.detail}</p>
+                            <div class="section-advice">
+                                <strong>💡 建议：</strong>${love.advice}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="horoscope-section-card">
+                        <div class="horoscope-section-header">
+                            <span class="section-icon">💼</span>
+                            <span class="section-title">事业学业 · ${career.status}</span>
+                            <span class="section-score">${careerScore}分</span>
+                        </div>
+                        <div class="horoscope-section-body">
+                            <p>${career.detail}</p>
+                            <div class="section-advice">
+                                <strong>💡 建议：</strong>${career.advice}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="horoscope-section-card">
+                        <div class="horoscope-section-header">
+                            <span class="section-icon">💰</span>
+                            <span class="section-title">财富运势 · ${wealth.status}</span>
+                            <span class="section-score">${wealthScore}分</span>
+                        </div>
+                        <div class="horoscope-section-body">
+                            <p>${wealth.detail}</p>
+                            <div class="section-advice">
+                                <strong>💡 建议：</strong>${wealth.advice}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="horoscope-section-card">
+                        <div class="horoscope-section-header">
+                            <span class="section-icon">🏃</span>
+                            <span class="section-title">健康运势 · ${health.status}</span>
+                            <span class="section-score">${healthScore}分</span>
+                        </div>
+                        <div class="horoscope-section-body">
+                            <p>${health.detail}</p>
+                            <div class="section-advice">
+                                <strong>💡 建议：</strong>${health.advice}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="horoscope-section-card">
+                        <div class="horoscope-section-header">
+                            <span class="section-icon">👥</span>
+                            <span class="section-title">人际关系 · ${social.status}</span>
+                            <span class="section-score">${socialScore}分</span>
+                        </div>
+                        <div class="horoscope-section-body">
+                            <p>${social.detail}</p>
+                            <div class="section-advice">
+                                <strong>💡 建议：</strong>${social.advice}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="horoscope-lucky-section">
+                    <div class="lucky-title">🍀 今日幸运指南</div>
+                    <div class="lucky-grid">
+                        <div class="lucky-item">
+                            <div class="lucky-label">幸运颜色</div>
+                            <div class="lucky-value" style="color: ${luckyColor === '红色' ? '#e74c3c' : luckyColor === '蓝色' ? '#3498db' : luckyColor === '绿色' ? '#27ae60' : luckyColor === '黄色' ? '#f1c40f' : luckyColor === '紫色' ? '#9b59b6' : luckyColor === '橙色' ? '#e67e22' : luckyColor === '粉色' ? '#fd79a8' : luckyColor === '白色' ? '#bdc3c7' : luckyColor === '黑色' ? '#2c3e50' : '#f39c12'}">${luckyColor}</div>
+                            <div class="lucky-desc">${colorMeaning}</div>
+                        </div>
+                        <div class="lucky-item">
+                            <div class="lucky-label">幸运数字</div>
+                            <div class="lucky-value">${luckyNumber}</div>
+                            <div class="lucky-desc">今日吉利的数字，可用于选择</div>
+                        </div>
+                        <div class="lucky-item">
+                            <div class="lucky-label">幸运方位</div>
+                            <div class="lucky-value">${luckyDirection}</div>
+                            <div class="lucky-desc">面向此方位有助于提升运势</div>
+                        </div>
+                        <div class="lucky-item">
+                            <div class="lucky-label">吉时</div>
+                            <div class="lucky-value">${luckyTime}</div>
+                            <div class="lucky-desc">重要事务安排在此时间段</div>
+                        </div>
+                        <div class="lucky-item">
+                            <div class="lucky-label">开运物品</div>
+                            <div class="lucky-value">${luckyItem}</div>
+                            <div class="lucky-desc">随身携带可增添好运</div>
+                        </div>
+                        <div class="lucky-item">
+                            <div class="lucky-label">速配星座</div>
+                            <div class="lucky-value">${getMatchSign(sign.name)}</div>
+                            <div class="lucky-desc">今日与你最合拍的星座</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="horoscope-daily-advice">
+                    <div class="advice-title">📜 今日箴言</div>
+                    <div class="advice-content">${advice}</div>
+                </div>
+            `;
+            
+            document.getElementById('horoscopeGrid').style.display = 'none';
+            document.getElementById('horoscopeDetail').style.display = 'block';
+        }
+        
+        function getMatchSign(signName) {
+            const matches = {
+                '白羊座': '狮子座', '金牛座': '处女座', '双子座': '天秤座',
+                '巨蟹座': '天蝎座', '狮子座': '白羊座', '处女座': '金牛座',
+                '天秤座': '双子座', '天蝎座': '巨蟹座', '射手座': '白羊座',
+                '摩羯座': '金牛座', '水瓶座': '双子座', '双鱼座': '巨蟹座'
+            };
+            return matches[signName] || '天秤座';
+        }
+        
+        function backToHoroscopeGrid() {
+            document.getElementById('horoscopeGrid').style.display = 'grid';
+            document.getElementById('horoscopeDetail').style.display = 'none';
+        }
+        
+        // 基于种子的随机数生成器（保证同一天同一星座结果相同）
+        function seededRandom(seed) {
+            let hash = 0;
+            for (let i = 0; i < seed.length; i++) {
+                hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+                hash = hash & hash;
+            }
+            return function() {
+                hash = (hash * 9301 + 49297) % 233280;
+                return hash / 233280;
+            };
+        }
+        
+        // ==================== 答案之书功能 ====================
+        const answerBookData = [
+            { answer: '是的，毫无疑问', meaning: '你的直觉是正确的，这件事的发展会如你所愿。不要怀疑自己的判断，勇敢地向前迈进吧。', type: 'positive' },
+            { answer: '绝对可以', meaning: '这是一个绿灯信号，所有的条件都已经成熟。成功就在眼前，你只需要迈出那一步。', type: 'positive' },
+            { answer: '前景一片光明', meaning: '未来充满了希望和可能性，你的努力将得到回报。保持现在的方向，美好的事情即将发生。', type: 'positive' },
+            { answer: '放手去做吧', meaning: '犹豫只会让你错失良机。相信自己的能力，大胆地去尝试，你不会后悔的。', type: 'positive' },
+            { answer: '时机正好', meaning: '现在就是最好的时刻，所有的星象都在为你让路。抓住这个机会，不要让它溜走。', type: 'positive' },
+            { answer: '相信你的直觉', meaning: '你的内心深处已经有了答案，只是你还没有意识到。静下心来，听听内心的声音。', type: 'positive' },
+            { answer: '结果会如你所愿', meaning: '宇宙听到了你的愿望，正在为你安排一切。保持积极的心态，好事即将降临。', type: 'positive' },
+            { answer: '大胆尝试', meaning: '失败并不可怕，可怕的是从未尝试。即使结果不如预期，你也会从中学到宝贵的经验。', type: 'positive' },
+            { answer: '不要犹豫', meaning: '过度的思考会让你陷入 paralysis by analysis。相信第一直觉，果断行动。', type: 'positive' },
+            { answer: '这是正确的选择', meaning: '无论别人怎么说，你选择的道路是正确的。坚持下去，时间会证明一切。', type: 'positive' },
+            { answer: '再等等看', meaning: '耐心是一种美德。现在还不是最好的时机，让事情再酝酿一段时间。', type: 'neutral' },
+            { answer: '时机尚未成熟', meaning: '好事多磨，现在强行推进可能会适得其反。等待合适的时机，一切都会水到渠成。', type: 'neutral' },
+            { answer: '需要更多耐心', meaning: '罗马不是一天建成的。给自己和对方多一些时间，最好的结果值得等待。', type: 'neutral' },
+            { answer: '暂时不要行动', meaning: '现在保持现状是最好的选择。贸然改变可能会带来不必要的麻烦，静观其变。', type: 'neutral' },
+            { answer: '先观察一下', meaning: '信息还不够充分，不要急于做决定。多收集一些情报，你会看得更清楚。', type: 'neutral' },
+            { answer: '还有变数', meaning: '事情还没有最终定论，可能会有意想不到的发展。保持灵活，随时准备调整策略。', type: 'neutral' },
+            { answer: '不要太着急', meaning: '欲速则不达。放慢脚步，稳扎稳打，反而能更快到达目标。', type: 'neutral' },
+            { answer: '等待更好的机会', meaning: '现在的机会虽然不错，但还有更好的在前方。不要满足于现状，继续寻找。', type: 'neutral' },
+            { answer: '这不是最佳时机', meaning: '虽然可以做，但现在不是最好的时候。选择一个更合适的时机，成功率会大大提高。', type: 'neutral' },
+            { answer: '建议放弃', meaning: '有时候，放弃也是一种智慧。及时止损，把精力投入到更有价值的事情上。', type: 'negative' },
+            { answer: '不太可能', meaning: '现实可能和你期望的有差距。调整期望值，或者寻找其他的可能性。', type: 'negative' },
+            { answer: '结果不太乐观', meaning: '按照目前的趋势，结果可能不如预期。考虑改变策略，或者做好心理准备。', type: 'negative' },
+            { answer: '换个方向试试', meaning: '此路不通，那就换一条路。有时候转弯不是退缩，而是寻找更好的出路。', type: 'negative' },
+            { answer: '不要勉强', meaning: '强扭的瓜不甜。如果感觉不对劲，就不要强迫自己。顺应自然，才是最好的选择。', type: 'negative' },
+            { answer: '顺其自然', meaning: '有些事情不是你能够控制的，学会放手。让事情自然发展，往往会得到最好的结果。', type: 'neutral' },
+            { answer: '听从内心', meaning: '外界的声音太多，让你迷失了方向。回归内心，你真正想要的是什么？', type: 'neutral' },
+            { answer: '问问朋友的意见', meaning: '当局者迷，旁观者清。找一个信任的朋友聊聊，他们可能会给你不一样的视角。', type: 'neutral' },
+            { answer: '需要更多准备', meaning: '机会是留给有准备的人的。现在先打好基础，当机会来临时你才能抓住。', type: 'neutral' },
+            { answer: '保持现状', meaning: '如果没有更好的选择，维持现状是最好的策略。有时候不变就是最好的变化。', type: 'neutral' },
+            { answer: '专注于当下', meaning: '过去已逝，未来未至，只有当下是真实的。把注意力集中在眼前的事情上。', type: 'neutral' },
+            { answer: '答案就在你心里', meaning: '其实你早就知道该怎么做了，只是需要有人点醒你。深呼吸，问问自己的心。', type: 'neutral' },
+            { answer: '这件事很重要', meaning: '不要轻视这个问题，它可能会影响你未来的走向。认真对待，深思熟虑后再决定。', type: 'neutral' },
+            { answer: '值得努力', meaning: '虽然过程可能会很辛苦，但结果会是值得的。付出总会有回报，坚持就是胜利。', type: 'positive' },
+            { answer: '会有意外收获', meaning: '除了你期待的结果，还会有意想不到的惊喜。保持开放的心态，接受生活给你的礼物。', type: 'positive' },
+            { answer: '保持乐观', meaning: '态度决定一切。即使遇到困难，也要相信一切都会好起来的。正能量会吸引正能量。', type: 'positive' },
+            { answer: '不要放弃', meaning: '最黑暗的时刻往往就在黎明之前。再坚持一下，曙光就在前方。', type: 'positive' },
+            { answer: '会有贵人相助', meaning: '在你最需要帮助的时候，会有人伸出援手。保持善良，贵人自然会出现。', type: 'positive' },
+            { answer: '需要付出代价', meaning: '天下没有免费的午餐。想要得到什么，就必须付出相应的代价。你准备好了吗？', type: 'neutral' },
+            { answer: '结果取决于你', meaning: '命运掌握在自己手中。你的选择和行动将决定最终的结果，不要推卸责任。', type: 'neutral' },
+            { answer: '一切随缘', meaning: '缘起缘灭，一切都是最好的安排。不要强求，让该来的来，该走的走。', type: 'neutral' }
+        ];
+        
+        let isBookOpening = false;
+        
+        function initAnswerBook() {
+            // 初始化
+            isBookOpening = false;
+        }
+        
+        function openAnswerBook() {
+            if (isBookOpening) return;
+            isBookOpening = true;
+            
+            const book = document.getElementById('answerbookBook');
+            const intro = document.getElementById('answerbookIntro');
+            const result = document.getElementById('answerbookResult');
+            
+            // 隐藏介绍文字
+            intro.style.opacity = '0';
+            intro.style.transition = 'opacity 0.3s';
+            
+            // 添加翻书动画
+            book.classList.add('opening');
+            
+            // 随机选择答案
+            const randomIndex = Math.floor(Math.random() * answerBookData.length);
+            const selectedAnswer = answerBookData[randomIndex];
+            
+            // 设置书页内容
+            document.getElementById('pageNumber').textContent = randomIndex + 1;
+            document.getElementById('pageAnswer').textContent = selectedAnswer.answer;
+            
+            // 翻书动画完成后直接显示结果（1.5秒）
+            setTimeout(() => {
+                book.style.display = 'none';
+                
+                // 设置结果内容
+                document.getElementById('answerText').textContent = selectedAnswer.answer;
+                document.getElementById('answerMeaning').textContent = selectedAnswer.meaning;
+                
+                // 根据答案类型设置卡片边框颜色
+                const answerCard = result.querySelector('.answer-card');
+                const beforeElement = answerCard.querySelector('::before') || answerCard;
+                
+                // 显示结果
+                result.style.display = 'block';
+                isBookOpening = false;
+            }, 1500);
+        }
+        
+        function resetAnswerBook() {
+            const book = document.getElementById('answerbookBook');
+            const intro = document.getElementById('answerbookIntro');
+            const result = document.getElementById('answerbookResult');
+            
+            // 重置状态
+            result.style.display = 'none';
+            book.style.display = 'block';
+            book.classList.remove('opening');
+            intro.style.opacity = '1';
+            isBookOpening = false;
+        }
+        
+        // ==================== AI算命功能 ====================
+        const tianGan = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸'];
+        const diZhi = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+        const wuXing = { '甲': '木', '乙': '木', '丙': '火', '丁': '火', '戊': '土', '己': '土', '庚': '金', '辛': '金', '壬': '水', '癸': '水',
+                        '子': '水', '丑': '土', '寅': '木', '卯': '木', '辰': '土', '巳': '火', '午': '火', '未': '土', '申': '金', '酉': '金', '戌': '土', '亥': '水' };
+        const zodiacAnimals = ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'];
+        
+        function initFortune() {
+            // 设置默认日期为今天
+            document.getElementById('fortuneDate').valueAsDate = new Date();
+        }
+        
+        function calculateFortune() {
+            const name = document.getElementById('fortuneName').value.trim();
+            const date = document.getElementById('fortuneDate').value;
+            const timeIndex = parseInt(document.getElementById('fortuneTime').value);
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            
+            if (!date) {
+                alert('请选择出生日期');
+                return;
+            }
+            
+            const birthDate = new Date(date);
+            const bazi = calculateBazi(birthDate, timeIndex);
+            const result = generateFortuneResult(bazi, gender);
+            result.userName = name || '佚名';
+            
+            displayFortuneResult(result);
+        }
+        
+        function calculateBazi(date, timeIndex) {
+            // 简化版八字计算（基于公历日期近似转换）
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            
+            // 年柱（简化计算）
+            const yearGanIndex = (year - 4) % 10;
+            const yearZhiIndex = (year - 4) % 12;
+            
+            // 月柱（简化计算）
+            const monthGanIndex = (yearGanIndex * 2 + month + 1) % 10;
+            const monthZhiIndex = (month + 1) % 12;
+            
+            // 日柱（简化计算）
+            const baseDate = new Date(1900, 0, 31);
+            const diffDays = Math.floor((date - baseDate) / (1000 * 60 * 60 * 24));
+            const dayGanIndex = (diffDays + 10) % 10;
+            const dayZhiIndex = (diffDays + 12) % 12;
+            
+            // 时柱
+            const dayGan = dayGanIndex % 5;
+            const timeGanIndex = (dayGan * 2 + timeIndex) % 10;
+            
+            return {
+                year: { gan: tianGan[yearGanIndex], zhi: diZhi[yearZhiIndex] },
+                month: { gan: tianGan[monthGanIndex], zhi: diZhi[monthZhiIndex] },
+                day: { gan: tianGan[dayGanIndex], zhi: diZhi[dayZhiIndex] },
+                time: { gan: tianGan[timeGanIndex], zhi: diZhi[timeIndex] },
+                zodiac: zodiacAnimals[yearZhiIndex]
+            };
+        }
+        
+        // 纳音五行
+        const naYin = {
+            '甲子': '海中金', '乙丑': '海中金', '丙寅': '炉中火', '丁卯': '炉中火',
+            '戊辰': '大林木', '己巳': '大林木', '庚午': '路旁土', '辛未': '路旁土',
+            '壬申': '剑锋金', '癸酉': '剑锋金', '甲戌': '山头火', '乙亥': '山头火',
+            '丙子': '涧下水', '丁丑': '涧下水', '戊寅': '城头土', '己卯': '城头土',
+            '庚辰': '白蜡金', '辛巳': '白蜡金', '壬午': '杨柳木', '癸未': '杨柳木',
+            '甲申': '泉中水', '乙酉': '泉中水', '丙戌': '屋上土', '丁亥': '屋上土',
+            '戊子': '霹雳火', '己丑': '霹雳火', '庚寅': '松柏木', '辛卯': '松柏木',
+            '壬辰': '长流水', '癸巳': '长流水', '甲午': '沙中金', '乙未': '沙中金',
+            '丙申': '山下火', '丁酉': '山下火', '戊戌': '平地木', '己亥': '平地木',
+            '庚子': '壁上土', '辛丑': '壁上土', '壬寅': '金箔金', '癸卯': '金箔金',
+            '甲辰': '覆灯火', '乙巳': '覆灯火', '丙午': '天河水', '丁未': '天河水',
+            '戊申': '大驿土', '己酉': '大驿土', '庚戌': '钗钏金', '辛亥': '钗钏金',
+            '壬子': '桑柘木', '癸丑': '桑柘木', '甲寅': '大溪水', '乙卯': '大溪水',
+            '丙辰': '沙中土', '丁巳': '沙中土', '戊午': '天上火', '己未': '天上火',
+            '庚申': '石榴木', '辛酉': '石榴木', '壬戌': '大海水', '癸亥': '大海水'
+        };
+        
+        // 十神关系
+        const shiShen = {
+            '比肩': '代表自我意识强，独立自主，有领导能力',
+            '劫财': '代表竞争意识强，善于交际，但容易破财',
+            '食神': '代表才华横溢，口才好，有艺术天赋',
+            '伤官': '代表聪明机智，创新能力强，但容易叛逆',
+            '偏财': '代表偏财运佳，善于投资理财',
+            '正财': '代表正财运稳，勤劳致富，理财保守',
+            '七杀': '代表有魄力，敢于冒险，但压力大',
+            '正官': '代表正直守法，有责任感，适合公职',
+            '偏印': '代表学习能力强，有研究精神，但容易孤僻',
+            '正印': '代表有贵人相助，学业有成，心地善良'
+        };
+        
+        function generateFortuneResult(bazi, gender) {
+            // 分析五行
+            const elements = { '金': 0, '木': 0, '水': 0, '火': 0, '土': 0 };
+            const pillars = [bazi.year, bazi.month, bazi.day, bazi.time];
+            
+            pillars.forEach(pillar => {
+                const ganWx = wuXing[pillar.gan];
+                const zhiWx = wuXing[pillar.zhi];
+                elements[ganWx] = (elements[ganWx] || 0) + 1;
+                elements[zhiWx] = (elements[zhiWx] || 0) + 1;
+            });
+            
+            // 找出最强和最弱的五行
+            const sortedElements = Object.entries(elements).sort((a, b) => b[1] - a[1]);
+            const strongElement = sortedElements[0][0];
+            const weakElement = sortedElements[sortedElements.length - 1][0];
+            
+            // 计算纳音
+            const naYinList = pillars.map(p => naYin[p.gan + p.zhi] || '未知');
+            
+            // 分析日主强弱
+            const dayGan = bazi.day.gan;
+            const dayElement = wuXing[dayGan];
+            const daySupport = elements[dayElement];
+            const isStrongDay = daySupport >= 3;
+            
+            // 性格分析
+            const personalityDetails = {
+                '金': {
+                    title: '刚毅果断型',
+                    traits: ['意志坚定，目标明确', '做事果断，不拖泥带水', '重情重义，讲义气', '有领导才能，善于决策'],
+                    weakness: ['有时过于固执', '容易钻牛角尖', '不善表达情感', '可能显得冷漠'],
+                    career: '适合从事管理、金融、法律、军警等需要决断力的职业',
+                    love: '感情专一但表达含蓄，需要学会主动表达爱意'
+                },
+                '木': {
+                    title: '温和仁慈型',
+                    traits: ['心地善良，富有同情心', '有创造力，想象力丰富', '适应力强，善于协调', '乐于助人，人缘好'],
+                    weakness: ['有时优柔寡断', '容易受他人影响', '缺乏主见', '过于理想化'],
+                    career: '适合从事教育、医疗、艺术、环保等需要创造力的职业',
+                    love: '温柔体贴但缺乏主见，需要学会独立做决定'
+                },
+                '水': {
+                    title: '聪明灵活型',
+                    traits: ['智商高，学习能力强', '善于交际，口才好', '适应力强，随机应变', '直觉敏锐，洞察力强'],
+                    weakness: ['情绪起伏大', '容易多疑', '缺乏恒心', '有时过于圆滑'],
+                    career: '适合从事销售、传媒、咨询、科研等需要沟通能力的职业',
+                    love: '浪漫多情但情绪多变，需要学会稳定情绪'
+                },
+                '火': {
+                    title: '热情开朗型',
+                    traits: ['热情大方，感染力强', '乐观积极，充满活力', '有领导魅力，善于激励', '行动力强，敢想敢做'],
+                    weakness: ['容易冲动急躁', '缺乏耐心', '有时过于自我', '容易三分钟热度'],
+                    career: '适合从事演艺、营销、创业、公关等需要表现力的职业',
+                    love: '热情主动但容易冲动，需要学会控制情绪'
+                },
+                '土': {
+                    title: '稳重踏实型',
+                    traits: ['诚实守信，值得信赖', '脚踏实地，勤奋努力', '责任心强，有担当', '包容心强，善于倾听'],
+                    weakness: ['有时过于保守', '不善变通', '容易固执己见', '缺乏冒险精神'],
+                    career: '适合从事建筑、农业、房地产、公务员等需要稳定性的职业',
+                    love: '忠诚可靠但缺乏浪漫，需要学会制造惊喜'
+                }
+            };
+            
+            const personality = personalityDetails[strongElement];
+            
+            // 今日运势详细分析
+            const todayAnalysis = generateTodayFortune(bazi, elements, strongElement, weakElement);
+            
+            // 五大运势
+            const fiveFortunes = generateFiveFortunes(bazi, elements, strongElement, weakElement, gender);
+            
+            // 宜忌
+            const yiJi = generateYiJi(bazi, strongElement);
+            
+            return {
+                bazi: bazi,
+                elements: elements,
+                naYin: naYinList,
+                strongElement: strongElement,
+                weakElement: weakElement,
+                dayElement: dayElement,
+                isStrongDay: isStrongDay,
+                personality: personality,
+                todayAnalysis: todayAnalysis,
+                fiveFortunes: fiveFortunes,
+                yiJi: yiJi
+            };
+        }
+        
+        function generateTodayFortune(bazi, elements, strong, weak) {
+            const fortunes = [
+                { aspect: '整体', level: '大吉', desc: '今日运势极佳，诸事顺遂，适合开展新计划。贵人运旺，遇到困难会有人相助。', advice: '把握机会，大胆行动' },
+                { aspect: '整体', level: '吉', desc: '今日运势良好，适合处理重要事务。保持积极心态，好事自然来。', advice: '稳扎稳打，循序渐进' },
+                { aspect: '整体', level: '平', desc: '今日运势平稳，无大起大落。适合处理日常事务，不宜冒险。', advice: '保持现状，静观其变' },
+                { aspect: '整体', level: '凶', desc: '今日运势欠佳，需谨慎行事。避免做重大决定，低调度过。', advice: '谨言慎行，避免冲突' }
+            ];
+            
+            // 根据五行平衡度选择运势
+            const maxCount = Math.max(...Object.values(elements));
+            const minCount = Math.min(...Object.values(elements));
+            const balance = maxCount - minCount;
+            
+            let fortuneIndex;
+            if (balance <= 1) fortuneIndex = 0;
+            else if (balance <= 2) fortuneIndex = 1;
+            else if (balance <= 3) fortuneIndex = 2;
+            else fortuneIndex = 3;
+            
+            return fortunes[fortuneIndex];
+        }
+        
+        function generateFiveFortunes(bazi, elements, strong, weak, gender) {
+            const baseFortunes = {
+                love: {
+                    title: '感情运势',
+                    icon: '💕',
+                    scores: { '金': 75, '木': 85, '水': 90, '火': 80, '土': 70 },
+                    details: {
+                        '金': '单身者有机会遇到志同道合的对象，已婚者感情稳定。今日适合表达心意。',
+                        '木': '桃花运旺盛，容易吸引异性注意。但要注意分辨真心与假意。',
+                        '水': '感情丰富的一天，适合约会或表白。已婚者要注意沟通方式。',
+                        '火': '热情高涨，容易冲动表白。建议冷静思考，不要操之过急。',
+                        '土': '感情平稳，适合深入交流。单身者可能需要更多耐心。'
+                    }
+                },
+                career: {
+                    title: '事业运势',
+                    icon: '💼',
+                    scores: { '金': 90, '木': 75, '水': 85, '火': 80, '土': 85 },
+                    details: {
+                        '金': '工作效率极高，适合处理重要项目。领导会注意到你的表现。',
+                        '木': '创意灵感迸发，适合从事创造性工作。团队合作顺利。',
+                        '水': '沟通能力出色，适合谈判或演讲。人际关系会有突破。',
+                        '火': '行动力强，但要注意细节。避免因为急躁而出错。',
+                        '土': '踏实肯干，会得到认可。适合处理繁琐但重要的工作。'
+                    }
+                },
+                wealth: {
+                    title: '财富运势',
+                    icon: '💰',
+                    scores: { '金': 85, '木': 70, '水': 90, '火': 75, '土': 80 },
+                    details: {
+                        '金': '正财运佳，努力工作会有回报。适合进行长期投资规划。',
+                        '木': '财运平稳，没有大起大落。注意节约，避免不必要开支。',
+                        '水': '偏财运不错，可能有意外收获。但投资需谨慎，不要贪心。',
+                        '火': '赚钱欲望强烈，但容易冲动消费。建议制定预算计划。',
+                        '土': '财运稳定，适合储蓄。不动产投资会有好机会。'
+                    }
+                },
+                health: {
+                    title: '健康运势',
+                    icon: '🏃',
+                    scores: { '金': 80, '木': 85, '水': 75, '火': 70, '土': 90 },
+                    details: {
+                        '金': '注意呼吸系统健康，避免吸烟或去空气污染严重的地方。',
+                        '木': '肝胆功能良好，适合进行户外运动。注意保护眼睛。',
+                        '水': '注意肾脏和泌尿系统健康，多喝水，避免憋尿。',
+                        '火': '注意心脏和血压，避免过度劳累和情绪激动。',
+                        '土': '脾胃功能良好，适合进补。但要注意饮食规律，不要暴饮暴食。'
+                    }
+                },
+                social: {
+                    title: '人际运势',
+                    icon: '👥',
+                    scores: { '金': 75, '木': 90, '水': 95, '火': 85, '土': 80 },
+                    details: {
+                        '金': '人际关系平稳，保持真诚待人。避免过于直接而得罪人。',
+                        '木': '人缘极佳，容易获得他人好感。适合拓展人脉。',
+                        '水': '社交能力出众，左右逢源。但要注意分辨真心朋友。',
+                        '火': '热情大方，容易成为焦点。但要注意倾听他人。',
+                        '土': '为人可靠，朋友信任。适合深化已有关系。'
+                    }
+                }
+            };
+            
+            return Object.entries(baseFortunes).map(([key, value]) => ({
+                key: key,
+                title: value.title,
+                icon: value.icon,
+                score: value.scores[strong],
+                detail: value.details[strong]
+            }));
+        }
+        
+        function generateYiJi(bazi, strongElement) {
+            const yiJiData = {
+                '金': {
+                    yi: ['签约谈判', '理财投资', '整理收纳', '学习新技能', '拜访长辈'],
+                    ji: ['冲动消费', '与人争执', '高空作业', '剧烈运动', '熬夜加班']
+                },
+                '木': {
+                    yi: ['创意工作', '团队合作', '户外运动', '阅读学习', '植树种花'],
+                    ji: ['独断专行', '久坐不动', '用眼过度', '暴饮暴食', '拖延症']
+                },
+                '水': {
+                    yi: ['社交应酬', '谈判沟通', '学习研究', '旅行出游', '游泳运动'],
+                    ji: ['口舌是非', '过度思虑', '涉水冒险', '饮酒过量', '轻信他人']
+                },
+                '火': {
+                    yi: ['展示才华', '领导团队', '健身运动', '烹饪美食', '参加聚会'],
+                    ji: ['冲动决策', '与人冲突', '玩火危险', '暴晒中暑', '情绪失控']
+                },
+                '土': {
+                    yi: ['处理琐事', '整理资料', '房产相关', '陪伴家人', '稳健投资'],
+                    ji: ['冒险投机', '改变计划', '暴饮暴食', '久坐不动', '固执己见']
+                }
+            };
+            
+            return yiJiData[strongElement];
+        }
+        
+        function displayFortuneResult(result) {
+            const resultDiv = document.getElementById('fortuneResult');
+            
+            // 计算五行百分比
+            const totalElements = Object.values(result.elements).reduce((a, b) => a + b, 0);
+            const elementPercentages = Object.entries(result.elements).map(([k, v]) => ({
+                element: k,
+                count: v,
+                percentage: Math.round((v / totalElements) * 100)
+            })).sort((a, b) => b.count - a.count);
+            
+            resultDiv.innerHTML = `
+                <div class="fortune-header">
+                    <div class="fortune-zodiac">${result.bazi.zodiac}</div>
+                    <div class="fortune-title">${result.userName}</div>
+                    <div class="fortune-subtitle">${result.personality.title} · 日主${result.dayElement} · ${result.isStrongDay ? '身强' : '身弱'}</div>
+                </div>
+                
+                <!-- 四柱八字 -->
+                <div class="bazi-section-card">
+                    <div class="bazi-section-header">
+                        <span class="section-icon">📅</span>
+                        <span class="section-title">四柱八字</span>
+                    </div>
+                    <div class="bazi-pillars-detailed">
+                        <div class="bazi-pillar-item">
+                            <div class="pillar-label">年柱</div>
+                            <div class="pillar-content">
+                                <div class="pillar-gan" data-element="${wuXing[result.bazi.year.gan]}">${result.bazi.year.gan}</div>
+                                <div class="pillar-zhi" data-element="${wuXing[result.bazi.year.zhi]}">${result.bazi.year.zhi}</div>
+                                <div class="pillar-nayin">${result.naYin[0]}</div>
+                            </div>
+                        </div>
+                        <div class="bazi-pillar-item">
+                            <div class="pillar-label">月柱</div>
+                            <div class="pillar-content">
+                                <div class="pillar-gan" data-element="${wuXing[result.bazi.month.gan]}">${result.bazi.month.gan}</div>
+                                <div class="pillar-zhi" data-element="${wuXing[result.bazi.month.zhi]}">${result.bazi.month.zhi}</div>
+                                <div class="pillar-nayin">${result.naYin[1]}</div>
+                            </div>
+                        </div>
+                        <div class="bazi-pillar-item">
+                            <div class="pillar-label">日柱</div>
+                            <div class="pillar-content">
+                                <div class="pillar-gan highlight" data-element="${wuXing[result.bazi.day.gan]}">${result.bazi.day.gan}</div>
+                                <div class="pillar-zhi" data-element="${wuXing[result.bazi.day.zhi]}">${result.bazi.day.zhi}</div>
+                                <div class="pillar-nayin">${result.naYin[2]}</div>
+                            </div>
+                        </div>
+                        <div class="bazi-pillar-item">
+                            <div class="pillar-label">时柱</div>
+                            <div class="pillar-content">
+                                <div class="pillar-gan" data-element="${wuXing[result.bazi.time.gan]}">${result.bazi.time.gan}</div>
+                                <div class="pillar-zhi" data-element="${wuXing[result.bazi.time.zhi]}">${result.bazi.time.zhi}</div>
+                                <div class="pillar-nayin">${result.naYin[3]}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 五行分析 -->
+                <div class="bazi-section-card">
+                    <div class="bazi-section-header">
+                        <span class="section-icon">⚖️</span>
+                        <span class="section-title">五行分析</span>
+                    </div>
+                    <div class="elements-analysis">
+                        <div class="elements-chart">
+                            ${elementPercentages.map(e => `
+                                <div class="element-bar-item">
+                                    <div class="element-label">${e.element}</div>
+                                    <div class="element-bar-wrapper">
+                                        <div class="element-bar ${e.element}" style="width: ${e.percentage}%"></div>
+                                    </div>
+                                    <div class="element-value">${e.count}个 (${e.percentage}%)</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="elements-summary">
+                            <div class="element-highlight">
+                                <span class="highlight-label">五行旺相：</span>
+                                <span class="highlight-value ${result.strongElement}">${result.strongElement}</span>
+                            </div>
+                            <div class="element-highlight">
+                                <span class="highlight-label">五行偏弱：</span>
+                                <span class="highlight-value ${result.weakElement}">${result.weakElement}</span>
+                            </div>
+                            <div class="element-advice">
+                                建议多接触${result.weakElement}属性的事物来平衡命理，如${getElementAdvice(result.weakElement)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 性格分析 -->
+                <div class="bazi-section-card">
+                    <div class="bazi-section-header">
+                        <span class="section-icon">🎭</span>
+                        <span class="section-title">性格分析</span>
+                    </div>
+                    <div class="personality-analysis">
+                        <div class="personality-type">${result.personality.title}</div>
+                        <div class="personality-traits">
+                            <div class="trait-section">
+                                <div class="trait-title">✨ 性格优点</div>
+                                <div class="trait-list">
+                                    ${result.personality.traits.map(t => `<span class="trait-tag good">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="trait-section">
+                                <div class="trait-title">⚠️ 需要注意</div>
+                                <div class="trait-list">
+                                    ${result.personality.weakness.map(t => `<span class="trait-tag caution">${t}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="personality-career">
+                            <strong>💼 事业建议：</strong>${result.personality.career}
+                        </div>
+                        <div class="personality-love">
+                            <strong>💕 感情建议：</strong>${result.personality.love}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 今日运势 -->
+                <div class="bazi-section-card today-fortune">
+                    <div class="bazi-section-header">
+                        <span class="section-icon">🔮</span>
+                        <span class="section-title">今日运势</span>
+                        <span class="fortune-level ${result.todayAnalysis.level === '大吉' ? 'excellent' : result.todayAnalysis.level === '吉' ? 'good' : result.todayAnalysis.level === '平' ? 'normal' : 'bad'}">${result.todayAnalysis.level}</span>
+                    </div>
+                    <div class="today-fortune-content">
+                        <p>${result.todayAnalysis.desc}</p>
+                        <div class="fortune-advice-box">
+                            <strong>💡 今日建议：</strong>${result.todayAnalysis.advice}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 五大运势 -->
+                <div class="bazi-section-card">
+                    <div class="bazi-section-header">
+                        <span class="section-icon">📊</span>
+                        <span class="section-title">五大运势详解</span>
+                    </div>
+                    <div class="five-fortunes">
+                        ${result.fiveFortunes.map(f => `
+                            <div class="fortune-item">
+                                <div class="fortune-item-header">
+                                    <span class="fortune-icon">${f.icon}</span>
+                                    <span class="fortune-name">${f.title}</span>
+                                    <div class="fortune-score-bar">
+                                        <div class="fortune-score-fill" style="width: ${f.score}%; background: ${getScoreColor(f.score)}"></div>
+                                    </div>
+                                    <span class="fortune-score-value">${f.score}分</span>
+                                </div>
+                                <div class="fortune-item-detail">${f.detail}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <!-- 今日宜忌 -->
+                <div class="bazi-section-card">
+                    <div class="bazi-section-header">
+                        <span class="section-icon">📋</span>
+                        <span class="section-title">今日宜忌</span>
+                    </div>
+                    <div class="yiji-container">
+                        <div class="yiji-box yi">
+                            <div class="yiji-title">✅ 宜</div>
+                            <div class="yiji-list">
+                                ${result.yiJi.yi.map(item => `<span class="yiji-item">${item}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="yiji-box ji">
+                            <div class="yiji-title">❌ 忌</div>
+                            <div class="yiji-list">
+                                ${result.yiJi.ji.map(item => `<span class="yiji-item">${item}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="fortune-retry" onclick="resetFortune()">🔄 重新测算</button>
+            `;
+            
+            document.getElementById('fortuneForm').style.display = 'none';
+            resultDiv.style.display = 'block';
+        }
+        
+        function getElementAdvice(element) {
+            const advice = {
+                '金': '佩戴金属饰品、穿白色衣服、去西方',
+                '木': '多接触植物、穿绿色衣服、去东方',
+                '水': '多喝水、穿黑色衣服、去北方、游泳',
+                '火': '晒太阳、穿红色衣服、去南方',
+                '土': '接触大地、穿黄色衣服、去中部地区'
+            };
+            return advice[element] || '';
+        }
+        
+        function getScoreColor(score) {
+            if (score >= 90) return 'linear-gradient(90deg, #27ae60, #2ecc71)';
+            if (score >= 80) return 'linear-gradient(90deg, #3498db, #5dade2)';
+            if (score >= 70) return 'linear-gradient(90deg, #f39c12, #f5b041)';
+            return 'linear-gradient(90deg, #e74c3c, #ec7063)';
+        }
+        
+        function resetFortune() {
+            document.getElementById('fortuneForm').style.display = 'block';
+            document.getElementById('fortuneResult').style.display = 'none';
+        }
+        
+
     </script>
 </body>
 </html>
