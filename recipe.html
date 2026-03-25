@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食菜谱 - 舌尖上的美味</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1em;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-btn:hover {
+            background: white;
+            color: #ff6b6b;
+        }
+        
+        /* 搜索区域 */
+        .search-section {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1.1em;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255,107,107,0.1);
+        }
+        
+        .search-btn {
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,107,107,0.4);
+        }
+        
+        /* 分类标签 */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .category-tag {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+        
+        .category-tag:hover,
+        .category-tag.active {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border-color: transparent;
+        }
+        
+        /* 内容区域 */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+        
+        /* 加载中 */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff6b6b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 菜谱卡片网格 */
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .recipe-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+        }
+        
+        .recipe-info {
+            padding: 20px;
+        }
+        
+        .recipe-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .recipe-category {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #fff3e0;
+            color: #ff6b6b;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+        
+        .recipe-desc {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* 详情模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            padding: 30px;
+            color: white;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .modal-title {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .modal-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.3em;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ffe0e0;
+        }
+        
+        .ingredients-list {
+            background: #fff8f0;
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 2;
+        }
+        
+        .steps-list {
+            counter-reset: step;
+        }
+        
+        .step-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+            line-height: 1.8;
+        }
+        
+        .tips-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 0 15px 15px 0;
+        }
+        
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #999;
+        }
+        
+        .empty-state-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+        
+        /* 结果统计 */
+        .result-count {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        .result-count span {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .search-box {
+                flex-direction: column;
+            }
+            
+            .recipe-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回</a>
+        <h1>🍳 美食菜谱</h1>
+        <p>发现美味，享受烹饪的乐趣</p>
+    </div>
+    
+    <div class="search-section">
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索菜谱，如：红烧肉、西红柿炒鸡蛋..." onkeypress="if(event.key==='Enter')searchRecipes()">
+            <button class="search-btn" onclick="searchRecipes()">🔍 搜索</button>
+        </div>
+        
+        <div class="categories">
+            <span class="category-tag active" onclick="searchByCategory('')">全部</span>
+            <span class="category-tag" onclick="searchByCategory('猪肉')">🥩 猪肉类</span>
+            <span class="category-tag" onclick="searchByCategory('鸡肉')">🍗 鸡肉类</span>
+            <span class="category-tag" onclick="searchByCategory('牛肉')">🥩 牛肉类</span>
+            <span class="category-tag" onclick="searchByCategory('海鲜')">🦐 海鲜类</span>
+            <span class="category-tag" onclick="searchByCategory('蔬菜')">🥬 蔬菜类</span>
+            <span class="category-tag" onclick="searchByCategory('汤')">🍲 汤羹</span>
+            <span class="category-tag" onclick="searchByCategory('面食')">🍜 面食</span>
+            <span class="category-tag" onclick="searchByCategory('早餐')">🥪 早餐</span>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div id="recipeContainer">
+            <div class="empty-state">
+                <div class="empty-state-icon">🍽️</div>
+                <p>输入关键词或选择分类，开始探索美食吧！</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 详情模态框 -->
+    <div class="modal" id="recipeModal" onclick="closeModalOnBackground(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <h2 class="modal-title" id="modalTitle">菜谱名称</h2>
+                <span class="modal-category" id="modalCategory">分类</span>
+            </div>
+            <div class="modal-body">
+                <div class="section">
+                    <h3 class="section-title">📝 食材原料</h3>
+                    <div class="ingredients-list" id="modalIngredients"></div>
+                </div>
+                
+                <div class="section">
+                    <h3 class="section-title">👨‍🍳 制作步骤</h3>
+                    <div class="steps-list" id="modalSteps"></div>
+                </div>
+                
+                <div class="section" id="modalTipsSection">
+                    <h3 class="section-title">💡 小贴士</h3>
+                    <div class="tips-box" id="modalTips"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_KEY = '149cdf40a70bb5c0e9e46e8b979211dd';
+        const API_URL = 'http://apis.juhe.cn/fapigx/caipu/query';
+        
+        let currentCategory = '';
+        
+        // 经典菜谱数据库 - 内置丰富菜谱
+        const classicRecipes = [
+            {
+                cp_name: '红烧肉',
+                type_name: '猪肉类',
+                yuanliao: '五花肉500g；生姜3片；葱2根；八角2个；桂皮1小块；冰糖30g；生抽2勺；老抽1勺；料酒2勺；盐适量',
+                zuofa: '1. 五花肉洗净切成3厘米见方的块，冷水下锅焯水，撇去浮沫后捞出洗净沥干。2. 锅中放少许油，放入冰糖小火炒至融化呈焦糖色。3. 放入五花肉翻炒上色，加入姜片、葱段、八角、桂皮炒香。4. 加入料酒、生抽、老抽翻炒均匀。5. 加入开水没过肉块，大火烧开后转小火炖煮45分钟。6. 大火收汁，汤汁浓稠裹满肉块即可出锅。',
+                texing: '肥而不腻，入口即化，色泽红亮',
+                tishi: '炒糖色时火候要小，避免发苦；炖煮时用开水，肉质更嫩。'
+            },
+            {
+                cp_name: '西红柿炒鸡蛋',
+                type_name: '蔬菜类',
+                yuanliao: '西红柿2个；鸡蛋3个；葱花适量；盐1勺；糖1勺；食用油适量',
+                zuofa: '1. 西红柿洗净切块，鸡蛋打入碗中加少许盐打散。2. 热锅凉油，倒入蛋液，炒至凝固盛出备用。3. 锅中再加少许油，放入西红柿翻炒出汁。4. 加入炒好的鸡蛋，加盐和糖调味。5. 撒上葱花，翻炒均匀即可出锅。',
+                texing: '酸甜可口，营养丰富，老少皆宜',
+                tishi: '西红柿要选熟透的，炒的时候更容易出汁；喜欢汤汁多的可以加少许水。'
+            },
+            {
+                cp_name: '麻婆豆腐',
+                type_name: '豆腐类',
+                yuanliao: '嫩豆腐1块；猪肉末100g；豆瓣酱2勺；花椒粉1勺；蒜末适量；姜末适量；葱花适量；生抽1勺；淀粉水适量',
+                zuofa: '1. 豆腐切成2厘米见方的块，放入淡盐水中浸泡10分钟。2. 锅中放油，下肉末炒至变色，加入豆瓣酱炒出红油。3. 加入蒜末、姜末炒香，加入适量清水烧开。4. 轻轻放入豆腐，加生抽调味，小火炖煮5分钟。5. 淋入淀粉水勾芡，撒上花椒粉和葱花即可。',
+                texing: '麻辣鲜香，豆腐嫩滑，下饭神器',
+                tishi: '豆腐用盐水浸泡可以去豆腥味且不易碎；勾芡时轻轻推动，不要大力翻炒。'
+            },
+            {
+                cp_name: '糖醋排骨',
+                type_name: '猪肉类',
+                yuanliao: '排骨500g；料酒2勺；生抽2勺；白醋3勺；白糖4勺；番茄酱2勺；白芝麻适量；生姜3片',
+                zuofa: '1. 排骨洗净剁成小段，冷水下锅加姜片、料酒焯水去腥。2. 捞出沥干，用厨房纸吸干水分。3. 锅中放油，中小火将排骨炸至金黄捞出。4. 调糖醋汁：料酒1勺、生抽2勺、白醋3勺、白糖4勺、番茄酱2勺、清水5勺混合均匀。5. 锅中留底油，倒入糖醋汁烧开，放入排骨翻炒均匀。6. 大火收汁，撒上白芝麻即可。',
+                texing: '酸甜开胃，外酥里嫩，色泽诱人',
+                tishi: '糖醋汁比例记住12345：1酒2酱3醋4糖5水；炸排骨时油温不要太高。'
+            },
+            {
+                cp_name: '可乐鸡翅',
+                type_name: '鸡肉类',
+                yuanliao: '鸡翅中10个；可乐1罐；生姜3片；料酒2勺；生抽2勺；老抽半勺；盐适量',
+                zuofa: '1. 鸡翅洗净，两面各划两刀便于入味。2. 冷水下锅加姜片、料酒焯水，捞出洗净沥干。3. 锅中放少许油，将鸡翅煎至两面金黄。4. 加入生抽、老抽翻炒均匀上色。5. 倒入可乐没过鸡翅，大火烧开后转中小火炖煮15分钟。6. 大火收汁至浓稠，加盐调味即可。',
+                texing: '甜咸适口，肉质鲜嫩，色泽红亮',
+                tishi: '煎鸡翅时先煎皮面，更容易出油；可乐含糖量高，收汁时要不停翻动防止糊锅。'
+            },
+            {
+                cp_name: '鱼香肉丝',
+                type_name: '猪肉类',
+                yuanliao: '猪里脊肉200g；木耳适量；胡萝卜半根；青椒1个；泡椒适量；姜末蒜末适量；生抽2勺；醋2勺；糖1勺；淀粉适量；料酒1勺',
+                zuofa: '1. 里脊肉切丝，加料酒、生抽、淀粉抓匀腌制15分钟。2. 木耳泡发切丝，胡萝卜、青椒切丝备用。3. 调鱼香汁：生抽2勺、醋2勺、糖1勺、淀粉1勺、清水3勺调匀。4. 热锅凉油，下肉丝滑散炒至变色盛出。5. 锅中留底油，爆香姜蒜末和泡椒，下配菜翻炒。6. 倒入肉丝和鱼香汁，大火快速翻炒均匀即可。',
+                texing: '鱼香味浓，酸甜微辣，下饭绝配',
+                tishi: '鱼香汁的比例是关键，糖醋比例1:2；大火快炒保持肉丝嫩滑。'
+            },
+            {
+                cp_name: '宫保鸡丁',
+                type_name: '鸡肉类',
+                yuanliao: '鸡胸肉300g；花生米50g；干辣椒10个；花椒1勺；葱段适量；姜末蒜末适量；生抽2勺；醋2勺；糖1勺；淀粉适量',
+                zuofa: '1. 鸡胸肉切丁，加料酒、生抽、淀粉、少许油抓匀腌制20分钟。2. 花生米炸至金黄酥脆备用。3. 调宫保汁：生抽2勺、醋2勺、糖1勺、淀粉1勺、清水2勺调匀。4. 热锅凉油，下鸡丁滑散炒至变色盛出。5. 锅中留底油，小火煸香干辣椒和花椒。6. 下姜蒜末、葱段炒香，倒入鸡丁和宫保汁大火翻炒。7. 最后加入花生米拌匀即可。',
+                texing: '鸡肉嫩滑，花生酥脆，麻辣鲜香',
+                tishi: '花生米最后放，保持酥脆；炒干辣椒时火候要小，避免炒糊发苦。'
+            },
+            {
+                cp_name: '水煮鱼',
+                type_name: '海鲜类',
+                yuanliao: '草鱼1条；豆芽200g；莴笋1根；干辣椒20个；花椒2勺；豆瓣酱3勺；蒜末姜末适量；料酒2勺；淀粉适量；蛋清1个',
+                zuofa: '1. 草鱼去骨切片，加料酒、盐、蛋清、淀粉抓匀腌制15分钟。2. 豆芽、莴笋焯水铺入碗底。3. 锅中放油，下豆瓣酱炒出红油，加入姜蒜末炒香。4. 加入适量清水烧开，调入盐、生抽、料酒。5. 逐片放入鱼片，轻轻推动，煮至鱼片变白捞出铺在配菜上。6. 鱼片上放干辣椒段、花椒、蒜末，淋上热油激香即可。',
+                texing: '鱼肉鲜嫩，麻辣过瘾，汤汁红亮',
+                tishi: '鱼片要薄厚均匀，煮的时候不要翻动太频繁；淋油时油温要高才能激出香味。'
+            },
+            {
+                cp_name: '回锅肉',
+                type_name: '猪肉类',
+                yuanliao: '五花肉400g；青椒2个；蒜苗3根；豆瓣酱2勺；甜面酱1勺；姜片适量；料酒2勺；白糖半勺',
+                zuofa: '1. 五花肉整块冷水下锅，加姜片、料酒煮至七八成熟，捞出晾凉切薄片。2. 青椒切块，蒜苗切段备用。3. 锅中放少许油，下肉片中小火煸炒至出油、微微卷曲。4. 将肉片拨到一边，下豆瓣酱炒出红油。5. 加入甜面酱、白糖翻炒均匀，下青椒翻炒。6. 最后加入蒜苗段，大火快炒几下即可出锅。',
+                texing: '肉片焦香，肥而不腻，酱香浓郁',
+                tishi: '肉要煮到七八成熟，切片要薄；煸炒时火不要太大，把油煸出来才香。'
+            },
+            {
+                cp_name: '蒜蓉粉丝蒸虾',
+                type_name: '海鲜类',
+                yuanliao: '大虾12只；粉丝1把；蒜末适量；生抽2勺；蚝油1勺；白糖半勺；葱花适量；热油适量',
+                zuofa: '1. 粉丝用温水泡软，剪短铺在盘底。2. 大虾剪去虾须虾脚，开背去虾线，摆在粉丝上。3. 调蒜蓉酱：蒜末加生抽、蚝油、白糖、少许清水调匀。4. 将蒜蓉酱均匀浇在虾上。5. 水开后上锅蒸8-10分钟。6. 撒上葱花，淋上热油激香即可。',
+                texing: '虾肉鲜甜，蒜香浓郁，粉丝入味',
+                tishi: '虾开背要深一些，更入味也容易熟；蒸的时间不宜过长，虾肉会变老。'
+            },
+            {
+                cp_name: '番茄牛腩',
+                type_name: '牛肉类',
+                yuanliao: '牛腩500g；西红柿3个；洋葱半个；姜片适量；料酒2勺；生抽2勺；盐适量；冰糖适量',
+                zuofa: '1. 牛腩切块，冷水下锅焯水去血沫，捞出洗净。2. 西红柿顶部划十字，开水烫后去皮切块。3. 锅中放油，下洋葱、姜片炒香，放入牛腩翻炒。4. 加入料酒、生抽翻炒均匀，加入开水没过牛腩。5. 大火烧开后转小火炖煮1小时。6. 加入西红柿块和冰糖，继续炖煮30分钟至汤汁浓稠，加盐调味即可。',
+                texing: '牛肉软烂，汤汁酸甜浓郁，营养丰富',
+                tishi: '牛腩要选带筋的，炖出来更有口感；西红柿分两次放，第一次增加酸味，第二次增加鲜味。'
+            },
+            {
+                cp_name: '酸菜鱼',
+                type_name: '海鲜类',
+                yuanliao: '草鱼1条；酸菜200g；泡椒适量；姜片蒜末适量；花椒1勺；干辣椒适量；料酒2勺；蛋清1个；淀粉适量',
+                zuofa: '1. 草鱼去骨切片，鱼骨切段，鱼片加料酒、盐、蛋清、淀粉腌制。2. 酸菜洗净切段，泡椒切碎。3. 锅中放油，炒香姜片蒜末、泡椒、酸菜。4. 加入鱼骨翻炒，加开水煮开，煮10分钟捞出铺底。5. 汤中逐片下入鱼片，煮至变白捞出。6. 鱼片上放干辣椒、花椒，淋热油激香，撒上香菜即可。',
+                texing: '鱼肉滑嫩，酸菜开胃，汤汁鲜美微辣',
+                tishi: '酸菜要充分清洗去除多余酸味；鱼片下锅后不要马上搅动，等定型后再轻轻推动。'
+            },
+            {
+                cp_name: '青椒肉丝',
+                type_name: '猪肉类',
+                yuanliao: '猪里脊200g；青椒3个；蒜末适量；生抽2勺；料酒1勺；淀粉适量；盐适量',
+                zuofa: '1. 里脊肉切丝，加料酒、生抽、淀粉抓匀腌制15分钟。2. 青椒去籽切丝。3. 热锅凉油，下肉丝快速滑散炒至变色盛出。4. 锅中留底油，爆香蒜末，下青椒丝翻炒至断生。5. 倒入肉丝，加盐调味，大火快速翻炒均匀即可。',
+                texing: '肉丝嫩滑，青椒爽脆，家常美味',
+                tishi: '肉丝要顺纹切，腌制时加少许油更滑嫩；青椒不要炒太久，保持脆嫩口感。'
+            },
+            {
+                cp_name: '蒜蓉西兰花',
+                type_name: '蔬菜类',
+                yuanliao: '西兰花1颗；蒜末适量；盐适量；蚝油1勺；食用油适量',
+                zuofa: '1. 西兰花掰成小朵，用淡盐水浸泡10分钟后洗净。2. 烧一锅开水，加少许盐和油，下西兰花焯水1分钟捞出沥干。3. 锅中放油，小火炒香蒜末。4. 倒入西兰花，加蚝油、盐调味。5. 大火快速翻炒均匀即可出锅。',
+                texing: '色泽翠绿，蒜香清新，营养健康',
+                tishi: '焯水时加盐和油能保持翠绿；炒制时间要短，保持脆嫩口感。'
+            },
+            {
+                cp_name: '蛋炒饭',
+                type_name: '主食类',
+                yuanliao: '米饭2碗；鸡蛋2个；火腿肠1根；胡萝卜丁适量；青豆适量；葱花适量；盐适量；生抽1勺',
+                zuofa: '1. 鸡蛋打散，火腿肠切丁。2. 热锅凉油，倒入蛋液快速划散成蛋花盛出。3. 锅中再加少许油，下胡萝卜丁、青豆、火腿丁翻炒。4. 倒入米饭，用铲子将饭团压散，大火翻炒均匀。5. 加入蛋花、盐、生抽调味。6. 撒上葱花，翻炒均匀即可出锅。',
+                texing: '粒粒分明，蛋香四溢，简单美味',
+                tishi: '用隔夜饭炒最好，水分少不易粘连；大火快炒，让米饭在锅中跳舞。'
+            },
+            {
+                cp_name: '酸辣汤',
+                type_name: '汤羹类',
+                yuanliao: '嫩豆腐1块；木耳适量；香菇3朵；火腿丝适量；鸡蛋1个；生抽2勺；醋3勺；白胡椒粉1勺；淀粉水适量；香菜适量',
+                zuofa: '1. 豆腐、木耳、香菇切丝备用。2. 锅中加水烧开，放入香菇、木耳煮5分钟。3. 加入豆腐丝、火腿丝，加生抽调味。4. 淋入淀粉水勾芡至浓稠。5. 转小火，缓缓倒入蛋液形成蛋花。6. 加入醋、白胡椒粉调味，撒上香菜即可。',
+                texing: '酸辣开胃，暖胃驱寒，营养丰富',
+                tishi: '醋和白胡椒粉最后放，保持酸辣味；勾芡不要太稠，保持汤的清亮。'
+            },
+            {
+                cp_name: '蒸水蛋',
+                type_name: '蛋类',
+                yuanliao: '鸡蛋3个；温水200ml；盐适量；生抽1勺；香油少许；葱花适量',
+                zuofa: '1. 鸡蛋打入碗中，加少许盐打散。2. 加入温水（蛋水比例1:1.5），轻轻搅匀。3. 用细网过滤蛋液，去除气泡。4. 盖上保鲜膜，用牙签扎几个小孔。5. 水开后上锅，中火蒸10-12分钟。6. 出锅淋生抽、香油，撒葱花即可。',
+                texing: '嫩滑如镜，入口即化，老少皆宜',
+                tishi: '用温水而不是冷水，蒸出来更嫩；过滤和盖保鲜膜是表面光滑的关键。'
+            },
+            {
+                cp_name: '葱油拌面',
+                type_name: '面食类',
+                yuanliao: '面条200g；小葱1把；生抽2勺；老抽1勺；糖1勺；食用油适量',
+                zuofa: '1. 小葱洗净切段，擦干水分。2. 调酱汁：生抽、老抽、糖混合均匀。3. 锅中放油，小火慢慢炸葱段，炸至焦黄捞出。4. 倒入酱汁，用余温激发出香味。5. 另起锅煮面，煮熟后捞出过凉水沥干。6. 将葱油酱汁浇在面上，拌匀即可。',
+                texing: '葱香四溢，酱香浓郁，简单快手',
+                tishi: '炸葱油一定要小火慢炸，才能炸出葱香而不糊；面条过凉水更劲道。'
+            },
+            {
+                cp_name: '凉拌黄瓜',
+                type_name: '凉菜类',
+                yuanliao: '黄瓜2根；蒜末适量；生抽2勺；醋1勺；白糖半勺；香油1勺；辣椒油适量；盐适量',
+                zuofa: '1. 黄瓜洗净，用刀拍扁后切成小段。2. 放入碗中，加少许盐腌制10分钟，倒掉多余水分。3. 加入蒜末、生抽、醋、白糖、香油、辣椒油。4. 拌匀后腌制5分钟入味即可食用。',
+                texing: '清爽解腻，酸辣开胃，夏日必备',
+                tishi: '黄瓜拍碎比切条更入味；腌制后倒掉水分口感更脆。'
+            },
+            {
+                cp_name: '土豆炖牛肉',
+                type_name: '牛肉类',
+                yuanliao: '牛腩400g；土豆2个；胡萝卜1根；洋葱半个；姜片适量；料酒2勺；生抽2勺；老抽1勺；盐适量；八角2个',
+                zuofa: '1. 牛腩切块焯水洗净，土豆、胡萝卜、洋葱切块。2. 锅中放油，炒香洋葱、姜片、八角。3. 放入牛腩翻炒，加料酒、生抽、老抽上色。4. 加入开水没过牛肉，大火烧开转小火炖煮1小时。5. 加入土豆、胡萝卜块，继续炖煮20分钟。6. 加盐调味，大火收汁即可。',
+                texing: '牛肉软烂，土豆绵软，汤汁浓郁',
+                tishi: '牛肉要炖够时间才软烂；土豆不要切太小，容易煮化。'
+            }
+        ];
+        
+        // 搜索菜谱 - 优先搜索内置菜谱，同时调用API
+        async function searchRecipes() {
+            const keyword = document.getElementById('searchInput').value.trim();
+            if (!keyword && !currentCategory) {
+                alert('请输入搜索关键词或选择分类');
+                return;
+            }
+            
+            const searchWord = keyword || currentCategory;
+            const container = document.getElementById('recipeContainer');
+            container.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在搜索美食...</p>
+                </div>
+            `;
+            
+            // 先搜索内置菜谱
+            const localResults = classicRecipes.filter(recipe => {
+                const searchLower = searchWord.toLowerCase();
+                return recipe.cp_name.toLowerCase().includes(searchLower) ||
+                       recipe.type_name.toLowerCase().includes(searchLower) ||
+                       recipe.yuanliao.toLowerCase().includes(searchLower);
+            });
+            
+            // 同时调用API搜索
+            try {
+                const response = await fetch(`${API_URL}?word=${encodeURIComponent(searchWord)}&key=${API_KEY}`);
+                const data = await response.json();
+                
+                let apiResults = [];
+                if (data.error_code === 0 && data.result && data.result.list) {
+                    apiResults = data.result.list;
+                }
+                
+                // 合并结果，去重（优先保留内置菜谱的详细做法）
+                const allResults = [...localResults];
+                const seenNames = new Set(localResults.map(r => r.cp_name));
+                
+                apiResults.forEach(recipe => {
+                    if (!seenNames.has(recipe.cp_name)) {
+                        seenNames.add(recipe.cp_name);
+                        allResults.push(recipe);
+                    }
+                });
+                
+                if (allResults.length > 0) {
+                    displayRecipes(allResults);
+                } else {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">😔</div>
+                            <p>没有找到相关菜谱，换个关键词试试？</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('API搜索失败，使用本地数据:', error);
+                // API失败时，只显示本地搜索结果
+                if (localResults.length > 0) {
+                    displayRecipes(localResults);
+                } else {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">😔</div>
+                            <p>没有找到相关菜谱，换个关键词试试？</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // 按分类搜索 - 使用内置菜谱
+        function searchByCategory(category) {
+            currentCategory = category;
+            
+            // 更新分类标签样式
+            document.querySelectorAll('.category-tag').forEach(tag => {
+                tag.classList.remove('active');
+                if (tag.textContent.includes(category) || (category === '' && tag.textContent === '全部')) {
+                    tag.classList.add('active');
+                }
+            });
+            
+            if (category === '') {
+                // 显示全部
+                displayRecipes(classicRecipes);
+            } else {
+                // 按分类筛选内置菜谱
+                const filtered = classicRecipes.filter(recipe => 
+                    recipe.type_name.includes(category)
+                );
+                
+                // 如果没有匹配的内置菜谱，尝试API搜索
+                if (filtered.length === 0) {
+                    document.getElementById('searchInput').value = category;
+                    searchRecipes();
+                } else {
+                    document.getElementById('searchInput').value = '';
+                    displayRecipes(filtered);
+                }
+            }
+        }
+        
+        // 显示菜谱列表
+        function displayRecipes(recipes) {
+            const container = document.getElementById('recipeContainer');
+            
+            if (recipes.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">😔</div>
+                        <p>没有找到相关菜谱</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const foodEmojis = ['🍖', '🍗', '🥩', '🦐', '🐟', '🥬', '🍅', '🥕', '🍆', '🥦', '🌶️', '🧄', '🍜', '🍲', '🥘', '🍳'];
+            
+            container.innerHTML = `
+                <div class="result-count">共找到 <span>${recipes.length}</span> 道菜谱</div>
+                <div class="recipe-grid">
+                    ${recipes.map((recipe, index) => `
+                        <div class="recipe-card" onclick='showRecipeDetail(${JSON.stringify(recipe)})'>
+                            <div class="recipe-image">${foodEmojis[index % foodEmojis.length]}</div>
+                            <div class="recipe-info">
+                                <div class="recipe-title">${recipe.cp_name}</div>
+                                <span class="recipe-category">${recipe.type_name || '美食'}</span>
+                                <div class="recipe-desc">${recipe.texing || '美味可口的' + recipe.cp_name}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        // 智能解析步骤文本
+        function parseSteps(zuofaText) {
+            if (!zuofaText || !zuofaText.trim()) {
+                return ['暂无步骤信息'];
+            }
+            
+            // 尝试多种分隔符模式
+            let steps = [];
+            
+            // 模式1: 数字+点号+空格 (1. 2. 3.)
+            if (/\d+[\.、]\s*/.test(zuofaText)) {
+                steps = zuofaText.split(/\d+[\.、]\s*/).filter(s => s.trim());
+            }
+            // 模式2: 分号或句号分隔
+            else if (zuofaText.includes('；') || zuofaText.includes('。')) {
+                steps = zuofaText.split(/[；。]/).filter(s => s.trim() && s.trim().length > 3);
+            }
+            // 模式3: 换行符分隔
+            else if (zuofaText.includes('\n')) {
+                steps = zuofaText.split('\n').filter(s => s.trim());
+            }
+            // 默认：按句子长度拆分
+            else {
+                // 每30-50个字作为一个步骤
+                const sentences = zuofaText.match(/[^。！？]+[。！？]?/g) || [zuofaText];
+                steps = sentences.filter(s => s.trim());
+            }
+            
+            // 清理步骤文本
+            return steps.map(s => s.trim()).filter(s => s.length > 0);
+        }
+        
+        // 显示菜谱详情
+        function showRecipeDetail(recipe) {
+            document.getElementById('modalTitle').textContent = recipe.cp_name;
+            document.getElementById('modalCategory').textContent = recipe.type_name || '美食';
+            
+            // 食材 - 更智能的解析
+            let ingredients = ['食材信息暂无'];
+            if (recipe.yuanliao) {
+                // 尝试多种分隔符
+                if (recipe.yuanliao.includes('；')) {
+                    ingredients = recipe.yuanliao.split('；');
+                } else if (recipe.yuanliao.includes('、')) {
+                    ingredients = recipe.yuanliao.split('、');
+                } else if (recipe.yuanliao.includes(',')) {
+                    ingredients = recipe.yuanliao.split(',');
+                } else if (recipe.yuanliao.includes('，')) {
+                    ingredients = recipe.yuanliao.split('，');
+                } else {
+                    ingredients = [recipe.yuanliao];
+                }
+            }
+            document.getElementById('modalIngredients').innerHTML = ingredients
+                .map(i => i.trim())
+                .filter(i => i.length > 0)
+                .map(i => `• ${i}`)
+                .join('<br>');
+            
+            // 步骤 - 使用智能解析
+            const steps = parseSteps(recipe.zuofa);
+            document.getElementById('modalSteps').innerHTML = steps.map((step, index) => `
+                <div class="step-item">
+                    <div class="step-number">${index + 1}</div>
+                    <div class="step-content">${step}</div>
+                </div>
+            `).join('');
+            
+            // 小贴士
+            const tipsSection = document.getElementById('modalTipsSection');
+            if (recipe.tishi && recipe.tishi.trim()) {
+                document.getElementById('modalTips').textContent = recipe.tishi;
+                tipsSection.style.display = 'block';
+            } else {
+                tipsSection.style.display = 'none';
+            }
+            
+            document.getElementById('recipeModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 关闭模态框
+        function closeModal() {
+            document.getElementById('recipeModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // 点击背景关闭
+        function closeModalOnBackground(event) {
+            if (event.target === event.currentTarget) {
+                closeModal();
+            }
+        }
+        
+        // ESC键关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // 页面加载时显示推荐菜谱 - 使用内置经典菜谱
+        window.onload = () => {
+            // 直接展示内置经典菜谱
+            displayRecipes(classicRecipes);
+        };
+    </script>
+</body>
+</html>

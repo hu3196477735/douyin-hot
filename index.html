@@ -358,30 +358,6 @@
             box-shadow: 0 4px 15px rgba(255,0,80,0.4);
         }
         
-        .platform-btn.zhihu {
-            background: linear-gradient(135deg, #0084ff 0%, #0066cc 100%);
-            color: white;
-            border-color: #0084ff;
-        }
-        
-        .platform-btn.zhihu:hover,
-        .platform-btn.zhihu.active {
-            background: linear-gradient(135deg, #0066cc 0%, #0084ff 100%);
-            box-shadow: 0 4px 15px rgba(0,132,255,0.4);
-        }
-        
-        .platform-btn.xiaohongshu {
-            background: linear-gradient(135deg, #ff2442 0%, #ff6b7a 100%);
-            color: white;
-            border-color: #ff2442;
-        }
-        
-        .platform-btn.xiaohongshu:hover,
-        .platform-btn.xiaohongshu.active {
-            background: linear-gradient(135deg, #ff6b7a 0%, #ff2442 100%);
-            box-shadow: 0 4px 15px rgba(255,36,66,0.4);
-        }
-        
         .platform-btn.placeholder {
             background: #e9ecef;
             color: #adb5bd;
@@ -424,18 +400,7 @@
             box-shadow: 0 4px 15px rgba(0,64,152,0.4);
         }
         
-        .platform-btn.netease {
-            background: linear-gradient(135deg, #cc0000 0%, #ff3333 100%);
-            color: white;
-            border-color: #cc0000;
-        }
-        
-        .platform-btn.netease:hover,
-        .platform-btn.netease.active {
-            background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
-            box-shadow: 0 4px 15px rgba(204,0,0,0.4);
-        }
-        
+
 
         
         .content {
@@ -3632,6 +3597,10 @@
                 <span class="nav-icon">🌱</span>
                 <span class="nav-text">花园养成</span>
             </div>
+            <div class="nav-item" onclick="window.location.href='recipe.html'">
+                <span class="nav-icon">🍳</span>
+                <span class="nav-text">美食菜谱</span>
+            </div>
 
         </div>
         
@@ -3669,30 +3638,13 @@
                 <button class="platform-btn weibo" data-platform="weibo" onclick="switchPlatform('weibo')">
                     <span>微博</span>
                 </button>
-                <button class="platform-btn zhihu" data-platform="zhihu" onclick="switchPlatform('zhihu')">
-                    <span>知乎</span>
-                </button>
                 <button class="platform-btn bilibili" data-platform="bilibili" onclick="switchPlatform('bilibili')">
                     <span>B站</span>
-                </button>
-                <button class="platform-btn xiaohongshu" data-platform="xiaohongshu" onclick="switchPlatform('xiaohongshu')">
-                    <span>小红书</span>
                 </button>
                 <button class="platform-btn baidu" data-platform="baidu" onclick="switchPlatform('baidu')">
                     <span>百度</span>
                 </button>
-                <button class="platform-btn hupu" data-platform="hupu" onclick="switchPlatform('hupu')">
-                    <span>虎扑</span>
-                </button>
-                <button class="platform-btn douban" data-platform="douban" onclick="switchPlatform('douban')">
-                    <span>豆瓣</span>
-                </button>
-                <button class="platform-btn thepaper" data-platform="thepaper" onclick="switchPlatform('thepaper')">
-                    <span>澎湃新闻</span>
-                </button>
-                <button class="platform-btn netease" data-platform="netease" onclick="switchPlatform('netease')">
-                    <span>网易新闻</span>
-                </button>
+
                 <!-- 预留更多平台位置 -->
                 <button class="platform-btn placeholder" onclick="event.stopPropagation(); return false;" style="opacity: 0.5; cursor: default;">
                     <span>+ 更多</span>
@@ -4079,14 +4031,6 @@
                 api: 'https://v2.xxapi.cn/api/weibohot',
                 searchUrl: 'https://s.weibo.com/weibo?q='
             },
-            zhihu: {
-                name: '知乎',
-                apis: [
-                    'https://v2.xxapi.cn/api/zhihu'
-                ],
-                api: 'https://v2.xxapi.cn/api/zhihu',
-                searchUrl: 'https://www.zhihu.com/search?type=content&q='
-            },
             bilibili: {
                 name: 'B站',
                 apis: [
@@ -4095,14 +4039,6 @@
                 api: 'https://v2.xxapi.cn/api/bilibilihot',
                 searchUrl: 'https://search.bilibili.com/all?keyword='
             },
-            xiaohongshu: {
-                name: '小红书',
-                apis: [
-                    'https://api.oioweb.cn/api/social/xiaohongshu-hot-search'
-                ],
-                api: 'https://api.oioweb.cn/api/social/xiaohongshu-hot-search',
-                searchUrl: 'https://www.xiaohongshu.com/search_result?keyword='
-            },
             baidu: {
                 name: '百度',
                 apis: [
@@ -4110,38 +4046,6 @@
                 ],
                 api: 'https://v2.xxapi.cn/api/baiduhot',
                 searchUrl: 'https://www.baidu.com/s?wd='
-            },
-            hupu: {
-                name: '虎扑',
-                apis: [
-                    'https://v2.xxapi.cn/api/hupu'
-                ],
-                api: 'https://v2.xxapi.cn/api/hupu',
-                searchUrl: 'https://bbs.hupu.com/search?q='
-            },
-            douban: {
-                name: '豆瓣',
-                apis: [
-                    'https://v2.xxapi.cn/api/douban'
-                ],
-                api: 'https://v2.xxapi.cn/api/douban',
-                searchUrl: 'https://www.douban.com/search?q='
-            },
-            thepaper: {
-                name: '澎湃新闻',
-                apis: [
-                    'https://v2.xxapi.cn/api/thepaper'
-                ],
-                api: 'https://v2.xxapi.cn/api/thepaper',
-                searchUrl: 'https://www.thepaper.cn/searchResult.jsp?searchWord='
-            },
-            netease: {
-                name: '网易新闻',
-                apis: [
-                    'https://v2.xxapi.cn/api/netease'
-                ],
-                api: 'https://v2.xxapi.cn/api/netease',
-                searchUrl: 'https://www.163.com/search?keyword='
             }
         };
 
@@ -4150,22 +4054,10 @@
             douyin_raw: [],
             weibo: [],
             weibo_raw: [],
-            zhihu: [],
-            zhihu_raw: [],
             bilibili: [],
             bilibili_raw: [],
-            xiaohongshu: [],
-            xiaohongshu_raw: [],
             baidu: [],
-            baidu_raw: [],
-            hupu: [],
-            hupu_raw: [],
-            douban: [],
-            douban_raw: [],
-            thepaper: [],
-            thepaper_raw: [],
-            netease: [],
-            netease_raw: []
+            baidu_raw: []
         };
         let currentPlatform = 'douyin';
         let currentCategory = 'all';
@@ -5294,10 +5186,21 @@
             document.getElementById('sidebar').classList.toggle('open');
         }
         
+        // 点击页面其他区域关闭侧边栏
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            // 如果侧边栏是打开的，且点击的不是侧边栏内部也不是菜单按钮，则关闭侧边栏
+            if (sidebar && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+        
         // 页面切换功能
         function switchPage(page) {
-            // 关闭侧边栏
-            document.getElementById('sidebar').classList.remove('open');
             // 更新导航栏激活状态
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
