@@ -112,43 +112,115 @@
         
         .platform-buttons {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
         
         .platform-btn {
             padding: 14px 10px;
-            border: 2px solid #e9ecef;
+            border: 2px solid transparent;
             border-radius: 12px;
-            background: white;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            color: #495057;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
         }
         
         .platform-btn:hover {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
         
         .platform-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #667eea;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
         }
         
-        .platform-btn .emoji {
-            font-size: 20px;
+        /* 各平台品牌色 */
+        .platform-btn.douyin {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            border-color: #1a1a2e;
+        }
+        
+        .platform-btn.douyin:hover,
+        .platform-btn.douyin.active {
+            background: linear-gradient(135deg, #ff0050 0%, #00f2ea 100%);
+            border-color: #ff0050;
+            box-shadow: 0 4px 15px rgba(255,0,80,0.4);
+        }
+        
+        .platform-btn.weibo {
+            background: linear-gradient(135deg, #e6162d 0%, #ff6b6b 100%);
+            color: white;
+            border-color: #e6162d;
+        }
+        
+        .platform-btn.weibo:hover,
+        .platform-btn.weibo.active {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+            box-shadow: 0 4px 15px rgba(230,22,45,0.4);
+        }
+        
+        .platform-btn.bilibili {
+            background: linear-gradient(135deg, #00a1d6 0%, #00b5e5 100%);
+            color: white;
+            border-color: #00a1d6;
+        }
+        
+        .platform-btn.bilibili:hover,
+        .platform-btn.bilibili.active {
+            background: linear-gradient(135deg, #00b5e5 0%, #23ade5 100%);
+            box-shadow: 0 4px 15px rgba(0,161,214,0.4);
+        }
+        
+        .platform-btn.baidu {
+            background: linear-gradient(135deg, #2932e1 0%, #4e6ef2 100%);
+            color: white;
+            border-color: #2932e1;
+        }
+        
+        .platform-btn.baidu:hover,
+        .platform-btn.baidu.active {
+            background: linear-gradient(135deg, #4e6ef2 0%, #6b8cff 100%);
+            box-shadow: 0 4px 15px rgba(41,50,225,0.4);
+        }
+        
+        .platform-btn.twitter {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+            border-color: #000000;
+        }
+        
+        .platform-btn.twitter:hover,
+        .platform-btn.twitter.active {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        
+        .platform-btn.youtube {
+            background: linear-gradient(135deg, #ff0000 0%, #ff4444 100%);
+            color: white;
+            border-color: #ff0000;
+        }
+        
+        .platform-btn.youtube:hover,
+        .platform-btn.youtube.active {
+            background: linear-gradient(135deg, #ff3333 0%, #ff6666 100%);
+            box-shadow: 0 4px 15px rgba(255,0,0,0.4);
+        }
+        
+        .platform-btn.tiktok {
+            background: linear-gradient(135deg, #ff0050 0%, #00f2ea 50%, #000000 100%);
+            color: white;
+            border-color: #ff0050;
+        }
+        
+        .platform-btn.tiktok:hover,
+        .platform-btn.tiktok.active {
+            background: linear-gradient(135deg, #00f2ea 0%, #ff0050 50%, #000000 100%);
+            box-shadow: 0 4px 15px rgba(255,0,80,0.4);
         }
         
         .content {
@@ -280,23 +352,80 @@
             word-break: break-word;
         }
         
-        .hot-text.very-hot {
-            font-size: 17px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        /* 热度颜色阶梯 - 从红到紫 */
+        .hot-text.rank-1 {
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff0000 0%, #ff4757 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .hot-text.hot {
+        .hot-text.rank-2 {
+            font-size: 17px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hot-text.rank-3 {
+            font-size: 16px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6348 0%, #ff7f50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hot-text.rank-4 {
             font-size: 16px;
             font-weight: 600;
             color: #e74c3c;
         }
         
-        .hot-text.medium {
+        .hot-text.rank-5 {
+            font-size: 15px;
             font-weight: 600;
+            color: #e84393;
+        }
+        
+        .hot-text.rank-6 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #9b59b6;
+        }
+        
+        .hot-text.rank-7 {
+            font-size: 15px;
+            font-weight: 500;
+            color: #8e44ad;
+        }
+        
+        .hot-text.rank-8 {
+            font-size: 15px;
+            font-weight: 500;
+            color: #667eea;
+        }
+        
+        .hot-text.rank-9 {
+            font-size: 15px;
+            font-weight: 500;
+            color: #3498db;
+        }
+        
+        .hot-text.rank-10 {
+            font-size: 15px;
+            font-weight: 500;
+            color: #2980b9;
+        }
+        
+        .hot-text.rank-normal {
+            font-size: 15px;
+            font-weight: 400;
+            color: #2d3748;
         }
         
         .hot-value {
@@ -311,26 +440,70 @@
             border-radius: 15px;
         }
         
-        .hot-value.very-hot {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        /* 热度标签颜色 */
+        .hot-value.rank-1 {
+            background: linear-gradient(135deg, #ff0000 0%, #ff4757 100%);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .hot-value.rank-2 {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .hot-value.rank-3 {
+            background: linear-gradient(135deg, #ff6348 0%, #ff7f50 100%);
             color: white;
             font-weight: 600;
         }
         
-        .hot-value.hot {
-            background: #f8f9fa;
+        .hot-value.rank-4 {
+            background: #ffebee;
             color: #e74c3c;
             font-weight: 600;
         }
         
-        .hot-value.warm {
-            background: #fff3cd;
-            color: #f39c12;
+        .hot-value.rank-5 {
+            background: #fce4ec;
+            color: #e84393;
+            font-weight: 600;
         }
         
-        .hot-value.cool {
-            background: #e7f5ff;
+        .hot-value.rank-6 {
+            background: #f3e5f5;
+            color: #9b59b6;
+            font-weight: 600;
+        }
+        
+        .hot-value.rank-7 {
+            background: #ede7f6;
+            color: #8e44ad;
+            font-weight: 500;
+        }
+        
+        .hot-value.rank-8 {
+            background: #e8eaf6;
+            color: #667eea;
+            font-weight: 500;
+        }
+        
+        .hot-value.rank-9 {
+            background: #e3f2fd;
             color: #3498db;
+            font-weight: 500;
+        }
+        
+        .hot-value.rank-10 {
+            background: #e1f5fe;
+            color: #2980b9;
+            font-weight: 500;
+        }
+        
+        .hot-value.rank-normal {
+            background: #f8f9fa;
+            color: #6c757d;
         }
         
         .go-btn {
@@ -359,6 +532,79 @@
         .go-btn:active {
             transform: scale(0.95);
         }
+        
+        /* 分类标签 */
+        .hot-content {
+            flex: 1;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            width: fit-content;
+        }
+        
+        /* 分类筛选 - 微博风格 */
+        .category-selector {
+            padding: 0;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .category-selector::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .category-buttons {
+            display: flex;
+            gap: 0;
+            padding: 0 10px;
+            min-width: max-content;
+        }
+        
+        .category-btn {
+            padding: 15px 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.2s;
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .category-btn:hover {
+            color: #333;
+        }
+        
+        .category-btn.active {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .category-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            right: 20%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffa502);
+            border-radius: 2px;
+        }
+        
+
         
         .footer {
             text-align: center;
@@ -404,6 +650,13 @@
             color: #adb5bd;
         }
         
+        @media (max-width: 768px) {
+            .platform-buttons {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+        }
+        
         @media (max-width: 480px) {
             .platform-buttons {
                 grid-template-columns: repeat(2, 1fr);
@@ -411,8 +664,8 @@
             }
             
             .platform-btn {
-                padding: 12px 8px;
-                font-size: 14px;
+                padding: 12px 6px;
+                font-size: 13px;
             }
             
             .hot-item {
@@ -444,7 +697,86 @@
                 font-size: 14px;
                 margin-left: 8px;
             }
+            
+            .search-box {
+                padding: 15px;
+            }
+            
+            .search-input {
+                padding: 12px 15px;
+                font-size: 15px;
+            }
+            
+            .search-btn {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
         }
+        
+        /* 搜索框样式 */
+        .search-section {
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+        
+        .search-input-wrapper {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .search-input:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+        }
+        
+        .search-btn {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+        }
+        
+        .search-btn:active {
+            transform: translateY(0);
+        }
+        
+
     </style>
 </head>
 <body>
@@ -455,25 +787,41 @@
             <div class="subtitle">实时热点 · 一触即达</div>
         </div>
         
+        <!-- 搜索框区域 -->
+        <div class="search-section">
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <input type="text" class="search-input" id="searchInput" placeholder="输入关键词，用Yandex搜索全网..." onkeypress="if(event.key==='Enter')performYandexSearch()">
+                    <button class="search-btn" onclick="performYandexSearch()">
+                        🔍 搜索
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        
         <div class="platform-selector">
             <div class="platform-label">选择平台</div>
             <div class="platform-buttons">
-                <button class="platform-btn active" data-platform="douyin">
-                    <span class="emoji">📱</span>
+                <button class="platform-btn active douyin" data-platform="douyin">
                     <span>抖音</span>
                 </button>
-                <button class="platform-btn" data-platform="weibo">
-                    <span class="emoji">🔥</span>
+                <button class="platform-btn weibo" data-platform="weibo">
                     <span>微博</span>
                 </button>
-                <button class="platform-btn" data-platform="bilibili">
-                    <span class="emoji">📺</span>
+                <button class="platform-btn bilibili" data-platform="bilibili">
                     <span>B站</span>
                 </button>
-                <button class="platform-btn" data-platform="baidu">
-                    <span class="emoji">🔍</span>
+                <button class="platform-btn baidu" data-platform="baidu">
                     <span>百度</span>
                 </button>
+            </div>
+        </div>
+        
+        <!-- 分类筛选 -->
+        <div class="category-selector" id="categorySelector" style="display: none;">
+            <div class="category-buttons" id="categoryButtons">
+                <button class="category-btn active" data-category="all">全部</button>
             </div>
         </div>
         
@@ -485,123 +833,715 @@
     </div>
 
     <script>
+        // 分类配置 - 映射到固定分类
+        const categories = {
+            douyin: {
+                0: { name: '热搜', color: '#e74c3c' },
+                1: { name: '娱乐', color: '#e84393' },
+                2: { name: '社会', color: '#e74c3c' },
+                3: { name: '娱乐', color: '#fd79a8' },
+                4: { name: '体育', color: '#00b894' },
+                5: { name: '汽车', color: '#0984e3' },
+                6: { name: '科技', color: '#6c5ce7' },
+                7: { name: '财经', color: '#f39c12' },
+                8: { name: '游戏', color: '#a29bfe' },
+                9: { name: '热搜', color: '#fdcb6e' },
+                10: { name: '娱乐', color: '#e17055' },
+                16: { name: '生活', color: '#00cec9' },
+                18: { name: '美食', color: '#fab1a0' },
+                19: { name: '时尚', color: '#ff7675' },
+                20: { name: '时尚', color: '#d63031' },
+                21: { name: '生活', color: '#74b9ff' },
+                22: { name: '生活', color: '#fd79a8' },
+                23: { name: '生活', color: '#fdcb6e' },
+                24: { name: '生活', color: '#55efc4' },
+                25: { name: '社会', color: '#81ecec' },
+                26: { name: '社会', color: '#74b9ff' },
+                27: { name: '财经', color: '#a29bfe' },
+                28: { name: '社会', color: '#636e72' },
+                29: { name: '社会', color: '#b2bec3' },
+                30: { name: '娱乐', color: '#dfe6e9' },
+                31: { name: '娱乐', color: '#fd79a8' },
+                32: { name: '娱乐', color: '#e17055' },
+                33: { name: '娱乐', color: '#d63031' },
+                34: { name: '娱乐', color: '#e84393' },
+                35: { name: '娱乐', color: '#00b894' },
+                36: { name: '生活', color: '#0984e3' },
+                37: { name: '娱乐', color: '#6c5ce7' },
+                38: { name: '时尚', color: '#f39c12' },
+                39: { name: '时尚', color: '#a29bfe' },
+                40: { name: '娱乐', color: '#fdcb6e' },
+                41: { name: '娱乐', color: '#e17055' },
+                42: { name: '社会', color: '#ff7675' },
+                43: { name: '生活', color: '#d63031' },
+                44: { name: '社会', color: '#74b9ff' },
+                45: { name: '社会', color: '#636e72' },
+                46: { name: '政务', color: '#b2bec3' },
+                47: { name: '公益', color: '#55efc4' },
+                48: { name: '三农', color: '#81ecec' },
+                49: { name: '家居', color: '#a29bfe' },
+                50: { name: '装修', color: '#fd79a8' }
+            }
+        };
+
+        // 关键词分类规则（用于微博/B站/百度）
+        const keywordCategories = [
+            { keywords: ['明星', '演员', '歌手', '艺人', '偶像', '粉丝', '演唱会', '电影', '电视剧', '综艺', '八卦', '绯闻', '恋情', '分手', '结婚', '离婚', '出轨', '爆料', '瓜', '剧组', '导演', '片酬', '红毯', '颁奖', '影帝', '影后', '视帝', '视后', '顶流', '塌房', '应援', '打榜', '路透', '杀青', '定档', '首映', '票房', '追剧', '剧透', '番位', '撕番', '营业', '生图', '精修', '素颜', '造型', '礼服', '代言', '官宣', '实锤', '辟谣', '声明', '道歉', '退圈', '封杀', '雪藏', '复出'], category: '娱乐', color: '#e84393' },
+            { keywords: ['科技', 'AI', '人工智能', '芯片', '手机', '华为', '苹果', '小米', '特斯拉', '电动车', '新能源', '5G', '6G', '互联网', '元宇宙', '区块链', '比特币', '数码', '发布会', 'iPhone', '安卓', 'iOS', '鸿蒙', '高通', '骁龙', '天玑', '台积电', '光刻机', '半导体', '自动驾驶', '智能座舱', '人形机器人', '大模型', 'ChatGPT', 'Sora', 'OpenAI', '谷歌', '微软', '英伟达', '算力', '云计算', '大数据', '物联网', 'VR', 'AR', 'MR', '脑机接口', '量子计算', '航天', '卫星', '火箭', 'SpaceX', '星舰', '火星', '登月'], category: '科技', color: '#6c5ce7' },
+            { keywords: ['社会', '新闻', '热点', '事件', '事故', '灾难', '地震', '洪水', '火灾', '疫情', '病毒', '疫苗', '医院', '医生', '患者', '死亡', '受伤', '救援', '警察', '法院', '判决', '犯罪', '逮捕', '通报', '调查', '处理', '处罚', '罚款', '拘留', '判刑', '命案', '失踪', '失联', '遇难', '伤亡', '车祸', '空难', '沉船', '爆炸', '坍塌', '塌方', '泥石流', '台风', '暴雨', '干旱', '高温', '寒潮', '雾霾', '污染', '环保', '反腐', '落马', '违纪', '违规', '举报', '曝光', '舆论', '辟谣', '澄清', '调解', '仲裁', '诉讼', '维权', '讨薪', '拆迁', '征地', '补偿', '安置', '社保', '医保', '养老', '就业', '失业', '生育', '人口', '老龄化', '留守儿童', '空巢老人', '残疾人', '弱势群体', '志愿者', '慈善', '公益', '捐赠', '救灾', '援助'], category: '社会', color: '#e74c3c' },
+            { keywords: ['体育', '足球', '篮球', 'NBA', 'CBA', '世界杯', '奥运会', '冠军', '比赛', '决赛', '进球', '运动员', '球星', '教练', '球队', '联赛', '锦标赛', '金牌', '银牌', '铜牌', '中超', '英超', '西甲', '意甲', '德甲', '法甲', '欧冠', '亚冠', '欧洲杯', '美洲杯', '亚洲杯', '法网', '温网', '澳网', '美网', '乒乓球', '羽毛球', '网球', '排球', '游泳', '田径', '体操', '跳水', '射击', '举重', '拳击', '格斗', 'UFC', 'F1', '赛车', '高尔夫', '斯诺克', '台球', '马拉松', '滑雪', '滑冰', '短道速滑', '花滑', '电竞', 'LPL', 'KPL', '转会', '续约', '退役', '复出', 'MVP', '得分王', '助攻王', '篮板王', '射手榜', '积分榜', '降级', '升班马', '德比', '绝杀', '逆转', '爆冷', '平局', '加时', '点球', '红牌', '黄牌', '伤病', '康复'], category: '体育', color: '#00b894' },
+            { keywords: ['财经', '股市', '股票', 'A股', '港股', '美股', '基金', '理财', '投资', '银行', '利率', '汇率', '人民币', '美元', '黄金', '油价', '房价', '楼市', '经济', 'GDP', '通胀', '降息', '加息', '央行', '美联储', '证监会', '银保监会', '上交所', '深交所', '北交所', '科创板', '创业板', '主板', '新三板', '港股通', '沪股通', '深股通', 'QFII', 'RQFII', 'IPO', '上市', '退市', '停牌', '复牌', '涨停', '跌停', '牛市', '熊市', '震荡', '回调', '反弹', '突破', '支撑位', '压力位', '成交量', '成交额', '市值', '估值', 'PE', 'PB', 'ROE', '财报', '年报', '季报', '分红', '送股', '配股', '增发', '减持', '增持', '回购', '质押', '解禁', '借壳', '重组', '并购', '收购', '合并', '分拆', '破产', '清算', '债务', '违约', '暴雷', '踩雷', '韭菜', '割肉', '抄底', '逃顶', '套牢', '解套', '满仓', '空仓', '轻仓', '重仓', '加仓', '减仓', '调仓', '换股', '打新', '中签', '破发', '破净', '分红', '股息', '收益率', '年化', '净值', '累计净值', '万份收益', '七日年化', '余额宝', '零钱通', '定期', '活期', '大额存单', '国债', '企业债', '地方债', '可转债', '打新债', '逆回购', '融资融券', '配资', '杠杆', '爆仓', '强平', '穿仓', '穿仓', '穿仓'], category: '财经', color: '#f39c12' },
+            { keywords: ['游戏', '电竞', '王者荣耀', '英雄联盟', 'LOL', '吃鸡', '原神', '手游', '网游', 'Steam', 'Switch', 'PS5', 'Xbox', '主播', '直播', '战队', '比赛', '夺冠', '皮肤', '装备', '梦幻西游', '魔兽世界', 'DNF', '地下城', 'CF', '穿越火线', 'CSGO', 'CS2', '守望先锋', '炉石传说', '自走棋', '云顶之弈', '金铲铲', '和平精英', '刺激战场', 'PUBG', '永劫无间', '逆水寒', '剑网', '天涯明月刀', '蛋仔派对', '元梦之星', '第五人格', '阴阳师', '明日方舟', '崩坏', '星穹铁道', '绝区零', '鸣潮', '黑神话', '悟空', '艾尔登法环', '塞尔达', '马里奥', '宝可梦', '任天堂', '索尼', '微软', '动视暴雪', '育碧', 'EA', 'R星', '卡普空', '科乐美', '腾讯游戏', '网易游戏', '米哈游', '莉莉丝', '叠纸', '鹰角', '库洛', '完美世界', '盛趣', '巨人', '畅游', '西山居', '版号', '过审', '停服', '关服', '合服', '维护', '更新', '补丁', 'DLC', '资料片', '赛季', '排位', '段位', '匹配', '人机', '外挂', '作弊', '封号', '举报', '投诉', '退款', '氪金', '充值', '首充', '月卡', '战令', '通行证', '抽卡', '保底', '出货', '歪了', '沉船', '欧皇', '非酋', '肝', '氪', '佛系', '养老', '开荒', '毕业', '满级', '战力', '评分', '装备', '武器', '道具', '材料', '金币', '钻石', '点券', '代币', '皮肤', '时装', '坐骑', '宠物', '翅膀', '称号', '成就', '任务', '副本', '团本', 'raid', 'BOSS', '野怪', '挂机', '搬砖', '打金', '代练', '陪玩', '公会', '帮派', ' clan', '战队', '好友', '组队', '语音', '开黑', 'solo', '1v1', '5v5', '大乱斗', '吃鸡', '跑毒', '舔包', '伏地魔', 'LYB', '老六', '开挂', '炸鱼', '虐菜', '带飞', '躺赢', 'carry', 'MVP', 'SVP', 'ACE', '五杀', '超神', '团灭', '一波', '推塔', '偷家', '守家', '翻盘', '投降', '重开', '暂停', '掉线', '卡顿', '延迟', 'ping', 'fps', '画质', '帧率', '分辨率', '全屏', '窗口', '键位', '手柄', '键鼠', '外设', '耳机', '鼠标', '键盘', '显示器', '显卡', 'CPU', '内存', '硬盘', 'SSD', '配置', '画质', '特效', '光追', 'DLSS', 'FSR', 'MOD', '插件', '脚本', '宏', '辅助', '外挂', '私服', '鬼服', '滚服', '合区', '跨服', '转区', '移民', '改名', '换号', '卖号', '买号', '交易', '账号', '密码', '安全', '绑定', '解绑', '换绑', '实名', '防沉迷', '未成年', '健康系统', '人脸识别', '家长监护'], category: '游戏', color: '#a29bfe' },
+            { keywords: ['汽车', '电动车', '特斯拉', '比亚迪', '蔚来', '小鹏', '理想', '奔驰', '宝马', '奥迪', '丰田', '本田', '大众', '新车', '上市', '降价', '销量', '召回', '事故', '驾照', '小米汽车', '问界', '智界', '享界', '尊界', '极氪', '领克', '长城', '吉利', '长安', '奇瑞', '广汽', '上汽', '一汽', '北汽', '东风', '日产', '马自达', '现代', '起亚', '福特', '通用', '雪佛兰', '别克', '凯迪拉克', '林肯', '沃尔沃', '捷豹', '路虎', '保时捷', '法拉利', '兰博基尼', '迈凯伦', '阿斯顿马丁', '宾利', '劳斯莱斯', '玛莎拉蒂', '阿尔法罗密欧', '雷克萨斯', '英菲尼迪', '讴歌', '斯巴鲁', '三菱', '铃木', 'Jeep', '道奇', '克莱斯勒', '特斯拉', 'Rivian', 'Lucid', 'Fisker', '蔚来', '小鹏', '理想', '零跑', '哪吒', '威马', '极狐', '岚图', '阿维塔', '智己', '飞凡', '埃安', '深蓝', '启源', '银河', '几何', '极星', '路特斯', '高合', '仰望', '方程豹', '腾势', '坦克', '欧拉', '好猫', '宏光MINI', '缤果', '海鸥', '海豚', '海豹', 'Model 3', 'Model Y', 'Model S', 'Model X', 'Cybertruck', 'Semi', 'Roadster', 'SU7', 'MEGA', 'L9', 'L8', 'L7', 'L6', 'ES8', 'ES6', 'EC6', 'ET7', 'ET5', 'P7', 'P5', 'G9', 'G6', 'X9', '001', '007', '009', 'X', '11', '12', 'S7', 'SL03', 'C11', 'C01', 'T03', 'S', 'GT', 'F7', 'R7', 'LS6', 'LS7', 'L7', 'L6', '试驾', '评测', '测评', '对比', '横评', '拆解', '碰撞', '安全', '续航', '充电', '换电', '超充', '家充', '桩', '电池', '电机', '电控', '三电', '底盘', '悬架', '悬挂', '操控', '舒适', 'NVH', '隔音', '静谧', '空间', '内饰', '外观', '设计', '造型', '风阻', '轻量化', '碳纤维', '铝合金', '高强度钢', '热成型钢', '安全气囊', '气帘', 'AEB', '自动刹车', '自适应巡航', 'ACC', '车道保持', 'LKA', '变道辅助', '盲区监测', '全景影像', '倒车影像', '雷达', '激光雷达', '毫米波雷达', '超声波雷达', '摄像头', '视觉', '算法', '芯片', '算力', '座舱', '车机', '大屏', '语音', '导航', '辅助驾驶', '自动驾驶', '智驾', 'NOA', 'NGP', 'NCA', 'FSD', '城市领航', '高速领航', '记忆泊车', '自动泊车', '代客泊车', '召唤', '遥控', 'OTA', '升级', '保养', '维修', '质保', '三包', '召回', '缺陷', '故障', '异响', '漏油', '漏水', '生锈', '断轴', '自燃', '碰撞', '事故', '车祸', '追尾', '剐蹭', '违章', '罚单', '扣分', '年检', '年检', '环保', '排放', '油耗', '电耗', '续航', '里程', '保值率', '二手车', '置换', '补贴', '购置税', '车船税', '保险', '交强险', '商业险', '三者', '车损', '盗抢', '玻璃', '划痕', '涉水', '自燃险', '不计免赔', '座位险', '驾乘险', '延保', '金融', '贷款', '按揭', '首付', '月供', '零息', '低息', '贴息', '全款', '裸车', '落地', '指导价', '成交价', '优惠', '折扣', '让利', '补贴', '置换', '增购', '团购', '秒杀', '限量', '抢购', '排队', '等车', '交付', '提车', '上牌', '临牌', '绿牌', '蓝牌', '黄牌', '京牌', '沪牌', '粤B', '摇号', '竞价', '拍卖', '限行', '限购', '限牌', '单双号', '尾号', '高峰', '拥堵', '停车费', '高速费', '过路费', '加油', '充电', '换电', '续航焦虑', '里程焦虑', '二手车', '准新车', '事故车', '泡水车', '火烧车', '调表车', '抵押车', '查封车', '营运车', '网约车', '顺风车', '租车', '共享汽车', '分时租赁', '日租', '月租', '年租', '自驾', '自驾游', '越野', '穿越', '改装', '贴膜', '车衣', '改色', '包围', '尾翼', '排气', '进气', '刷程序', '一阶', '二阶', '三阶', 'ECU', 'TCU', '动力', '马力', '扭矩', '零百', '加速', '极速', '圈速', '赛道', '漂移', '越野', '涉水', '爬坡', '脱困', '四驱', '两驱', '前驱', '后驱', '全时四驱', '分时四驱', '适时四驱', '差速锁', '蠕行', '坦克掉头', '空气悬架', '电磁悬架', 'CDC', '魔毯', '后轮转向', '线控转向', '线控刹车', '电吸门', '电动门', '鸥翼门', '剪刀门', '对开门', '隐藏门把手', '无框车门', '全景天窗', '天幕', 'HUD', '抬头显示', '流媒体后视镜', '电子后视镜', '虚拟后视镜', '氛围灯', '香氛', '音响', '喇叭', '功放', '隔音', '降噪', '主动降噪', '座椅', '通风', '加热', '按摩', '零重力', '女王副驾', '后排娱乐', '冰箱', '彩电', '大沙发', '露营', '外放电', 'V2L', 'V2V', 'V2G', '拖挂', '牵引', '资质'], category: '汽车', color: '#0984e3' },
+            { keywords: ['美食', '吃', '餐厅', '火锅', '烧烤', '奶茶', '咖啡', '蛋糕', '甜品', '小吃', '零食', '菜谱', '做饭', '厨艺', '探店', '外卖', '食品安全', '网红店', '早餐', '午餐', '晚餐', '夜宵', '下午茶', '自助餐', '日料', '韩餐', '西餐', '中餐', '川菜', '粤菜', '湘菜', '鲁菜', '苏菜', '浙菜', '闽菜', '徽菜', '东北菜', '新疆菜', '云南菜', '贵州菜', '泰国菜', '越南菜', '印度菜', '意大利菜', '法国菜', '墨西哥菜', '汉堡', '披萨', '寿司', '拉面', '烤肉', '烤鱼', '烤鸭', '烤鸡', '炸鸡', '牛排', '羊排', '猪排', '海鲜', '刺身', '生蚝', '龙虾', '螃蟹', '虾', '鱼', '贝类', '螺蛳粉', '酸辣粉', '麻辣烫', '冒菜', '串串', '钵钵鸡', '冷锅鱼', '酸菜鱼', '水煮鱼', '水煮肉', '毛血旺', '火锅', '底料', '蘸料', '油碟', '干碟', '麻酱', '香菜', '葱花', '蒜泥', '小米辣', '折耳根', '臭豆腐', '榴莲', '螺蛳', '肥肠', '脑花', '鸭血', '黄喉', '毛肚', '鹅肠', '腰花', '郡肝', '牛蛙', '兔头', '鸭脖', '鸡爪', '鸡翅', '鸡腿', '鸭腿', '猪蹄', '猪耳', '牛肉干', '猪肉脯', '辣条', '薯片', '饼干', '巧克力', '糖果', '果冻', '布丁', '慕斯', '提拉米苏', '马卡龙', '舒芙蕾', '松饼', '华夫饼', '可颂', '贝果', '吐司', '欧包', '法棍', '馒头', '包子', '饺子', '馄饨', '汤圆', '粽子', '月饼', '年糕', '青团', '驴打滚', '麻花', '油条', '豆浆', '豆腐脑', '煎饼', '手抓饼', '鸡蛋灌饼', '肉夹馍', '凉皮', '凉面', '凉粉', '冰粉', '清补凉', '四果汤', '烧仙草', '芋圆', '珍珠', '椰果', '布丁', '奶盖', '芝士', '抹茶', '可可', '焦糖', '香草', '草莓', '芒果', '葡萄', '西瓜', '哈密瓜', '水蜜桃', '樱桃', '车厘子', '蓝莓', '树莓', '黑莓', '榴莲', '山竹', '荔枝', '龙眼', '菠萝', '芒果', '木瓜', '百香果', '柠檬', '橙子', '柚子', '橘子', '金桔', '苹果', '梨', '桃', '李子', '杏', '枣', '柿子', '石榴', '火龙果', '猕猴桃', '牛油果', '椰子', '甘蔗', '雪莲果', '人参果', '青梅', '杨梅', '枇杷', '桑葚', '无花果', '菠萝蜜', '榴莲蜜', '释迦', '莲雾', '芭乐', '芒果', '百香果', '酸角', '余甘子', '橄榄', '油柑', '黄皮', '龙眼', '荔枝', '红毛丹', '山竹', '榴莲', '芒果', '菠萝', '木瓜', '香蕉', '芭蕉', '小米蕉', '皇帝蕉', '粉蕉', '大蕉', '西贡蕉', '牛角蕉', '佳丽蕉', '金手指', '红香蕉', '南洋红香蕉', '芝麻蕉', '仙人蕉', '李林蕉', '玫瑰蕉', '皇帝蕉', '小米蕉', '粉蕉', '大蕉', '西贡蕉', '牛角蕉', '佳丽蕉', '金手指', '红香蕉', '南洋红香蕉', '芝麻蕉', '仙人蕉', '李林蕉', '玫瑰蕉'], category: '美食', color: '#fab1a0' },
+            { keywords: ['时尚', '穿搭', '衣服', '鞋子', '包包', '化妆品', '护肤品', '口红', '香水', '品牌', 'LV', '香奈儿', '爱马仕', ' Gucci', 'Prada', '走秀', '时装周', '模特', '潮流', '街拍', 'OOTD', 'vlog', '美妆', '护肤', '彩妆', '底妆', '眼妆', '唇妆', '腮红', '高光', '修容', '遮瑕', '定妆', '卸妆', '洁面', '爽肤水', '精华', '乳液', '面霜', '眼霜', '面膜', '防晒', '隔离', '粉底', '气垫', 'BB霜', 'CC霜', '散粉', '粉饼', '眉笔', '眉粉', '眼线', '睫毛膏', '眼影', '睫毛夹', '双眼皮贴', '假睫毛', '美瞳', '隐形眼镜', '指甲油', '美甲', '美发', '染发', '烫发', '护发', '发型', '短发', '长发', '卷发', '直发', '刘海', '编发', '盘发', '丸子头', '马尾', '脏辫', '接发', '假发', '帽子', '围巾', '手套', '墨镜', '眼镜', '项链', '耳环', '手链', '手镯', '戒指', '胸针', '发饰', '腰带', '丝巾', '领带', '领结', '手表', '包包', '手提包', '单肩包', '斜挎包', '双肩包', '钱包', '卡包', '手拿包', '腋下包', '腰包', '胸包', '帆布包', '托特包', '水桶包', '马鞍包', '剑桥包', '邮差包', '贝壳包', '戴妃包', '铂金包', '凯莉包', '菜篮子', '花园包', '琳迪包', '吉普赛包', '伊芙琳', '保龄球包', '枕头包', '云朵包', '沙漏包', '机车包', 'city', 'neverfull', 'speedy', 'alma', 'noe', 'keepall', 'discovery', 'apollo', 'montsouris', 'palm springs', 'graceful', ' delightful', 'totally', 'artsy', 'odeon', 'on the go', 'coussin', 'papillon', 'ellipse', 'sac plat', 'cite', 'loop', 'pochette', 'felicie', 'favorite', 'eva', 'clutch', 'minaudiere', 'box', 'vanity', 'trunk', 'suitcase', 'luggage', 'backpack', 'duffle', 'weekender', 'tote', 'shopper', 'hobo', 'satchel', 'messenger', 'saddle', 'bucket', 'drawstring', 'frame', 'clasp', 'kiss lock', 'turn lock', 'push lock', 'flap', 'zip', 'magnetic', 'buckle', 'strap', 'chain', 'leather', 'canvas', 'nylon', 'suede', 'velvet', 'satin', 'silk', 'cotton', 'linen', 'denim', 'corduroy', 'tweed', 'boucle', 'knit', 'wool', 'cashmere', 'mohair', 'angora', 'alpaca', 'fur', 'faux fur', 'shearling', 'leather', 'patent leather', 'saffiano', 'pebbled', 'grained', 'smooth', 'box calf', 'togo', 'clemence', 'epsom', 'swift', 'evercolor', 'tadelakt', 'barenia', 'chamonix', 'evergrain', 'fjord', 'negonda', 'country', 'ardenne', 'chevre', 'lizard', 'ostrich', 'crocodile', 'alligator', 'python', 'snake', 'stingray', 'shark', 'elephant', 'hippo', 'kangaroo', 'deer', 'elk', 'moose', 'caribou', 'reindeer', 'seal', 'walrus', 'whale', 'dolphin', 'shark', 'ray', 'skate', 'sturgeon', 'caviar', 'pearl', 'mother of pearl', 'abalone', 'shell', 'coral', 'amber', 'jet', 'ivory', 'bone', 'horn', 'hoof', 'antler', 'feather', 'quill', 'down', 'synthetic', 'vegan', 'recycled', 'upcycled', 'sustainable', 'eco-friendly', 'organic', 'fair trade', 'artisanal', 'handmade', 'bespoke', 'custom', 'made to measure', 'ready to wear', 'RTW', 'couture', 'haute couture', 'demi-couture', 'diffusion', 'bridge', 'contemporary', 'designer', 'luxury', 'premium', 'mass market', 'fast fashion', 'ultra fast fashion', 'shein', 'temu', 'zaful', 'romwe', 'boohoo', 'prettylittlething', 'missguided', 'nasty gal', 'asos', 'boohooman', 'collusion', 'weekday', 'monki', 'arket', 'cos', '& other stories', 'filippa k', 'acne studios', 'toteme', 'jil sander', 'the row', 'phoebe philo', 'old celine', 'new celine', 'hedi slimane', 'saint laurent', 'anthony vaccarello', 'demna gvasalia', 'balenciaga', 'vetements', 'maison margiela', 'john galliano', 'martin margiela', 'comme des garcons', 'rei kawakubo', 'junya watanabe', 'tao', 'noir kei ninomiya', 'ganryu', 'junya watanabe', 'sacai', 'chitose abe', 'sacai nike', 'kolor', 'junichi abe', 'kolor beacon', 'kolor advanced', 'sacai', 'sacai nike', 'sacai blazer', 'sacai ldwaffle', 'sacai vaporwaffle', 'sacai zoom cortez', 'sacai fragment', 'sacai clot', 'sacai kaws', 'sacai jean paul gaultier', 'sacai dior', 'sacai louis vuitton', 'sacai hermes', 'sacai cartier', 'sacai tiffany', 'sacai bulgari', 'sacai van cleef', 'sacai chopard', 'sacai graff', 'sacai harry winston', 'sacai de beers', 'sacai mikimoto', 'sacai tasaki', 'sacai chanel', 'sacai dior', 'sacai gucci', 'sacai prada', 'sacai miu miu', 'sacai bottega veneta', 'sacai celine', 'sacai loewe', 'sacai givenchy', 'sacai balenciaga', 'sacai saint laurent', 'sacai valentino', 'sacai alexander mcqueen', 'sacai burberry', 'sacai fendi', 'sacai versace', 'sacai dolce gabbana', 'sacai armani', 'sacai max mara', 'sacai ferragamo', 'sacai tods', 'sacai bally', 'sacai coach', 'sacai michael kors', 'sacai tory burch', 'sacai kate spade', 'sacai marc jacobs', 'sacai stella mccartney', 'sacai alexander wang', 'sacai proenza schouler', 'sacai 3.1 phillip lim', 'sacai derek lam', 'sacai jason wu', 'sacai prabal gurung', 'sacai thakoon', 'sacai peter som', 'sacai zac posen', 'sacai christian siriano', 'sacai naeem khan', 'sacai monique lhuillier', 'sacai marchesa', 'sacai reem acra', 'sacai elie saab', 'sacai zuhair murad', 'sacai georges hobeika', 'sacai rami al ali', 'sacai ashi studio', 'sacai ralph russo', 'sacai valentino', 'sacai giambattista valli', 'sacai chanel', 'sacai dior', 'sacai gucci', 'sacai prada', 'sacai miu miu', 'sacai bottega veneta', 'sacai celine', 'sacai loewe', 'sacai givenchy', 'sacai balenciaga', 'sacai saint laurent', 'sacai valentino', 'sacai alexander mcqueen', 'sacai burberry', 'sacai fendi', 'sacai versace', 'sacai dolce gabbana', 'sacai armani', 'sacai max mara', 'sacai ferragamo', 'sacai tods', 'sacai bally', 'sacai coach', 'sacai michael kors', 'sacai tory burch', 'sacai kate spade', 'sacai marc jacobs', 'sacai stella mccartney', 'sacai alexander wang', 'sacai proenza schouler', 'sacai 3.1 phillip lim', 'sacai derek lam', 'sacai jason wu', 'sacai prabal gurung', 'sacai thakoon', 'sacai peter som', 'sacai zac posen', 'sacai christian siriano', 'sacai naeem khan', 'sacai monique lhuillier', 'sacai marchesa', 'sacai reem acra', 'sacai elie saab', 'sacai zuhair murad', 'sacai georges hobeika', 'sacai rami al ali', 'sacai ashi studio', 'sacai ralph russo', 'sacai valentino', 'sacai giambattista valli'], category: '时尚', color: '#ff7675' },
+            { keywords: ['旅行', '旅游', '景点', '酒店', '机票', '高铁', '自驾', '攻略', '打卡', '网红地', '景区', '门票', '旅行社', '导游', '护照', '签证', '出境', '入境'], category: '生活', color: '#00cec9' },
+            { keywords: ['健康', '养生', '减肥', '健身', '运动', '瑜伽', '跑步', '睡眠', '饮食', '营养', '体检', '医院', '医生', '药品', '中医', '西医', '疫苗', '免疫力'], category: '生活', color: '#00cec9' },
+            { keywords: ['教育', '学校', '大学', '高考', '考研', '留学', '考试', '成绩', '录取', '专业', '就业', '老师', '学生', '家长', '作业', '补课', '培训', '学区房'], category: '生活', color: '#00cec9' },
+            { keywords: ['职场', '工作', '公司', '老板', '员工', '工资', '薪资', '加班', '辞职', '面试', '招聘', '求职', '简历', '跳槽', '裁员', '失业', '创业', '副业'], category: '生活', color: '#00cec9' },
+            { keywords: ['房产', '房价', '楼市', '买房', '卖房', '租房', '房贷', '首付', '楼盘', '开发商', '中介', '公积金', '限购', '落户', '拆迁', '装修', '物业'], category: '生活', color: '#00cec9' },
+            { keywords: ['情感', '爱情', '恋爱', '分手', '复合', '婚姻', '离婚', '出轨', '小三', '相亲', '单身', '脱单', '约会', '表白', '暗恋', '前任', '现任', '夫妻'], category: '生活', color: '#00cec9' },
+            { keywords: ['搞笑', '段子', '笑话', '幽默', '沙雕', '吐槽', '恶搞', '鬼畜', '表情包', '神回复', '神评论', '翻车', '尴尬', '社死'], category: '生活', color: '#00cec9' },
+            { keywords: ['宠物', '猫', '狗', '猫咪', '狗狗', '萌宠', '铲屎官', '流浪', '领养', '绝育', '疫苗', '宠物医院', '狗粮', '猫粮'], category: '生活', color: '#00cec9' },
+            { keywords: ['动漫', '动画', '漫画', '二次元', 'cosplay', '手办', '番剧', '新番', '完结', '连载', '声优', '配音', '漫展', '同人', '周边'], category: '娱乐', color: '#e84393' },
+            { keywords: ['音乐', '歌曲', '歌手', '专辑', '演唱会', '音乐节', 'MV', '翻唱', '原创', '榜单', '排行榜', '热歌', '新歌', '经典', '怀旧'], category: '娱乐', color: '#e84393' }
+        ];
+
         // 平台配置
         const platforms = {
             douyin: {
                 name: '抖音',
                 emoji: '📱',
+                apis: [
+                    'https://v2.xxapi.cn/api/douyinhot'
+                ],
                 api: 'https://v2.xxapi.cn/api/douyinhot',
                 searchUrl: 'https://www.douyin.com/search/'
             },
             weibo: {
                 name: '微博',
                 emoji: '🔥',
+                // 多API聚合配置 - 按优先级排序
+                apis: [
+                    'https://v2.xxapi.cn/api/weibohot',
+                    // 备用API（当主API数据不新鲜时尝试）
+                    'https://api.oioweb.cn/api/social/weibo-hot-search'
+                ],
                 api: 'https://v2.xxapi.cn/api/weibohot',
                 searchUrl: 'https://s.weibo.com/weibo?q='
             },
             bilibili: {
                 name: 'B站',
                 emoji: '📺',
+                apis: [
+                    'https://v2.xxapi.cn/api/bilibilihot'
+                ],
                 api: 'https://v2.xxapi.cn/api/bilibilihot',
                 searchUrl: 'https://search.bilibili.com/all?keyword='
             },
             baidu: {
                 name: '百度',
                 emoji: '🔍',
+                apis: [
+                    'https://v2.xxapi.cn/api/baiduhot'
+                ],
                 api: 'https://v2.xxapi.cn/api/baiduhot',
                 searchUrl: 'https://www.baidu.com/s?wd='
-            }
+            },
+
         };
 
         let hotData = {
             douyin: [],
+            douyin_raw: [],
             weibo: [],
+            weibo_raw: [],
             bilibili: [],
-            baidu: []
+            bilibili_raw: [],
+            baidu: [],
+            baidu_raw: []
         };
         let currentPlatform = 'douyin';
+        let currentCategory = 'all';
         let lastUpdateTime = null;
+        
+        // 数据新鲜度管理
+        const dataFreshness = {
+            // 存储每个平台的数据指纹（用于检测变化）
+            fingerprints: {},
+            // 存储每个平台的缓存数据
+            cache: {},
+            // 获取数据指纹（基于前5条热搜标题）
+            getFingerprint(platform, data) {
+                if (!data || data.length === 0) return null;
+                return data.slice(0, 5).map(item => item.word).join('|');
+            },
+            // 检测数据是否变化
+            hasChanged(platform, newData) {
+                const newFingerprint = this.getFingerprint(platform, newData);
+                const oldFingerprint = this.fingerprints[platform];
+                return newFingerprint !== oldFingerprint;
+            },
+            // 更新指纹
+            updateFingerprint(platform, data) {
+                this.fingerprints[platform] = this.getFingerprint(platform, data);
+            },
+            // 保存缓存
+            saveCache(platform, data) {
+                this.cache[platform] = {
+                    data: JSON.parse(JSON.stringify(data)),
+                    timestamp: Date.now()
+                };
+            },
+            // 获取缓存
+            getCache(platform) {
+                return this.cache[platform] || null;
+            },
+            // 清除缓存
+            clearCache(platform) {
+                delete this.cache[platform];
+                delete this.fingerprints[platform];
+            }
+        };
 
         // 初始化
         async function init() {
             await loadAllData();
+            renderCategoryButtons(currentPlatform);
             renderPlatform(currentPlatform);
         }
 
         // 加载所有平台数据
         async function loadAllData() {
-            const promises = Object.keys(platforms).map(platform => fetchPlatformData(platform));
+            const platforms_list = Object.keys(platforms);
+            const results = {};
+            
+            // 并行获取所有平台数据
+            const promises = platforms_list.map(async (platform) => {
+                const result = await fetchPlatformData(platform);
+                results[platform] = result;
+            });
+            
             await Promise.all(promises);
-            updateFooterTime();
+            
+            // 统计结果
+            const stats = {
+                fresh: 0,
+                stale: 0,
+                cached: 0,
+                failed: 0
+            };
+            
+            Object.entries(results).forEach(([platform, result]) => {
+                if (!result.success) {
+                    stats.failed++;
+                } else if (result.source === 'cache') {
+                    stats.cached++;
+                } else if (result.fresh) {
+                    stats.fresh++;
+                } else {
+                    stats.stale++;
+                }
+            });
+            
+            console.log('[数据新鲜度统计]', stats);
+            updateFooterTime(stats);
         }
 
-        // 获取单个平台数据
+        // 获取单个平台数据（智能多源策略）
         async function fetchPlatformData(platform) {
+            const config = platforms[platform];
+            
             try {
-                const config = platforms[platform];
-                const response = await fetch(config.api + '?t=' + Date.now());
-                const result = await response.json();
+                // 策略1：先尝试主API
+                console.log(`[${platform}] 尝试主API...`);
+                const primaryData = await fetchSingleAPI(platform, config.apis[0]);
                 
-                if (result.code === 200 && result.data) {
-                    hotData[platform] = parsePlatformData(platform, result.data);
+                if (primaryData && primaryData.length > 0) {
+                    const parsedData = parsePlatformData(platform, primaryData);
+                    
+                    // 检测数据是否变化
+                    if (dataFreshness.hasChanged(platform, parsedData)) {
+                        console.log(`[${platform}] 主API返回新数据 ✓`);
+                        dataFreshness.updateFingerprint(platform, parsedData);
+                        dataFreshness.saveCache(platform, parsedData);
+                        hotData[platform] = parsedData;
+                        return { success: true, source: 'primary', fresh: true };
+                    } else {
+                        console.log(`[${platform}] 主API数据未变化，尝试备用API...`);
+                        
+                        // 策略2：尝试备用API
+                        if (config.apis.length > 1) {
+                            for (let i = 1; i < config.apis.length; i++) {
+                                try {
+                                    console.log(`[${platform}] 尝试备用API ${i}...`);
+                                    const backupData = await fetchSingleAPI(platform, config.apis[i]);
+                                    
+                                    if (backupData && backupData.length > 0) {
+                                        const parsedBackup = parsePlatformData(platform, backupData);
+                                        
+                                        if (dataFreshness.hasChanged(platform, parsedBackup)) {
+                                            console.log(`[${platform}] 备用API ${i} 返回新数据 ✓`);
+                                            dataFreshness.updateFingerprint(platform, parsedBackup);
+                                            dataFreshness.saveCache(platform, parsedBackup);
+                                            hotData[platform] = parsedBackup;
+                                            return { success: true, source: `backup-${i}`, fresh: true };
+                                        }
+                                    }
+                                } catch (e) {
+                                    console.warn(`[${platform}] 备用API ${i} 失败:`, e.message);
+                                }
+                            }
+                        }
+                        
+                        // 策略3：所有API都返回旧数据，使用缓存但标记为陈旧
+                        console.log(`[${platform}] 所有API数据均未变化，使用缓存`);
+                        hotData[platform] = parsedData;
+                        return { success: true, source: 'primary', fresh: false };
+                    }
                 } else {
-                    hotData[platform] = [];
+                    throw new Error('主API返回空数据');
                 }
             } catch (error) {
-                console.error(`获取${platforms[platform].name}数据失败:`, error);
+                console.error(`[${platform}] 主API失败:`, error.message);
+                
+                // 策略4：主API失败，尝试备用API
+                if (config.apis.length > 1) {
+                    for (let i = 1; i < config.apis.length; i++) {
+                        try {
+                            console.log(`[${platform}] 主API失败，尝试备用API ${i}...`);
+                            const backupData = await fetchSingleAPI(platform, config.apis[i]);
+                            
+                            if (backupData && backupData.length > 0) {
+                                const parsedBackup = parsePlatformData(platform, backupData);
+                                dataFreshness.updateFingerprint(platform, parsedBackup);
+                                dataFreshness.saveCache(platform, parsedBackup);
+                                hotData[platform] = parsedBackup;
+                                return { success: true, source: `backup-${i}`, fresh: true };
+                            }
+                        } catch (e) {
+                            console.warn(`[${platform}] 备用API ${i} 失败:`, e.message);
+                        }
+                    }
+                }
+                
+                // 策略5：所有API都失败，使用本地缓存
+                const cache = dataFreshness.getCache(platform);
+                if (cache && cache.data) {
+                    console.log(`[${platform}] 所有API失败，使用本地缓存`);
+                    hotData[platform] = cache.data;
+                    return { success: true, source: 'cache', fresh: false };
+                }
+                
+                // 策略6：彻底失败
                 hotData[platform] = [];
+                return { success: false, source: 'none', fresh: false };
             }
+        }
+        
+        // 获取单个API的数据（带超时和重试）
+        async function fetchSingleAPI(platform, apiUrl, timeout = 8000) {
+            try {
+                // 使用随机数+时间戳双重防缓存
+                const cacheBuster = `_t=${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                const separator = apiUrl.includes('?') ? '&' : '?';
+                const url = apiUrl + separator + cacheBuster;
+                
+                // 创建AbortController用于超时控制
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), timeout);
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                    },
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const result = await response.json();
+                
+                // 统一处理不同API的返回格式
+                // 格式1: { code: 200, data: [...] }
+                if (result.code === 200 && result.data) {
+                    return Array.isArray(result.data) ? result.data : [result.data];
+                }
+                // 格式2: 直接返回数组
+                else if (Array.isArray(result)) {
+                    return result;
+                }
+                // 格式3: { data: [...] }
+                else if (result.data && Array.isArray(result.data)) {
+                    return result.data;
+                }
+                // 格式4: { result: [...] }
+                else if (result.result && Array.isArray(result.result)) {
+                    return result.result;
+                }
+                // 格式5: { list: [...] }
+                else if (result.list && Array.isArray(result.list)) {
+                    return result.list;
+                }
+                
+                console.warn(`[${platform}] 无法解析API返回格式:`, result);
+                return [];
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    console.warn(`[${platform}] API请求超时: ${apiUrl}`);
+                } else {
+                    console.warn(`[${platform}] API请求失败: ${apiUrl}`, error.message);
+                }
+                return [];
+            }
+        }
+        
+        // 合并多API数据并去重
+        function mergeAndDeduplicate(platform, rawDataArray) {
+            const seen = new Set();
+            const merged = [];
+            
+            rawDataArray.forEach(item => {
+                // 提取唯一标识（标题）
+                let title = '';
+                if (typeof item === 'string') {
+                    title = item;
+                } else if (typeof item === 'object' && item !== null) {
+                    title = item.title || item.word || item.name || item.topic || item.query || item.keyword || '';
+                }
+                
+                // 标准化标题用于去重（去除空格、转为小写）
+                const normalizedTitle = title.toString().toLowerCase().replace(/\s+/g, '');
+                
+                if (normalizedTitle && !seen.has(normalizedTitle)) {
+                    seen.add(normalizedTitle);
+                    merged.push(item);
+                }
+            });
+            
+            return merged;
         }
 
         // 解析不同平台的数据格式
         function parsePlatformData(platform, data) {
             let list = [];
             
-            if (platform === 'douyin') {
-                // 抖音数据格式
-                if (Array.isArray(data)) {
-                    list = data.slice(0, 30).map((item, index) => ({
-                        word: item.word || item,
-                        hotValue: item.hot_value || 0,
-                        position: item.position || index + 1
-                    }));
-                } else if (data.list && Array.isArray(data.list)) {
-                    list = data.list.slice(0, 30).map((item, index) => ({
-                        word: item.word || item,
-                        hotValue: item.hot_value || 0,
-                        position: item.position || index + 1
-                    }));
+            // 统一处理各种可能的数据结构
+            let rawList = [];
+            
+            if (Array.isArray(data)) {
+                rawList = data;
+            } else if (data && typeof data === 'object') {
+                // 尝试从对象中提取数组
+                const possibleArrays = ['list', 'data', 'items', 'result', 'hot_list', 'trends'];
+                for (const key of possibleArrays) {
+                    if (Array.isArray(data[key])) {
+                        rawList = data[key];
+                        break;
+                    }
                 }
-            } else if (platform === 'weibo') {
-                // 微博数据格式
-                if (Array.isArray(data)) {
-                    list = data.slice(0, 30).map((item, index) => ({
-                        word: item.title || item.word,
-                        hotValue: parseHotValue(item.hot),
-                        position: item.index || index + 1
-                    }));
-                }
-            } else if (platform === 'bilibili') {
-                // B站数据格式
-                if (Array.isArray(data)) {
-                    list = data.slice(0, 30).map((item, index) => ({
-                        word: item.word || item.title || item,
-                        hotValue: 0,
-                        position: index + 1
-                    }));
-                }
-            } else if (platform === 'baidu') {
-                // 百度数据格式
-                if (Array.isArray(data)) {
-                    list = data.slice(0, 30).map((item, index) => ({
-                        word: item.word || item.title,
-                        hotValue: item.hotValue || item.hot || 0,
-                        position: index + 1
-                    }));
+                // 如果还是没找到，尝试对象的第一个数组属性
+                if (rawList.length === 0) {
+                    for (const key in data) {
+                        if (Array.isArray(data[key]) && data[key].length > 0) {
+                            rawList = data[key];
+                            break;
+                        }
+                    }
                 }
             }
             
+            if (rawList.length === 0) {
+                console.warn(`${platform} 平台未获取到数据`, data);
+                return [];
+            }
+            
+            // 解析所有数据
+            let fullList = rawList.map((item, index) => {
+                let word = '';
+                let hotValue = 0;
+                let label = null;
+                
+                if (typeof item === 'string') {
+                    word = item;
+                } else if (typeof item === 'object' && item !== null) {
+                    // 尝试各种可能的字段名
+                    word = item.word || item.title || item.name || item.topic || item.query || item.keyword || item.content || item.text || JSON.stringify(item);
+                    
+                    // 尝试各种可能的热度字段
+                    const hotFields = ['hot_value', 'hotValue', 'hot', 'heat', 'score', 'count', 'num', 'value', 'index', 'rank'];
+                    for (const field of hotFields) {
+                        if (item[field] !== undefined && item[field] !== null) {
+                            const val = parseHotValue(item[field]);
+                            if (val > hotValue) hotValue = val;
+                        }
+                    }
+                    
+                    // 获取分类标签（抖音）
+                    label = item.label !== undefined ? item.label : null;
+                }
+                
+                // 获取分类信息
+                const categoryInfo = getCategoryInfo(platform, word, label);
+                
+                return {
+                    word: word,
+                    hotValue: hotValue,
+                    position: index + 1,
+                    category: categoryInfo.name,
+                    categoryColor: categoryInfo.color,
+                    rawCategory: categoryInfo.rawName, // API原始分类名称
+                    label: label
+                };
+            });
+            
+            // 先按热度降序排序
+            fullList.sort((a, b) => b.hotValue - a.hotValue);
+            
+            // 重新设置排名
+            fullList.forEach((item, index) => {
+                item.position = index + 1;
+            });
+            
+            // 保存完整数据
+            hotData[platform + '_raw'] = [...fullList];
+            
+            // 返回全部数据（不限制条数）
+            list = fullList;
+            
             return list;
+        }
+        
+        // 获取分类信息 - 返回API原始分类
+        function getCategoryInfo(platform, word, label) {
+            // 抖音用 label 分类 - 返回原始label值作为分类名
+            if (platform === 'douyin' && label !== null) {
+                // 使用label值作为分类名称（如"label_0", "label_3"等）
+                // 或者如果有映射关系，使用映射后的名称
+                const labelNames = {
+                    0: '推荐',
+                    1: '娱乐', 
+                    2: '社会',
+                    3: '影视',
+                    4: '体育',
+                    5: '汽车',
+                    6: '科技',
+                    7: '财经',
+                    8: '游戏',
+                    9: '话题',
+                    10: '音乐',
+                    16: '生活',
+                    17: '明星',
+                    18: '美食',
+                    19: '时尚',
+                    20: '美妆',
+                    21: '旅行',
+                    22: '育儿',
+                    23: '家居',
+                    24: '健康',
+                    25: '文化',
+                    26: '历史',
+                    27: '军事',
+                    28: '国际',
+                    29: '国内',
+                    30: '综艺',
+                    31: '动漫',
+                    32: '宠物',
+                    33: '搞笑',
+                    34: '情感',
+                    35: '职场',
+                    36: '教育',
+                    37: '房产',
+                    38: '政务',
+                    39: '法律',
+                    40: '科普',
+                    41: '三农',
+                    42: '公益',
+                    43: '校园',
+                    44: '本地',
+                    45: '挑战',
+                    46: '直播',
+                    47: '电商',
+                    48: '招商',
+                    49: '家居',
+                    50: '装修'
+                };
+                const rawName = labelNames[label] || `分类${label}`;
+                return { 
+                    name: rawName, 
+                    rawName: rawName,
+                    color: getCategoryColor(label)
+                };
+            }
+            
+            // 微博/B站/百度 - API没有返回分类，根据标题关键词自动分类
+            const autoCategory = autoClassifyByKeywords(word);
+            return { name: autoCategory.name, rawName: autoCategory.name, color: autoCategory.color };
+        }
+        
+        // 根据label获取颜色
+        function getCategoryColor(label) {
+            const colors = [
+                '#e74c3c', '#e84393', '#fd79a8', '#00b894', '#0984e3',
+                '#6c5ce7', '#f39c12', '#a29bfe', '#fdcb6e', '#e17055',
+                '#00cec9', '#74b9ff', '#fab1a0', '#ff7675', '#d63031',
+                '#55efc4', '#81ecec', '#636e72', '#b2bec3', '#dfe6e9'
+            ];
+            return colors[label % colors.length] || '#667eea';
+        }
+        
+        // 根据关键词自动分类（用于微博/B站/百度等没有分类字段的API）
+        // 优化版：更精准的分类规则和优先级
+        function autoClassifyByKeywords(title) {
+            // 分类规则 - 按优先级排序（越靠前优先级越高）
+            const rules = [
+                // 1. 娱乐（高优先级，但避免过度匹配）
+                { 
+                    keywords: ['明星','演员','歌手','艺人','偶像','粉丝','演唱会','音乐节','见面会','应援','打榜','路透','生图','精修','素颜','造型','礼服','红毯','颁奖','影帝','影后','视帝','视后','顶流','塌房','退圈','封杀','雪藏','复出','新歌','专辑','单曲','MV','男团','女团','选秀','练习生','番位','撕番','营业','杀青','定档','首映','票房','追剧','剧透','剧组','导演','片酬','代言','官宣','实锤','辟谣','声明','道歉','八卦','绯闻','恋情','分手','复合','结婚','离婚','出轨','小三','爆料','瓜'], 
+                    name: '娱乐', 
+                    color: '#e84393',
+                    priority: 10
+                },
+                // 2. 影视动漫（从娱乐中细分）
+                { 
+                    keywords: ['电影','电视剧','网剧','综艺','真人秀','动漫','动画','漫画','二次元','番剧','新番','完结','连载','国漫','日漫','美漫','声优','配音','漫展','cosplay','手办','周边','宫崎骏','新海诚','漫威','DC','迪士尼','皮克斯'], 
+                    name: '影视', 
+                    color: '#fd79a8',
+                    priority: 9
+                },
+                // 3. 游戏电竞
+                { 
+                    keywords: ['游戏','电竞','王者荣耀','英雄联盟','LOL','吃鸡','和平精英','PUBG','原神','崩坏','星穹铁道','绝区零','鸣潮','黑神话','悟空','手游','网游','端游','Steam','Switch','PS5','Xbox','主机','主播','直播','战队','比赛','夺冠','皮肤','装备','梦幻西游','魔兽世界','DNF','穿越火线','CF','CSGO','CS2','守望先锋','炉石传说','云顶之弈','金铲铲','永劫无间','逆水寒','剑网','天涯明月刀','蛋仔派对','元梦之星','第五人格','阴阳师','明日方舟','版号','停服','赛季','排位','段位','外挂','封号','氪金','抽卡','保底'], 
+                    name: '游戏', 
+                    color: '#a29bfe',
+                    priority: 9
+                },
+                // 4. 体育
+                { 
+                    keywords: ['体育','足球','篮球','NBA','CBA','世界杯','奥运会','亚运会','全运会','冠军','比赛','决赛','半决赛','决赛','进球','得分','运动员','球星','教练','球队','联赛','锦标赛','金牌','银牌','铜牌','中超','英超','西甲','意甲','德甲','法甲','欧冠','亚冠','欧洲杯','美洲杯','亚洲杯','法网','温网','澳网','美网','乒乓球','羽毛球','网球','排球','游泳','田径','体操','跳水','射击','举重','拳击','格斗','UFC','F1','赛车','高尔夫','斯诺克','马拉松','滑雪','滑冰','短道速滑','花滑','转会','续约','退役','复出','MVP','绝杀','逆转','爆冷','平局','加时','点球','红牌','黄牌','伤病'], 
+                    name: '体育', 
+                    color: '#00b894',
+                    priority: 9
+                },
+                // 5. 科技数码（高优先级，避免和汽车、财经混淆）
+                { 
+                    keywords: ['科技','AI','人工智能','ChatGPT','Sora','OpenAI','大模型','AIGC','生成式AI','芯片','光刻机','半导体','台积电','高通','骁龙','天玑','华为','苹果','小米','OPPO','vivo','荣耀','一加','iPhone','安卓','iOS','鸿蒙','手机','发布会','新品','数码','评测','测评','5G','6G','互联网','元宇宙','区块链','比特币','以太坊','数字货币','VR','AR','MR','虚拟现实','增强现实','脑机接口','量子计算','云计算','大数据','物联网','自动驾驶','智能座舱','人形机器人','机器狗','四足机器人','无人机','航天','卫星','火箭','SpaceX','星舰','星链','火星','登月','嫦娥','神舟','天宫','空间站','北斗','天文','望远镜'], 
+                    name: '科技', 
+                    color: '#6c5ce7',
+                    priority: 8
+                },
+                // 6. 汽车（单独分类，避免和科技混淆）
+                { 
+                    keywords: ['汽车','电动车','新能源汽车','特斯拉','比亚迪','蔚来','小鹏','理想','问界','智界','享界','尊界','极氪','领克','小米汽车','SU7','奔驰','宝马','奥迪','丰田','本田','大众','新车','上市','降价','涨价','销量','交付','订单','产能','召回','事故','车祸','碰撞','试驾','评测','续航','充电','换电','超充','电池','电机','电控','三电','底盘','悬架','智驾','辅助驾驶','自动驾驶','NOA','NGP','FSD','OTA','保养','维修','质保','故障','二手车','置换','补贴','购置税','车贷','保险','上牌','摇号','限行','限购','车展','车展'], 
+                    name: '汽车', 
+                    color: '#0984e3',
+                    priority: 8
+                },
+                // 7. 财经金融
+                { 
+                    keywords: ['财经','股市','股票','A股','港股','美股','沪深','创业板','科创板','北交所','新三板','基金','理财','投资','收益','亏损','赚钱','亏钱','银行','保险','证券','期货','外汇','黄金','白银','原油','油价','大宗商品','比特币','加密货币','数字货币','人民币','美元','欧元','日元','汇率','利率','降息','加息','降准','央行','美联储','证监会','银保监会','上交所','深交所','IPO','上市','退市','停牌','复牌','涨停','跌停','牛市','熊市','震荡','回调','反弹','成交量','成交额','市值','估值','财报','年报','季报','分红','送股','配股','增发','减持','增持','回购','质押','解禁','借壳','重组','并购','收购','合并','分拆','破产','债务','违约','暴雷','踩雷','韭菜','割肉','抄底','逃顶','套牢','解套','满仓','空仓','加仓','减仓','调仓','换股','打新','中签','破发','破净','GDP','通胀','CPI','PPI','PMI','经济','房地产','楼市','房价'], 
+                    name: '财经', 
+                    color: '#f39c12',
+                    priority: 8
+                },
+                // 8. 社会民生
+                { 
+                    keywords: ['社会','民生','新闻','热点','事件','事故','灾难','地震','洪水','火灾','爆炸','坍塌','泥石流','台风','暴雨','干旱','高温','寒潮','暴雪','疫情','病毒','流感','疫苗','医院','医生','护士','患者','病人','死亡','去世','遇难','伤亡','受伤','救援','救助','警察','公安','消防','法院','检察院','判决','审判','犯罪','逮捕','拘留','判刑','监狱','通缉','通报','调查','处理','处罚','罚款','反腐','落马','违纪','违规','举报','曝光','舆论','辟谣','澄清','调解','仲裁','诉讼','维权','讨薪','拆迁','征地','补偿','安置','社保','医保','养老','公积金','就业','失业','招聘','求职','劳动','工伤','交通事故','酒驾','醉驾','逃逸'], 
+                    name: '社会', 
+                    color: '#e74c3c',
+                    priority: 7
+                },
+                // 9. 国际时政
+                { 
+                    keywords: ['国际','国外','海外','外交','外交部','领事','使馆','签证','护照','出入境','美国','特朗普','拜登','日本','韩国','朝鲜','英国','法国','德国','俄罗斯','普京','乌克兰','泽连斯基','以色列','巴勒斯坦','加沙','哈马斯','伊朗','沙特','阿联酋','土耳其','印度','莫迪','越南','泰国','新加坡','马来西亚','印尼','菲律宾','澳大利亚','加拿大','墨西哥','巴西','阿根廷','智利','秘鲁','古巴','委内瑞拉','埃及','南非','尼日利亚','肯尼亚','联合国','北约','欧盟','东盟','G7','G20','APEC','金砖','上合','一带一路','贸易战','关税','制裁','封锁','禁运','断交','建交','访华','访问','会晤','峰会','条约','协议','停火','和谈','撤军','军演','巡航','对峙','冲突','战争','空袭','轰炸','导弹','核武器'], 
+                    name: '国际', 
+                    color: '#74b9ff',
+                    priority: 7
+                },
+                // 10. 军事
+                { 
+                    keywords: ['军事','军队','部队','解放军','陆军','海军','空军','火箭军','战略支援部队','武警','预备役','征兵','服役','退役','军衔','将军','士兵','军官','武器','装备','枪械','坦克','装甲车','火炮','导弹','核弹','原子弹','氢弹','航母','驱逐舰','护卫舰','潜艇','舰载机','战斗机','轰炸机','预警机','直升机','无人机','卫星','雷达','电子战','网络战','太空战','演习','训练','阅兵','战备','防御','进攻','战略','战术','战役','战斗','边境','领土','领海','领空','主权','统一','台湾','台海','钓鱼岛','南海','东海','中印','中俄','中美','中日','中韩','中欧','中东','海湾','阿富汗','伊拉克','叙利亚','利比亚','也门','苏丹','索马里'], 
+                    name: '军事', 
+                    color: '#636e72',
+                    priority: 7
+                },
+                // 11. 教育
+                { 
+                    keywords: ['教育','学校','大学','高校','学院','中学','初中','高中','小学','幼儿园','高考','中考','考研','考博','留学','出国','雅思','托福','GRE','GMAT','SAT','ACT','考试','成绩','分数','排名','录取','志愿','专业','学科','学位','学士','硕士','博士','论文','答辩','毕业','就业','失业','老师','教师','教授','导师','学生','同学','家长','家长会','作业','考试','测验','补课','培训','辅导班','兴趣班','学区房','减负','双减','素质教育','应试教育','职业教育','在线教育','网课','慕课','公开课','学术','科研','课题','项目','基金','论文','期刊','SCI','EI','影响因子','引用'], 
+                    name: '教育', 
+                    color: '#81ecec',
+                    priority: 6
+                },
+                // 12. 健康医疗
+                { 
+                    keywords: ['健康','医疗','医学','医院','医生','专家','主任医师','副主任医师','主治医师','护士','护理','病人','患者','疾病','病症','症状','诊断','治疗','手术','住院','出院','复查','康复','药物','药品','西药','中药','处方药','非处方药','特效药','仿制药','疫苗','接种','免疫','体检','检查','化验','CT','MRI','X光','B超','心电图','血压','血糖','血脂','尿酸','肝功能','肾功能','肿瘤','癌症','癌症','糖尿病','高血压','心脏病','脑梗','中风','阿尔茨海默','帕金森','艾滋病','乙肝','结核','流感','新冠','感冒','发烧','咳嗽','疼痛','失眠','抑郁','焦虑','养生','保健','食疗','药膳','中医','西医','针灸','推拿','按摩','艾灸','拔罐','刮痧','瑜伽','健身','运动','减肥','瘦身','增肌','塑形','跑步','游泳','骑行','登山','徒步','马拉松','营养','膳食','维生素','蛋白质','碳水化合物','脂肪','矿物质','膳食纤维','益生菌','保健品','补品','燕窝','人参','鹿茸','阿胶','枸杞','红枣','桂圆','当归','黄芪','党参','白术','茯苓','甘草'], 
+                    name: '健康', 
+                    color: '#55efc4',
+                    priority: 6
+                },
+                // 13. 房产家居
+                { 
+                    keywords: ['房产','房地产','楼市','房价','买房','卖房','租房','二手房','新房','期房','现房','毛坯房','精装房','样板房','楼盘','小区','开发商','中介','经纪人','链家','贝壳','安居客','房天下','房贷','按揭','首付','月供','公积金贷款','商业贷款','组合贷','利率','限购','限贷','限售','落户','积分落户','人才引进','户口','户籍','居住证','房产证','不动产权证','过户','税费','契税','增值税','个税','印花税','装修','装饰','设计','施工','材料','家具','家电','软装','硬装','风格','现代','简约','北欧','中式','美式','日式','轻奢','极简','智能家居','全屋定制','橱柜','衣柜','沙发','床','床垫','窗帘','灯具','地板','瓷砖','壁纸','涂料','卫浴','厨房','阳台','花园','露台','地下室','阁楼','车位','车库','物业','物业费','业委会','居委会','社区','街道','邻里','噪音','漏水','裂缝','质量','维权'], 
+                    name: '房产', 
+                    color: '#a29bfe',
+                    priority: 6
+                },
+                // 14. 职场
+                { 
+                    keywords: ['职场','工作','职业','事业','上班','下班','加班','996','007','调休','请假','休假','年假','病假','事假','婚假','产假','陪产假','丧假','节假日','周末','公司','企业','单位','机构','组织','国企','央企','民企','外企','合资','创业','创始人','CEO','CTO','CFO','COO','VP','总监','经理','主管','员工','职员','实习生','试用期','转正','晋升','升职','加薪','降薪','调岗','轮岗','外派','出差','报销','福利','奖金','提成','分红','股权','期权','年终奖','十三薪','五险一金','社保','医保','公积金','失业险','工伤险','生育险','商业保险','团建','年会','聚餐','应酬','酒局','职场','办公室','同事','领导','老板','下属','客户','甲方','乙方','合作','竞争','勾心斗角','PUA','内卷','躺平','摆烂','摸鱼','划水','甩锅','背锅','背调','离职','辞职','跳槽','裁员','优化','毕业','失业','找工作','面试','笔试','HR','猎头','简历','求职信','offer','入职','离职证明','劳动仲裁','劳动合同','劳务合同','竞业协议','保密协议','知识产权','专利','商标','著作权'], 
+                    name: '职场', 
+                    color: '#fd79a8',
+                    priority: 6
+                },
+                // 15. 美食
+                { 
+                    keywords: ['美食','食物','食品','吃','喝','餐厅','饭店','酒店','食堂','外卖','打包','堂食','早餐','午餐','晚餐','夜宵','下午茶','自助餐','火锅','烧烤','烤肉','烤鱼','烤鸡','烤鸭','烤羊','日料','韩餐','西餐','中餐','川菜','粤菜','湘菜','鲁菜','苏菜','浙菜','闽菜','徽菜','东北菜','新疆菜','云南菜','贵州菜','泰国菜','越南菜','印度菜','意大利菜','法国菜','墨西哥菜','汉堡','披萨','寿司','拉面','牛排','羊排','猪排','海鲜','刺身','生蚝','龙虾','螃蟹','虾','螺蛳粉','酸辣粉','麻辣烫','冒菜','串串','钵钵鸡','酸菜鱼','水煮鱼','水煮肉','毛血旺','臭豆腐','榴莲','螺蛳','肥肠','脑花','鸭血','黄喉','毛肚','鹅肠','腰花','牛蛙','兔头','鸭脖','鸡爪','鸡翅','鸡腿','鸭腿','猪蹄','猪耳','牛肉干','猪肉脯','辣条','薯片','饼干','巧克力','糖果','果冻','布丁','慕斯','提拉米苏','马卡龙','舒芙蕾','松饼','华夫饼','可颂','贝果','吐司','欧包','法棍','馒头','包子','饺子','馄饨','汤圆','粽子','月饼','年糕','青团','驴打滚','麻花','油条','豆浆','豆腐脑','煎饼','手抓饼','鸡蛋灌饼','肉夹馍','凉皮','凉面','凉粉','冰粉','清补凉','四果汤','烧仙草','芋圆','珍珠','椰果','布丁','奶盖','芝士','抹茶','可可','焦糖','香草','奶茶','咖啡','果汁','汽水','可乐','雪碧','芬达','美年达','七喜','苏打水','气泡水','矿泉水','纯净水','白开水','茶','绿茶','红茶','乌龙茶','普洱茶','铁观音','龙井','碧螺春','毛尖','大红袍','白茶','黄茶','黑茶','花茶','果茶','奶茶','奶昔','酸奶','牛奶','豆浆','椰汁','果汁','苹果汁','橙汁','葡萄汁','西瓜汁','番茄汁','胡萝卜汁','蔬菜汁','鸡尾酒','红酒','白酒','啤酒','黄酒','米酒','清酒','威士忌','伏特加','白兰地','朗姆酒','金酒','龙舌兰','香槟','起泡酒','葡萄酒'], 
+                    name: '美食', 
+                    color: '#fab1a0',
+                    priority: 5
+                },
+                // 16. 时尚美妆
+                { 
+                    keywords: ['时尚','美妆','美容','护肤','化妆','彩妆','底妆','眼妆','唇妆','腮红','高光','修容','遮瑕','定妆','卸妆','洁面','洗脸','爽肤水','化妆水','精华','精华液','乳液','面霜','眼霜','面膜','防晒','隔离','粉底','气垫','BB霜','CC霜','散粉','粉饼','眉笔','眉粉','眼线','睫毛膏','眼影','睫毛夹','双眼皮贴','假睫毛','美瞳','隐形眼镜','指甲油','美甲','美发','染发','烫发','护发','发型','短发','长发','卷发','直发','刘海','编发','盘发','丸子头','马尾','脏辫','接发','假发','帽子','围巾','手套','墨镜','眼镜','项链','耳环','手链','手镯','戒指','胸针','发饰','腰带','丝巾','领带','领结','手表','包包','手提包','单肩包','斜挎包','双肩包','钱包','卡包','手拿包','腋下包','腰包','胸包','帆布包','托特包','水桶包','马鞍包','剑桥包','邮差包','贝壳包','戴妃包','铂金包','凯莉包','菜篮子','花园包','琳迪包','穿搭','搭配','衣服','服装','上衣','裤子','裙子','连衣裙','半身裙','短裙','长裙','A字裙','包臀裙','百褶裙','牛仔裙','衬衫','T恤','卫衣','毛衣','针织衫','外套','风衣','大衣','羽绒服','棉服','夹克','西装','皮衣','皮草','牛仔','休闲','运动','正装','礼服','婚纱','旗袍','汉服','和服','韩服','潮牌','奢侈品牌','LV','路易威登','香奈儿','Chanel','爱马仕','Hermes','Gucci','古驰','Prada','普拉达','Dior','迪奥','YSL','圣罗兰','阿玛尼','Armani','范思哲','Versace','巴宝莉','Burberry','芬迪','Fendi','纪梵希','Givenchy','巴黎世家','Balenciaga','Celine','赛琳','Loewe','罗意威','Bottega Veneta','BV','Valentino','华伦天奴','Alexander McQueen','麦昆','Balmain','巴尔曼','Chloe','蔻依','Miu Miu','缪缪','Ferragamo','菲拉格慕','Tods','托德斯','Bally','巴利','Coach','蔻驰','Michael Kors','MK','Tory Burch','汤丽柏琦','Kate Spade','凯特丝蓓','Marc Jacobs','马克雅克布','Stella McCartney','丝黛拉麦卡妮','Alexander Wang','王大仁','Proenza Schouler','菲利林','3.1 Phillip Lim',' Derek Lam','林健诚','Jason Wu','吴季刚','Prabal Gurung','普拉巴高隆','Thakoon','塔库恩','Peter Som','彼得桑','Zac Posen','扎克珀森','Christian Siriano','克里斯蒂安西里亚诺','Naeem Khan','纳伊姆汗','Monique Lhuillier','莫尼克鲁里耶','Marchesa','玛切萨','Reem Acra','雷姆阿克拉','Elie Saab','艾莉萨博','Zuhair Murad','祖海慕拉','Georges Hobeika','乔治斯荷拜卡','Rami Al Ali','拉米阿里','Ashi Studio','阿什工作室','Ralph Russo','拉尔夫鲁索','Giambattista Valli','詹巴迪斯塔瓦利'], 
+                    name: '时尚', 
+                    color: '#ff7675',
+                    priority: 5
+                },
+                // 17. 旅游
+                { 
+                    keywords: ['旅游','旅行','游','玩','度假','休闲','放松','景点','景区','公园','乐园','动物园','植物园','博物馆','美术馆','科技馆','纪念馆','寺庙','教堂','古迹','遗址','自然风光','山水','海滩','海岛','沙漠','草原','森林','雪山','温泉','古镇','古城','古村落','民宿','酒店','宾馆','旅馆','青旅','度假村','别墅','公寓','客栈','机票','火车票','高铁票','汽车票','船票','车票','签证','护照','出入境','海关','边境','边防','安检','托运','行李','登机牌','值机','选座','升舱','里程','积分','会员','常旅客','攻略','游记','打卡','网红地','必去','推荐','评分','点评','好评','差评','投诉','维权','旅行社','导游','领队','地接','自由行','跟团游','自驾游','亲子游','情侣游','蜜月游','毕业游','研学游','商务游','医疗游','养老游','周边游','国内游','出境游','入境游','跨省游','跨境游','一日游','两日游','三日游','五日游','七日游','十日游','半月游','一月游','环球游','世界游','亚洲','欧洲','美洲','非洲','大洋洲','南极洲','北极','中国','北京','上海','广州','深圳','杭州','南京','苏州','成都','重庆','西安','武汉','长沙','郑州','济南','青岛','大连','厦门','福州','昆明','贵阳','南宁','海口','三亚','拉萨','乌鲁木齐','兰州','银川','西宁','呼和浩特','石家庄','太原','合肥','南昌','长春','哈尔滨','沈阳','天津','香港','澳门','台湾','日本','东京','大阪','京都','奈良','北海道','冲绳','韩国','首尔','釜山','济州岛','泰国','曼谷','清迈','普吉岛','苏梅岛','芭提雅','新加坡','马来西亚','吉隆坡','槟城','兰卡威','沙巴','印度尼西亚','巴厘岛','雅加达','越南','河内','胡志明市','芽庄','岘港','菲律宾','马尼拉','长滩岛','宿务','柬埔寨','暹粒','吴哥窟','金边','老挝','万象','缅甸','仰光','蒲甘','印度','新德里','孟买','斋普尔','阿格拉','泰姬陵','尼泊尔','加德满都','博卡拉','斯里兰卡','科伦坡','马尔代夫','马累','阿联酋','迪拜','阿布扎比','卡塔尔','多哈','沙特阿拉伯','利雅得','伊朗','德黑兰','以色列','耶路撒冷','特拉维夫','土耳其','伊斯坦布尔','卡帕多奇亚','棉花堡','希腊','雅典','圣托里尼','米克诺斯','意大利','罗马','威尼斯','佛罗伦萨','米兰','比萨','五渔村','阿玛尔菲','法国','巴黎','尼斯','戛纳','里昂','马赛','普罗旺斯','卢瓦尔河谷','诺曼底','英国','伦敦','爱丁堡','曼彻斯特','利物浦','牛津','剑桥','巴斯','约克','爱尔兰','都柏林','德国','柏林','慕尼黑','法兰克福','科隆','汉堡','海德堡','新天鹅堡','荷兰','阿姆斯特丹','鹿特丹','海牙','比利时','布鲁塞尔','布鲁日','卢森堡','瑞士','苏黎世','日内瓦','卢塞恩','因特拉肯','少女峰','奥地利','维也纳','萨尔茨堡','哈尔施塔特','捷克','布拉格','CK小镇','匈牙利','布达佩斯','波兰','华沙','克拉科夫','俄罗斯','莫斯科','圣彼得堡','贝加尔湖','摩尔曼斯克','芬兰','赫尔辛基','罗瓦涅米','圣诞老人村','瑞典','斯德哥尔摩','挪威','奥斯陆','卑尔根','峡湾','极光','丹麦','哥本哈根','冰岛','雷克雅未克','蓝湖','黑沙滩','极光','西班牙','马德里','巴塞罗那','塞维利亚','格拉纳达','葡萄牙','里斯本','波尔图','美国','纽约','洛杉矶','旧金山','拉斯维加斯','西雅图','芝加哥','波士顿','华盛顿','迈阿密','夏威夷','黄石公园','大峡谷','尼亚加拉瀑布','加拿大','温哥华','多伦多','蒙特利尔','班夫','贾斯珀','墨西哥','坎昆','玛雅','古巴','哈瓦那','牙买加','巴哈马','多米尼加','哥斯达黎加','巴拿马','哥伦比亚','波哥大','卡塔赫纳','秘鲁','利马','库斯科','马丘比丘','巴西','里约热内卢','圣保罗','伊瓜苏瀑布','阿根廷','布宜诺斯艾利斯','乌斯怀亚','南极','智利','圣地亚哥','复活节岛','玻利维亚','乌尤尼','天空之镜','厄瓜多尔','加拉帕戈斯','澳大利亚','悉尼','墨尔本','布里斯班','黄金海岸','凯恩斯','大堡礁','乌鲁鲁','新西兰','奥克兰','皇后镇','基督城','霍比特村','斐济','大溪地','帕劳','塞班','关岛','埃及','开罗','卢克索','阿斯旺','阿布辛贝','红海','赫尔格达','沙姆沙伊赫','金字塔','狮身人面像','南非','开普敦','约翰内斯堡','克鲁格','肯尼亚','内罗毕','马赛马拉','坦桑尼亚','乞力马扎罗','塞伦盖蒂','摩洛哥','卡萨布兰卡','马拉喀什','撒哈拉','突尼斯','埃塞俄比亚','马达加斯加','毛里求斯','塞舌尔'], 
+                    name: '旅游', 
+                    color: '#00cec9',
+                    priority: 5
+                },
+                // 18. 情感
+                { 
+                    keywords: ['情感','感情','心情','情绪','心理','爱情','恋爱','暧昧','追求','表白','告白','被拒绝','在一起','分手','失恋','复合','挽回','原谅','背叛','出轨','劈腿','小三','婚外情','离婚','分居','冷静期','结婚','婚姻','婚礼','婚纱','钻戒','蜜月','备孕','怀孕','生子','育儿','带娃','婆媳','岳婿','夫妻','情侣','对象','另一半','伴侣','配偶','老公','老婆','丈夫','妻子','男朋友','女朋友','男友','女友','前任','现任','初恋','暗恋','单恋','网恋','异地恋','姐弟恋','忘年恋','同性恋','双性恋','相亲','介绍','媒人','红娘','征婚','单身','单身狗','脱单','找对象','谈恋爱','处对象','约会','逛街','看电影','吃饭','旅行','吵架','冷战','哄','道歉','认错','撒娇','任性','作','包容','理解','信任','尊重','忠诚','专一','浪漫','惊喜','礼物','鲜花','巧克力','戒指','项链','手链','纪念日','情人节','七夕','520','1314','生日','求婚','订婚','彩礼','嫁妆','婚房','婚车','婚宴','婚纱照','蜜月旅行','婚后','七年之痒','平淡期','倦怠期','磨合期','信任危机','感情危机','婚姻危机','家庭','家族','亲戚','父母','爸妈','父亲','母亲','爸爸','妈妈','爹','娘','老爸','老妈','老爷子','老太太','爷爷','奶奶','外公','外婆','姥爷','姥姥','伯父','伯母','叔叔','阿姨','姑姑','姑父','舅舅','舅妈','姨妈','姨父','哥哥','姐姐','弟弟','妹妹','堂哥','堂姐','堂弟','堂妹','表哥','表姐','表弟','表妹','儿子','女儿','孙子','孙女','外孙','外孙女','侄子','侄女','外甥','外甥女','继父','继母','养父','养母','干爹','干妈','岳父','岳母','公公','婆婆','姐夫','妹夫','嫂子','弟媳','妯娌','连襟','亲家'], 
+                    name: '情感', 
+                    color: '#fdcb6e',
+                    priority: 4
+                }
+            ];
+            
+            // 按优先级匹配，优先级高的先匹配
+            for (const rule of rules) {
+                for (const keyword of rule.keywords) {
+                    if (title.includes(keyword)) {
+                        return { name: rule.name, color: rule.color };
+                    }
+                }
+            }
+            
+            // 默认分类
+            return { name: '其他', color: '#95a5a6' };
         }
 
         // 解析热度值字符串（如"100万"）
@@ -622,26 +1562,28 @@
             return num || 0;
         }
 
-        // 根据热度值获取样式类
-        function getHotStyle(hotValue, rank) {
-            if (hotValue > 0) {
-                if (hotValue >= 5000000) return 'very-hot';
-                else if (hotValue >= 1000000) return 'hot';
-                else if (hotValue >= 100000) return 'warm';
-                else return 'cool';
-            }
-            
-            if (rank <= 3) return 'very-hot';
-            else if (rank <= 10) return 'hot';
-            else if (rank <= 20) return 'warm';
-            else return 'cool';
+        // 根据排名获取样式类
+        function getHotStyle(rank) {
+            if (rank === 1) return 'rank-1';
+            else if (rank === 2) return 'rank-2';
+            else if (rank === 3) return 'rank-3';
+            else if (rank === 4) return 'rank-4';
+            else if (rank === 5) return 'rank-5';
+            else if (rank === 6) return 'rank-6';
+            else if (rank === 7) return 'rank-7';
+            else if (rank === 8) return 'rank-8';
+            else if (rank === 9) return 'rank-9';
+            else if (rank === 10) return 'rank-10';
+            else return 'rank-normal';
         }
 
         // 渲染指定平台的热榜
         function renderPlatform(platform) {
             currentPlatform = platform;
-            const list = hotData[platform];
+            const config = platforms[platform];
             const contentDiv = document.querySelector('.content');
+            
+            let list = hotData[platform];
             
             if (!list || list.length === 0) {
                 contentDiv.innerHTML = `
@@ -652,8 +1594,34 @@
                 `;
                 return;
             }
+            
+            // 检测是否使用缓存数据
+            const cache = dataFreshness.getCache(platform);
+            const isCached = cache && JSON.stringify(list[0]) === JSON.stringify(cache.data[0]);
+            const cacheAge = cache ? Math.floor((Date.now() - cache.timestamp) / 60000) : 0; // 分钟
+            
+            // 分类筛选（仅在非独立分类模式下）
+            if (currentCategory !== 'all' && !currentCategory.startsWith('cat:')) {
+                list = list.filter(item => item.category === currentCategory);
+            }
 
-            let html = `<div class="hot-list active">`;
+            // 添加缓存提示条
+            let html = '';
+            if (isCached && cacheAge > 5) {
+                html += `
+                    <div style="background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%); border: 1px solid #ffc107; border-radius: 8px; padding: 12px 15px; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 8px; color: #856404; font-size: 14px;">
+                            <span>⏰</span>
+                            <span>当前显示 ${cacheAge} 分钟前的缓存数据</span>
+                        </div>
+                        <button onclick="refreshAllData()" style="background: #ffc107; border: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; cursor: pointer; color: #856404; font-weight: 500;">
+                            立即刷新
+                        </button>
+                    </div>
+                `;
+            }
+            
+            html += `<div class="hot-list active">`;
             
             list.forEach((item, index) => {
                 const rank = item.position || index + 1;
@@ -664,12 +1632,15 @@
                 
                 const hotValue = item.hotValue || 0;
                 const hotValueText = hotValue > 0 ? formatHotValue(hotValue) : '热搜';
-                const hotStyle = getHotStyle(hotValue, rank);
+                const hotStyle = getHotStyle(rank);
                 
                 html += `
                     <div class="hot-item">
                         <div class="rank ${rankClass}">${rank}</div>
-                        <div class="hot-text ${hotStyle}">${item.word}</div>
+                        <div class="hot-content">
+                            <div class="hot-text ${hotStyle}">${item.word}</div>
+                            <span class="category-tag" style="background: ${item.categoryColor}20; color: ${item.categoryColor}; border: 1px solid ${item.categoryColor}40;">${item.category}</span>
+                        </div>
                         <div class="hot-value ${hotStyle}">${hotValueText}</div>
                         <button class="go-btn" onclick="searchKeyword('${platform}', '${encodeURIComponent(item.word)}')" title="前往搜索">
                             →
@@ -678,13 +1649,135 @@
                 `;
             });
             
+            const filterText = currentCategory !== 'all' && !currentCategory.startsWith('cat:') ? ` (${currentCategory})` : '';
             html += `</div>
                 <div style="text-align: center; padding-top: 20px; color: #adb5bd; font-size: 13px;">
-                    共 ${list.length} 条热点
+                    共 ${list.length} 条热点${filterText}
                 </div>`;
             
             contentDiv.innerHTML = html;
         }
+        
+        // 渲染独立分类热榜页面
+        function renderCategoryPage(platform, category) {
+            currentPlatform = platform;
+            currentCategory = 'cat:' + category; // 标记为独立分类模式
+            const config = platforms[platform];
+            const contentDiv = document.querySelector('.content');
+            
+            // 获取该平台所有原始数据（不限制30条）
+            let allData = hotData[platform + '_raw'] || hotData[platform];
+            
+            if (!allData || allData.length === 0) {
+                contentDiv.innerHTML = `
+                    <div class="empty">
+                        <div>暂无数据</div>
+                        <div>该平台API暂时不可用，请稍后再试</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 筛选该分类的数据（使用原始分类名称匹配）
+            let categoryList = allData.filter(item => 
+                item.rawCategory === category || item.category === category
+            );
+            
+            // 按热度重新排序
+            categoryList.sort((a, b) => b.hotValue - a.hotValue);
+            
+            // 重新设置排名
+            categoryList.forEach((item, index) => {
+                item.position = index + 1;
+            });
+            
+            // 获取分类颜色
+            const categoryColors = {
+                '热搜': '#e74c3c',
+                '娱乐': '#e84393',
+                '社会': '#e74c3c',
+                '科技': '#6c5ce7',
+                '体育': '#00b894',
+                '财经': '#f39c12',
+                '汽车': '#0984e3',
+                '游戏': '#a29bfe',
+                '美食': '#fab1a0',
+                '时尚': '#ff7675',
+                '生活': '#00cec9',
+                '其他': '#95a5a6'
+            };
+            const catColor = categoryColors[category] || '#667eea';
+            
+            let html = `
+                <div class="category-page-header" style="padding: 20px; background: linear-gradient(135deg, ${catColor}15 0%, ${catColor}05 100%); border-bottom: 2px solid ${catColor}30; margin-bottom: 15px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                        <button onclick="backToPlatform('${platform}')" style="padding: 8px 16px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; cursor: pointer; font-size: 14px; color: #495057; display: flex; align-items: center; gap: 6px; transition: all 0.2s;">
+                            ← 返回
+                        </button>
+                        <h2 style="margin: 0; color: ${catColor}; font-size: 22px; font-weight: 700;">${config.name} · ${category}榜</h2>
+                    </div>
+                    <div style="color: #6c757d; font-size: 14px; padding-left: 8px;">
+                        共 ${categoryList.length} 条热搜 · 按热度排序
+                    </div>
+                </div>
+                <div class="hot-list active">
+            `;
+            
+            categoryList.forEach((item, index) => {
+                const rank = index + 1;
+                let rankClass = '';
+                if (rank === 1) rankClass = 'top1';
+                else if (rank === 2) rankClass = 'top2';
+                else if (rank === 3) rankClass = 'top3';
+                
+                const hotValue = item.hotValue || 0;
+                const hotValueText = hotValue > 0 ? formatHotValue(hotValue) : '热搜';
+                const hotStyle = getHotStyle(rank);
+                
+                html += `
+                    <div class="hot-item">
+                        <div class="rank ${rankClass}">${rank}</div>
+                        <div class="hot-content">
+                            <div class="hot-text ${hotStyle}">${item.word}</div>
+                        </div>
+                        <div class="hot-value ${hotStyle}">${hotValueText}</div>
+                        <button class="go-btn" onclick="searchKeyword('${platform}', '${encodeURIComponent(item.word)}')" title="前往搜索">
+                            →
+                        </button>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            
+            if (categoryList.length === 0) {
+                html = `
+                    <div class="category-page-header" style="padding: 20px; background: linear-gradient(135deg, ${catColor}15 0%, ${catColor}05 100%); border-bottom: 2px solid ${catColor}30; margin-bottom: 15px;">
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+                            <button onclick="backToPlatform('${platform}')" style="padding: 8px 16px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; cursor: pointer; font-size: 14px; color: #495057; display: flex; align-items: center; gap: 6px;">
+                                ← 返回
+                            </button>
+                            <h2 style="margin: 0; color: ${catColor}; font-size: 22px; font-weight: 700;">${config.name} · ${category}榜</h2>
+                        </div>
+                    </div>
+                    <div class="empty">
+                        <div>该分类暂无数据</div>
+                        <div>尝试切换其他分类看看</div>
+                    </div>
+                `;
+            }
+            
+            contentDiv.innerHTML = html;
+        }
+        
+        // 返回平台主页
+        function backToPlatform(platform) {
+            currentCategory = 'all';
+            renderCategoryButtons(platform);
+            renderPlatform(platform);
+        }
+        
+
 
         // 格式化热度值
         function formatHotValue(value) {
@@ -700,29 +1793,93 @@
             window.open(url, '_blank');
         }
 
+        // Yandex 搜索功能
+        function performYandexSearch() {
+            const input = document.getElementById('searchInput');
+            const keyword = input.value.trim();
+            
+            if (!keyword) {
+                input.focus();
+                input.style.borderColor = '#e74c3c';
+                setTimeout(() => {
+                    input.style.borderColor = '#e9ecef';
+                }, 1000);
+                return;
+            }
+            
+            // Yandex 搜索 URL
+            const yandexUrl = 'https://yandex.com/search/?text=' + encodeURIComponent(keyword);
+            window.open(yandexUrl, '_blank');
+            
+            // 清空输入框
+            input.value = '';
+        }
+
         // 刷新所有数据
         async function refreshAllData() {
             const refreshBtn = document.getElementById('refreshBtn');
             refreshBtn.classList.add('loading');
             
-            document.querySelector('.content').innerHTML = '<div class="loading">刷新中...</div>';
+            // 显示渐进式加载提示
+            document.querySelector('.content').innerHTML = `
+                <div class="loading">
+                    <div>正在获取最新数据...</div>
+                    <div style="font-size: 13px; margin-top: 10px; opacity: 0.7;">
+                        智能检测数据新鲜度 · 多源聚合
+                    </div>
+                </div>
+            `;
+            
+            // 清除缓存强制刷新
+            Object.keys(platforms).forEach(platform => {
+                dataFreshness.clearCache(platform);
+            });
             
             await loadAllData();
             renderPlatform(currentPlatform);
             
             refreshBtn.classList.remove('loading');
             
-            // 显示刷新成功提示
+            // 根据结果显示不同提示
+            const cache = dataFreshness.getCache(currentPlatform);
             const originalText = refreshBtn.textContent;
-            refreshBtn.textContent = '✓';
+            
+            if (!cache) {
+                // 获取失败
+                refreshBtn.textContent = '✗';
+                refreshBtn.style.background = 'rgba(231, 76, 60, 0.3)';
+            } else {
+                // 获取成功
+                refreshBtn.textContent = '✓';
+                refreshBtn.style.background = 'rgba(0, 184, 148, 0.3)';
+            }
+            
             setTimeout(() => {
                 refreshBtn.textContent = originalText;
-            }, 1000);
+                refreshBtn.style.background = '';
+            }, 1500);
         }
 
         // 更新底部时间
-        function updateFooterTime() {
+        function updateFooterTime(stats = null) {
             lastUpdateTime = new Date();
+            const platformName = platforms[currentPlatform].name;
+            const dataCount = hotData[currentPlatform] ? hotData[currentPlatform].length : 0;
+            
+            // 数据新鲜度指示器
+            let freshnessIndicator = '';
+            if (stats) {
+                if (stats.failed > 0) {
+                    freshnessIndicator = ` <span style="color: #e74c3c;">⚠️ ${stats.failed}个平台获取失败</span>`;
+                } else if (stats.fresh === Object.keys(platforms).length) {
+                    freshnessIndicator = ' <span style="color: #00b894;">✓ 全部最新</span>';
+                } else if (stats.cached > 0) {
+                    freshnessIndicator = ' <span style="color: #f39c12;">⚡ 使用缓存</span>';
+                } else if (stats.stale > 0) {
+                    freshnessIndicator = ` <span style="color: #f39c12;">~ ${stats.stale}个平台数据未更新</span>`;
+                }
+            }
+            
             document.getElementById('updateTime').innerHTML = 
                 '更新时间: ' + lastUpdateTime.toLocaleString('zh-CN', {
                     month: '2-digit',
@@ -730,7 +1887,7 @@
                     hour: '2-digit',
                     minute: '2-digit',
                     second: '2-digit'
-                }) + ' (刚刚)';
+                }) + ` | ${platformName}: ${dataCount}条${freshnessIndicator}`;
         }
 
         // 切换平台
@@ -741,7 +1898,83 @@
                     btn.classList.add('active');
                 }
             });
+            currentPlatform = platform;
+            currentCategory = 'all';
+            renderCategoryButtons(platform);
             renderPlatform(platform);
+            
+            // 滚动到分类选择器位置
+            const categorySelector = document.getElementById('categorySelector');
+            if (categorySelector && categorySelector.style.display !== 'none') {
+                categorySelector.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+        
+        // 固定分类列表
+        const fixedCategories = ['全部', '热搜', '社会', '科技', '娱乐', '体育', '财经', '汽车', '游戏', '美食', '时尚', '生活', '其他'];
+        
+        // 渲染分类按钮 - 根据API实际返回的分类动态生成
+        function renderCategoryButtons(platform) {
+            const selector = document.getElementById('categorySelector');
+            const container = document.getElementById('categoryButtons');
+            const list = hotData[platform];
+            
+            if (!list || list.length === 0) {
+                selector.style.display = 'none';
+                return;
+            }
+            
+            // 统计各分类数量（使用API返回的原始分类）
+            const categoryCount = {};
+            list.forEach(item => {
+                const cat = item.rawCategory || item.category || '其他';
+                categoryCount[cat] = (categoryCount[cat] || 0) + 1;
+            });
+            
+            // 获取所有分类并排序（按数量降序）
+            const sortedCategories = Object.entries(categoryCount)
+                .sort((a, b) => b[1] - a[1]);
+            
+            // 生成分类按钮 - 使用API真实的分类
+            let html = '';
+            
+            // 先加"全部"按钮
+            const isAllActive = currentCategory === 'all' || currentCategory === 'cat:all';
+            html += `<button class="category-btn ${isAllActive ? 'active' : ''}" data-category="all">全部</button>`;
+            
+            // 再添加API返回的各个分类
+            sortedCategories.forEach(([cat, count]) => {
+                const isActive = currentCategory === cat || currentCategory === 'cat:' + cat;
+                const activeClass = isActive ? 'active' : '';
+                html += `<button class="category-btn ${activeClass}" data-category="${cat}">${cat} (${count})</button>`;
+            });
+            
+            container.innerHTML = html;
+            selector.style.display = 'block';
+            
+            // 绑定分类按钮事件
+            container.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const cat = btn.dataset.category;
+                    container.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    if (cat === 'all') {
+                        // 点击"全部"返回平台主页
+                        currentCategory = 'all';
+                        renderPlatform(platform);
+                    } else {
+                        // 点击其他分类进入独立分类页面
+                        renderCategoryPage(platform, cat);
+                    }
+                });
+            });
+        }
+        
+        // 切换分类
+        function switchCategory(category) {
+            currentCategory = category;
+            renderPlatform(currentPlatform);
         }
 
         // 绑定按钮事件
