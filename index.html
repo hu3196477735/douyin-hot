@@ -3928,7 +3928,14 @@
                     
                     <!-- 自动收益提示 -->
                     <div class="auto-gain" id="autoGain" style="display: none;">
-                        ⏱️ 每30秒自动获得经验（健康值越高获得越多）
+                        ⏱️ 每60秒自动获得经验（健康值越高获得越多）
+                    </div>
+                    
+                    <!-- 催收按钮 -->
+                    <div class="collection-section" style="margin: 15px 0; text-align: center;">
+                        <button class="collection-btn" onclick="collectionExp()" style="background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%); color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4); transition: all 0.3s ease;">
+                            💰 催收 (+1 EXP)
+                        </button>
                     </div>
                     
                     <!-- 测试按钮（仅用于开发测试） -->
@@ -5743,14 +5750,14 @@
         }
         
         // ==================== 花园养成功能 ====================
-        // 植物配置 - 10种植物
+        // 植物配置 - 10种植物（经验值已翻三倍）
         const plants = [
             { 
                 id: 'sunflower', 
                 name: '向日葵', 
                 icon: '🌻', 
                 names: ['种子期', '幼苗期', '生长期', '花蕾期', '开花期', '完全期'], 
-                maxExp: [500, 1000, 2000, 4000, 8000], 
+                maxExp: [1500, 3000, 6000, 12000, 24000], 
                 unlock: null,
                 desc: '向阳而生的金色花朵'
             },
@@ -5759,7 +5766,7 @@
                 name: '仙人掌', 
                 icon: '🌵', 
                 names: ['种子期', '幼苗期', '球茎期', '长柱期', '开花期', '完全期'], 
-                maxExp: [600, 1200, 2500, 5000, 10000], 
+                maxExp: [1800, 3600, 7500, 15000, 30000], 
                 unlock: 'sunflower',
                 desc: '沙漠中的坚强生命'
             },
@@ -5768,7 +5775,7 @@
                 name: '樱花树', 
                 icon: '🌸', 
                 names: ['种子期', '幼苗期', '抽枝期', '花苞期', '满花期', '完全期'], 
-                maxExp: [800, 1600, 3200, 6400, 12800], 
+                maxExp: [2400, 4800, 9600, 19200, 38400], 
                 unlock: 'cactus',
                 desc: '粉色浪漫的春日使者'
             },
@@ -5777,7 +5784,7 @@
                 name: '银杏树', 
                 icon: '🍂', 
                 names: ['种子期', '幼苗期', '展叶期', '绿冠期', '金黄期', '完全期'], 
-                maxExp: [1000, 2000, 4000, 8000, 16000], 
+                maxExp: [3000, 6000, 12000, 24000, 48000], 
                 unlock: 'sakura',
                 desc: '千年活化石的金色传奇'
             },
@@ -5786,7 +5793,7 @@
                 name: '神秘植物', 
                 icon: '🌺', 
                 names: ['种子期', '萌芽期', '生长期', '发光期', '绽放期', '完全期'], 
-                maxExp: [1500, 3000, 6000, 12000, 24000], 
+                maxExp: [4500, 9000, 18000, 36000, 72000], 
                 unlock: 'ginkgo',
                 desc: '散发着神秘光芒的奇花'
             },
@@ -5795,7 +5802,7 @@
                 name: '红玫瑰',
                 icon: '🌹',
                 names: ['种子期', '幼苗期', '抽茎期', '花苞期', '盛放期', '完全期'],
-                maxExp: [1200, 2400, 4800, 9600, 19200],
+                maxExp: [3600, 7200, 14400, 28800, 57600],
                 unlock: 'mystery',
                 desc: '爱情与美丽的象征'
             },
@@ -5804,7 +5811,7 @@
                 name: '翠竹',
                 icon: '🎋',
                 names: ['种子期', '萌芽期', '拔节期', '生长期', '成竹期', '完全期'],
-                maxExp: [900, 1800, 3600, 7200, 14400],
+                maxExp: [2700, 5400, 10800, 21600, 43200],
                 unlock: 'rose',
                 desc: '节节高升的君子之风'
             },
@@ -5813,7 +5820,7 @@
                 name: '荷花',
                 icon: '🪷',
                 names: ['种子期', '萌芽期', '浮叶期', '立叶期', '花开期', '完全期'],
-                maxExp: [1100, 2200, 4400, 8800, 17600],
+                maxExp: [3300, 6600, 13200, 26400, 52800],
                 unlock: 'bamboo',
                 desc: '出淤泥而不染的圣洁之花'
             },
@@ -5822,7 +5829,7 @@
                 name: '红枫',
                 icon: '🍁',
                 names: ['种子期', '幼苗期', '展叶期', '夏绿期', '秋红期', '完全期'],
-                maxExp: [1300, 2600, 5200, 10400, 20800],
+                maxExp: [3900, 7800, 15600, 31200, 62400],
                 unlock: 'lotus',
                 desc: '秋日里最绚烂的一抹红'
             },
@@ -5831,7 +5838,7 @@
                 name: '传说之树',
                 icon: '🌳',
                 names: ['种子期', '灵芽期', '生长期', '觉醒期', '圣光期', '完全期'],
-                maxExp: [2000, 5000, 10000, 20000, 50000],
+                maxExp: [6000, 15000, 30000, 60000, 150000],
                 unlock: 'maple',
                 desc: '只存在于传说中的神树'
             }
@@ -6011,7 +6018,7 @@
         }
         
         function startTimers() {
-            // 经验增长定时器（每30秒）
+            // 经验增长定时器（每60秒）
             if (gardenTimer) clearInterval(gardenTimer);
             gardenTimer = setInterval(() => {
                 // 检查是否完全期（level 5）
@@ -6029,7 +6036,7 @@
                     saveGardenData();
                     updatePlantDisplay();
                 }
-            }, 30000);
+            }, 60000);
             
             // 负面状态生成定时器（每3分钟）
             if (statusTimer) clearInterval(statusTimer);
@@ -6950,6 +6957,66 @@
             
             saveGardenData();
             updatePlantDisplay();
+        }
+        
+        // 催收功能 - 每次点击+1经验
+        function collectionExp() {
+            const plant = plants.find(p => p.id === gardenData.currentPlant);
+            if (!plant) {
+                alert('请先选择一颗种子开始种植！');
+                return;
+            }
+            
+            // 完全期不再获得经验
+            if (gardenData.level >= 5) {
+                alert('植物已到达完全期，无需再催收！');
+                return;
+            }
+            
+            // 添加+1经验
+            addExp(1);
+            
+            // 显示催收效果
+            showCollectionEffect();
+        }
+        
+        // 显示催收效果
+        function showCollectionEffect() {
+            const container = document.getElementById('plantBody');
+            if (!container) return;
+            
+            const effect = document.createElement('div');
+            effect.style.cssText = `
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #FF6B6B;
+                font-size: 24px;
+                font-weight: bold;
+                pointer-events: none;
+                animation: collectionFloat 1s ease-out forwards;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                z-index: 1000;
+            `;
+            effect.textContent = '+1 💰';
+            
+            // 添加动画样式
+            if (!document.getElementById('collectionAnim')) {
+                const style = document.createElement('style');
+                style.id = 'collectionAnim';
+                style.textContent = `
+                    @keyframes collectionFloat {
+                        0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+                        50% { opacity: 1; transform: translate(-50%, -80%) scale(1.2); }
+                        100% { opacity: 0; transform: translate(-50%, -120%) scale(1); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            container.appendChild(effect);
+            setTimeout(() => effect.remove(), 1000);
         }
         
         function onPlantMature(plant) {
