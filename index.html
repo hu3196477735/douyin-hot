@@ -29,11 +29,35 @@
             backdrop-filter: blur(10px);
             padding: 20px 0;
             position: fixed;
-            left: 0;
+            left: -200px;
             top: 0;
             bottom: 0;
             overflow-y: auto;
             z-index: 100;
+            transition: left 0.3s ease;
+        }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .menu-toggle {
+            position: fixed;
+            left: 15px;
+            top: 15px;
+            z-index: 101;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
         
         .sidebar-title {
@@ -84,7 +108,7 @@
         
         .container {
             flex: 1;
-            margin-left: 200px;
+            margin-left: 0;
             background: rgba(255, 255, 255, 0.95);
             min-height: 100vh;
             overflow: hidden;
@@ -102,7 +126,7 @@
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px 20px;
+            padding: 20px;
             text-align: center;
             position: relative;
         }
@@ -118,10 +142,16 @@
         }
         
         .header h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 13px;
+            opacity: 0.9;
         }
         
         .header .subtitle {
@@ -829,40 +859,34 @@
         
         @media (max-width: 768px) {
             .sidebar {
-                width: 60px;
-                padding: 15px 0;
+                width: 180px;
+                left: -180px;
             }
             
-            .sidebar-title {
-                font-size: 12px;
-                padding: 0 5px 15px;
+            .sidebar.open {
+                left: 0;
             }
             
-            .nav-item {
-                padding: 15px 10px;
-                justify-content: center;
-            }
-            
-            .nav-icon {
-                margin-right: 0;
-                font-size: 20px;
+            .menu-toggle {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
             }
             
             .main-content {
-                margin-left: 60px;
                 padding: 15px;
             }
             
             .header {
-                padding: 30px 15px;
+                padding: 15px;
             }
             
             .header h1 {
-                font-size: 24px;
+                font-size: 22px;
             }
             
             .header p {
-                font-size: 14px;
+                font-size: 13px;
             }
             
             .nav-text {
@@ -888,37 +912,37 @@
                 background: #f0f0f0 !important;
             }
             
-            .main-wrapper {
-                flex-direction: column;
+            .menu-toggle {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+                left: 10px;
+                top: 10px;
             }
             
             .sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-                flex-direction: row;
-                display: flex;
-                padding: 10px;
-                overflow-x: auto;
+                width: 160px;
+                left: -160px;
             }
             
-            .sidebar-title {
-                display: none;
-            }
-            
-            .nav-item {
-                flex-direction: column;
-                padding: 10px 15px;
-                min-width: 60px;
-            }
-            
-            .nav-text {
-                display: none;
+            .sidebar.open {
+                left: 0;
             }
             
             .main-content {
-                margin-left: 0;
                 padding: 10px;
+            }
+            
+            .header {
+                padding: 12px 10px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .header p {
+                font-size: 12px;
             }
             
             .platform-buttons {
@@ -2404,7 +2428,8 @@
 <body>
     <div class="main-wrapper">
         <!-- 左侧导航栏 -->
-        <div class="sidebar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <div class="sidebar" id="sidebar">
             <div class="sidebar-title">🔥 热点导航</div>
             <div class="nav-item active" data-page="hot" onclick="switchPage('hot')">
                 <span class="nav-icon">📊</span>
@@ -3888,8 +3913,15 @@
         // 页面加载 - 使用非阻塞方式，让页面先渲染
         init().catch(err => console.error('初始化错误:', err));
         
+        // 侧边栏切换功能
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+        
         // 页面切换功能
         function switchPage(page) {
+            // 关闭侧边栏
+            document.getElementById('sidebar').classList.remove('open');
             // 更新导航栏激活状态
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
