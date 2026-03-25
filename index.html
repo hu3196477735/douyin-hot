@@ -848,6 +848,23 @@
                 font-size: 20px;
             }
             
+            .main-content {
+                margin-left: 60px;
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 30px 15px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .header p {
+                font-size: 14px;
+            }
+            
             .nav-text {
                 display: none;
             }
@@ -867,6 +884,43 @@
         }
         
         @media (max-width: 480px) {
+            body {
+                background: #f0f0f0 !important;
+            }
+            
+            .main-wrapper {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+                flex-direction: row;
+                display: flex;
+                padding: 10px;
+                overflow-x: auto;
+            }
+            
+            .sidebar-title {
+                display: none;
+            }
+            
+            .nav-item {
+                flex-direction: column;
+                padding: 10px 15px;
+                min-width: 60px;
+            }
+            
+            .nav-text {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 10px;
+            }
+            
             .platform-buttons {
                 gap: 6px;
                 flex-wrap: wrap;
