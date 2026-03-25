@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏中心 - 休闲娱乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1em;
+        }
+        
+        /* 返回按钮 */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        /* 内容区域 */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* 分类标题 */
+        .category-title {
+            color: white;
+            font-size: 1.5em;
+            margin: 30px 0 20px;
+            padding-left: 15px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .category-title:first-child {
+            margin-top: 0;
+        }
+        
+        /* 游戏卡片网格 */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        /* 游戏卡片 */
+        .game-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        
+        .game-icon {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .game-card:nth-child(2) .game-icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .game-card:nth-child(3) .game-icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .game-card:nth-child(4) .game-icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .game-card:nth-child(5) .game-icon { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .game-card:nth-child(6) .game-icon { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        .game-card:nth-child(7) .game-icon { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+        .game-card:nth-child(8) .game-icon { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+        .game-card:nth-child(9) .game-icon { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); }
+        .game-card:nth-child(10) .game-icon { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .game-card:nth-child(11) .game-icon { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .game-card:nth-child(12) .game-icon { background: linear-gradient(135deg, #fc5c7d 0%, #6a82fb 100%); }
+        
+        .game-info {
+            padding: 20px;
+        }
+        
+        .game-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .game-desc {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .game-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #f0f0f0;
+            color: #667eea;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+        
+        /* 提示信息 */
+        .tips {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+        }
+        
+        .tips-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">← 返回</a>
+        <h1>🎮 游戏中心</h1>
+        <p>精选免费小游戏，即点即玩</p>
+    </div>
+    
+    <div class="content">
+        <div class="tips">
+            <div class="tips-icon">💡</div>
+            <p>点击游戏卡片即可跳转到对应网站游玩，所有游戏均为免费在线游戏</p>
+        </div>
+        
+        <h2 class="category-title">🇨🇳 国内直接访问（无需加速器）</h2>
+        <div class="game-grid">
+            <a href="https://poki.com/zh" target="_blank" class="game-card">
+                <div class="game-icon">🎮</div>
+                <div class="game-info">
+                    <div class="game-name">Poki</div>
+                    <div class="game-desc">数千款免费在线游戏，2048、地铁跑酷、俄罗斯方块等热门游戏，国内访问速度快！</div>
+                    <span class="game-tag">推荐</span>
+                </div>
+            </a>
+            
+            <a href="https://www.crazygames.com/" target="_blank" class="game-card">
+                <div class="game-icon">🕹️</div>
+                <div class="game-info">
+                    <div class="game-name">CrazyGames</div>
+                    <div class="game-desc">海量免费游戏，3D游戏、多人游戏、io游戏，国内可流畅访问！</div>
+                    <span class="game-tag">热门</span>
+                </div>
+            </a>
+            
+            <a href="https://play.famobi.com/" target="_blank" class="game-card">
+                <div class="game-icon">📱</div>
+                <div class="game-info">
+                    <div class="game-name">Famobi</div>
+                    <div class="game-desc">精选HTML5游戏，适合手机游玩，国内访问无压力！</div>
+                    <span class="game-tag">精品</span>
+                </div>
+            </a>
+            
+            <a href="https://www.arkadium.com/games/" target="_blank" class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-info">
+                    <div class="game-name">Arkadium</div>
+                    <div class="game-desc">经典纸牌、拼图、文字游戏，适合休闲放松，国内可访问！</div>
+                    <span class="game-tag">休闲</span>
+                </div>
+            </a>
+            
+            <a href="https://www.1001games.com/" target="_blank" class="game-card">
+                <div class="game-icon">💎</div>
+                <div class="game-info">
+                    <div class="game-name">1001 Games</div>
+                    <div class="game-desc">精选高质量游戏，无广告干扰，国内访问流畅！</div>
+                    <span class="game-tag">精选</span>
+                </div>
+            </a>
+            
+            <a href="https://www.gamepix.com/" target="_blank" class="game-card">
+                <div class="game-icon">🚀</div>
+                <div class="game-info">
+                    <div class="game-name">GamePix</div>
+                    <div class="game-desc">HTML5游戏聚合平台，适合全年龄段玩家，国内可直接访问！</div>
+                    <span class="game-tag">聚合</span>
+                </div>
+            </a>
+            
+            <a href="https://www.silvergames.com/" target="_blank" class="game-card">
+                <div class="game-icon">🥈</div>
+                <div class="game-info">
+                    <div class="game-name">Silvergames</div>
+                    <div class="game-desc">免费在线游戏，动作、策略、益智游戏齐全，国内可流畅游玩！</div>
+                    <span class="game-tag">免费</span>
+                </div>
+            </a>
+            
+            <a href="https://html5games.com/" target="_blank" class="game-card">
+                <div class="game-icon">🌐</div>
+                <div class="game-info">
+                    <div class="game-name">HTML5 Games</div>
+                    <div class="game-desc">HTML5游戏平台，精选优质游戏，国内访问正常！</div>
+                    <span class="game-tag">平台</span>
+                </div>
+            </a>
+            
+            <a href="https://www.4399.com/" target="_blank" class="game-card">
+                <div class="game-icon">🎪</div>
+                <div class="game-info">
+                    <div class="game-name">4399小游戏</div>
+                    <div class="game-desc">国内最老牌的小游戏网站，连连看、双人小游戏、H5游戏应有尽有！</div>
+                    <span class="game-tag">国产</span>
+                </div>
+            </a>
+            
+            <a href="https://h5online.cn/" target="_blank" class="game-card">
+                <div class="game-icon">⚡</div>
+                <div class="game-info">
+                    <div class="game-name">H5在线小游戏</div>
+                    <div class="game-desc">打开即玩的H5小游戏合集，无需安装，摸鱼必备！</div>
+                    <span class="game-tag">国产</span>
+                </div>
+            </a>
+            
+            <a href="https://www.4k99.com/" target="_blank" class="game-card">
+                <div class="game-icon">🎯</div>
+                <div class="game-info">
+                    <div class="game-name">4k99小游戏</div>
+                    <div class="game-desc">免费小游戏在线玩，每日更新，双人小游戏、休闲益智游戏大全！</div>
+                    <span class="game-tag">国产</span>
+                </div>
+            </a>
+            
+            <a href="https://easegame.com/zh" target="_blank" class="game-card">
+                <div class="game-icon">🎨</div>
+                <div class="game-info">
+                    <div class="game-name">EaseGame</div>
+                    <div class="game-desc">海量免费在线小游戏，双人合作、赛车、消除、射击游戏齐全！</div>
+                    <span class="game-tag">国产</span>
+                </div>
+            </a>
+            
+            <a href="https://yuppiy.com/cn/" target="_blank" class="game-card">
+                <div class="game-icon">🌟</div>
+                <div class="game-info">
+                    <div class="game-name">Yuppiy</div>
+                    <div class="game-desc">免费在线小游戏，赛车、益智、女孩游戏，随时随地可玩！</div>
+                    <span class="game-tag">国产</span>
+                </div>
+            </a>
+            
+            <a href="https://pokiig.com/zh" target="_blank" class="game-card">
+                <div class="game-icon">🔥</div>
+                <div class="game-info">
+                    <div class="game-name">Pokiig</div>
+                    <div class="game-desc">免费在线游戏，无需下载登录，数百款精选游戏随时畅玩！</div>
+                    <span class="game-tag">国产</span>
+                </div>
+            </a>
+            
+            <a href="https://playhop.com/zh" target="_blank" class="game-card">
+                <div class="game-icon">🎲</div>
+                <div class="game-info">
+                    <div class="game-name">Playhop</div>
+                    <div class="game-desc">最好的免费在线游戏，手机桌面都能玩，每日更新新游戏！</div>
+                    <span class="game-tag">国产</span>
+                </div>
+            </a>
+            
+            <a href="https://www.freeonlinegame.games/zh-CN" target="_blank" class="game-card">
+                <div class="game-icon">🎊</div>
+                <div class="game-info">
+                    <div class="game-name">FreeOnlineGame</div>
+                    <div class="game-desc">免费在线玩游戏，动作、益智、多人街机游戏，每周新增！</div>
+                    <span class="game-tag">国产</span>
+                </div>
+            </a>
+        </div>
+        
+        <h2 class="category-title">🌍 国外平台（可能需要加速器）</h2>
+        <div class="game-grid">
+            <a href="https://www.kongregate.com/" target="_blank" class="game-card">
+                <div class="game-icon">👑</div>
+                <div class="game-info">
+                    <div class="game-name">Kongregate</div>
+                    <div class="game-desc">老牌游戏平台，RPG、策略、塔防游戏丰富！</div>
+                    <span class="game-tag">老牌</span>
+                </div>
+            </a>
+            
+            <a href="https://www.miniclip.com/" target="_blank" class="game-card">
+                <div class="game-icon">⚽</div>
+                <div class="game-info">
+                    <div class="game-name">Miniclip</div>
+                    <div class="game-desc">经典游戏平台，足球、台球、赛车游戏应有尽有！</div>
+                    <span class="game-tag">经典</span>
+                </div>
+            </a>
+            
+            <a href="https://www.y8.com/" target="_blank" class="game-card">
+                <div class="game-icon">🎲</div>
+                <div class="game-info">
+                    <div class="game-name">Y8 Games</div>
+                    <div class="game-desc">海量免费游戏，双人游戏、模拟游戏种类丰富！</div>
+                    <span class="game-tag">多样</span>
+                </div>
+            </a>
+            
+            <a href="https://www.addictinggames.com/" target="_blank" class="game-card">
+                <div class="game-icon">🔥</div>
+                <div class="game-info">
+                    <div class="game-name">Addicting Games</div>
+                    <div class="game-desc">国外知名小游戏网站，动作、策略、益智游戏齐全！</div>
+                    <span class="game-tag">热门</span>
+                </div>
+            </a>
+            
+            <a href="https://www.agame.com/" target="_blank" class="game-card">
+                <div class="game-icon">🌟</div>
+                <div class="game-info">
+                    <div class="game-name">Agame</div>
+                    <div class="game-desc">女生游戏、装扮游戏、烹饪游戏特色平台！</div>
+                    <span class="game-tag">特色</span>
+                </div>
+            </a>
+            
+            <a href="https://www.gamesgames.com/" target="_blank" class="game-card">
+                <div class="game-icon">🎊</div>
+                <div class="game-info">
+                    <div class="game-name">GamesGames</div>
+                    <div class="game-desc">多人游戏、 io 游戏、竞技游戏聚集地！</div>
+                    <span class="game-tag">竞技</span>
+                </div>
+            </a>
+            
+            <a href="https://www.gamepix.com/" target="_blank" class="game-card">
+                <div class="game-icon">🚀</div>
+                <div class="game-info">
+                    <div class="game-name">GamePix</div>
+                    <div class="game-desc">HTML5游戏聚合平台，适合全年龄段玩家！</div>
+                    <span class="game-tag">聚合</span>
+                </div>
+            </a>
+            
+            <a href="https://www.silvergames.com/" target="_blank" class="game-card">
+                <div class="game-icon">🥈</div>
+                <div class="game-info">
+                    <div class="game-name">Silvergames</div>
+                    <div class="game-desc">免费在线游戏，多种类型任你选择！</div>
+                    <span class="game-tag">免费</span>
+                </div>
+            </a>
+            
+            <a href="https://html5games.com/" target="_blank" class="game-card">
+                <div class="game-icon">🌐</div>
+                <div class="game-info">
+                    <div class="game-name">HTML5 Games</div>
+                    <div class="game-desc">HTML5游戏平台，精选优质游戏！</div>
+                    <span class="game-tag">精选</span>
+                </div>
+            </a>
+            
+            <a href="https://www.newgrounds.com/" target="_blank" class="game-card">
+                <div class="game-icon">🎨</div>
+                <div class="game-info">
+                    <div class="game-name">Newgrounds</div>
+                    <div class="game-desc">创意游戏、动画、艺术社区，独立游戏发源地！</div>
+                    <span class="game-tag">创意</span>
+                </div>
+            </a>
+            
+            <a href="https://armorgames.com/" target="_blank" class="game-card">
+                <div class="game-icon">🛡️</div>
+                <div class="game-info">
+                    <div class="game-name">Armor Games</div>
+                    <div class="game-desc">精品Flash/HTML5游戏，策略、RPG游戏为主！</div>
+                    <span class="game-tag">精品</span>
+                </div>
+            </a>
+            
+            <a href="https://www.coolmathgames.com/" target="_blank" class="game-card">
+                <div class="game-icon">🧮</div>
+                <div class="game-info">
+                    <div class="game-name">Cool Math Games</div>
+                    <div class="game-desc">益智数学游戏，寓教于乐，适合各年龄段！</div>
+                    <span class="game-tag">益智</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
