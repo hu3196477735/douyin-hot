@@ -2,7 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>全网热榜</title>
     <style>
         * {
@@ -126,7 +129,7 @@
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
+            padding: 15px 20px;
             text-align: center;
             position: relative;
         }
@@ -913,20 +916,20 @@
             }
             
             .menu-toggle {
-                width: 32px;
-                height: 32px;
-                font-size: 14px;
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
                 left: 10px;
-                top: 10px;
+                top: 12px;
             }
             
             .sidebar {
-                width: 160px;
-                left: -160px;
+                width: 200px;
+                left: -200px !important;
             }
             
             .sidebar.open {
-                left: 0;
+                left: 0 !important;
             }
             
             .main-content {
@@ -934,15 +937,24 @@
             }
             
             .header {
-                padding: 12px 10px;
+                padding: 12px 10px 10px 50px;
+                min-height: 60px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
             
             .header h1 {
-                font-size: 20px;
+                font-size: 18px;
+                margin-bottom: 2px;
             }
             
             .header p {
-                font-size: 12px;
+                font-size: 11px;
+            }
+            
+            .header::after {
+                height: 3px;
             }
             
             .platform-buttons {
@@ -956,6 +968,24 @@
                 flex: 1;
                 min-width: 60px;
                 max-width: 80px;
+            }
+            
+            .category-tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            .category-tabs::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .category-tab {
+                white-space: nowrap;
+                flex-shrink: 0;
+                padding: 8px 12px;
+                font-size: 13px;
             }
             
             .hot-item {
