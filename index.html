@@ -2342,6 +2342,221 @@
             }
         }
         
+        /* 花园养成样式 */
+        .garden-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .plant-display {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .plant-stage {
+            font-size: 100px;
+            margin-bottom: 15px;
+            animation: plantBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes plantBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .plant-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .plant-level {
+            font-size: 18px;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .exp-bar {
+            width: 80%;
+            max-width: 300px;
+            height: 20px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 10px;
+            margin: 0 auto 10px;
+            overflow: hidden;
+        }
+        
+        .exp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .exp-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .garden-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .garden-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .garden-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .garden-btn.water {
+            border-color: #74b9ff;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+        
+        .garden-btn.fertilize {
+            border-color: #fdcb6e;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        }
+        
+        .garden-btn.weed {
+            border-color: #55efc4;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        }
+        
+        .garden-btn.bug {
+            border-color: #ff7675;
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        }
+        
+        .garden-btn .btn-icon {
+            font-size: 28px;
+        }
+        
+        .garden-btn .btn-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .garden-btn .btn-exp {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .auto-gain {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #2d6a4f;
+        }
+        
+        .plant-selector, .plant-collection {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .selector-title, .collection-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .plant-grid, .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .plant-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-radius: 15px;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .plant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .plant-card.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .plant-card.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+        
+        .plant-card-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        
+        .plant-card-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .plant-card-status {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .plant-card-status.unlocked {
+            color: #00b894;
+        }
+        
+        @media (max-width: 480px) {
+            .garden-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .plant-grid, .collection-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .plant-stage {
+                font-size: 80px;
+            }
+        }
+        
         .video-loading {
             display: flex;
             flex-direction: column;
@@ -2482,6 +2697,10 @@
             <div class="nav-item" data-page="fortune" onclick="switchPage('fortune')">
                 <span class="nav-icon">🔮</span>
                 <span class="nav-text">AI算命</span>
+            </div>
+            <div class="nav-item" data-page="garden" onclick="switchPage('garden')">
+                <span class="nav-icon">🌱</span>
+                <span class="nav-text">花园养成</span>
             </div>
 
         </div>
@@ -2697,6 +2916,71 @@
                     </div>
                     <div class="fortune-result" id="fortuneResult" style="display: none;">
                         <!-- 结果由JS生成 -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 花园养成页面 -->
+            <div id="page-garden" class="content-area">
+                <div class="header">
+                    <h1>🌱 花园养成</h1>
+                    <div class="subtitle">种植植物 · 收获快乐</div>
+                </div>
+                <div class="garden-container">
+                    <!-- 植物展示区 -->
+                    <div class="plant-display" id="plantDisplay">
+                        <div class="plant-stage" id="plantStage">🌱</div>
+                        <div class="plant-name" id="plantName">选择一颗种子开始种植</div>
+                        <div class="plant-level">Lv.<span id="plantLevel">0</span></div>
+                        <div class="exp-bar">
+                            <div class="exp-fill" id="expFill" style="width: 0%"></div>
+                        </div>
+                        <div class="exp-text"><span id="currentExp">0</span> / <span id="maxExp">100</span> EXP</div>
+                    </div>
+                    
+                    <!-- 操作按钮 -->
+                    <div class="garden-actions" id="gardenActions" style="display: none;">
+                        <button class="garden-btn water" onclick="gardenAction('water')">
+                            <span class="btn-icon">💧</span>
+                            <span class="btn-text">浇水</span>
+                            <span class="btn-exp">+10 EXP</span>
+                        </button>
+                        <button class="garden-btn fertilize" onclick="gardenAction('fertilize')">
+                            <span class="btn-icon">🧪</span>
+                            <span class="btn-text">施肥</span>
+                            <span class="btn-exp">+20 EXP</span>
+                        </button>
+                        <button class="garden-btn weed" onclick="gardenAction('weed')">
+                            <span class="btn-icon">🌿</span>
+                            <span class="btn-text">除草</span>
+                            <span class="btn-exp">+15 EXP</span>
+                        </button>
+                        <button class="garden-btn bug" onclick="gardenAction('bug')">
+                            <span class="btn-icon">🐛</span>
+                            <span class="btn-text">杀虫</span>
+                            <span class="btn-exp">+15 EXP</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 自动收益提示 -->
+                    <div class="auto-gain" id="autoGain" style="display: none;">
+                        💰 每分钟自动获得 <span id="autoExp">5</span> EXP
+                    </div>
+                    
+                    <!-- 选择植物 -->
+                    <div class="plant-selector" id="plantSelector">
+                        <div class="selector-title">🌱 选择种子</div>
+                        <div class="plant-grid" id="plantGrid">
+                            <!-- 植物卡片由JS生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 植物图鉴 -->
+                    <div class="plant-collection" id="plantCollection">
+                        <div class="collection-title">📚 植物图鉴</div>
+                        <div class="collection-grid" id="collectionGrid">
+                            <!-- 图鉴由JS生成 -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3982,6 +4266,9 @@
             } else if (page === 'fortune' && !window.fortuneInitialized) {
                 initFortune();
                 window.fortuneInitialized = true;
+            } else if (page === 'garden' && !window.gardenInitialized) {
+                initGarden();
+                window.gardenInitialized = true;
             }
         }
         
@@ -4406,6 +4693,214 @@
             book.classList.remove('opening');
             intro.style.opacity = '1';
             isBookOpening = false;
+        }
+        
+        // ==================== 花园养成功能 ====================
+        const plants = [
+            { id: 'sunflower', name: '向日葵', icon: '🌻', seedIcon: '🌱', stages: ['🌱', '🌿', '🌻', '🌻', '🌻'], names: ['种子', '幼苗', '成长期', '开花期', '成熟期'], maxExp: [100, 200, 400, 800, 1600], unlock: null },
+            { id: 'cactus', name: '仙人掌', icon: '🌵', seedIcon: '🌱', stages: ['🌱', '🌵', '🌵', '🌵', '🌵'], names: ['种子', '幼苗', '成长期', '开花期', '成熟期'], maxExp: [150, 300, 600, 1200, 2400], unlock: 'sunflower' },
+            { id: 'sakura', name: '樱花树', icon: '🌸', seedIcon: '🌱', stages: ['🌱', '🌳', '🌳', '🌸', '🌸'], names: ['种子', '幼苗', '成长期', '开花期', '成熟期'], maxExp: [200, 400, 800, 1600, 3200], unlock: 'cactus' },
+            { id: 'ginkgo', name: '银杏树', icon: '🍂', seedIcon: '🌱', stages: ['🌱', '🌳', '🌳', '🍂', '🍂'], names: ['种子', '幼苗', '成长期', '金黄期', '成熟期'], maxExp: [250, 500, 1000, 2000, 4000], unlock: 'sakura' },
+            { id: 'mystery', name: '神秘植物', icon: '🌺', seedIcon: '🌱', stages: ['🌱', '✨', '✨', '🌺', '🌺'], names: ['种子', '幼苗', '成长期', '绽放期', '成熟期'], maxExp: [500, 1000, 2000, 4000, 8000], unlock: 'ginkgo' }
+        ];
+        
+        let gardenData = {
+            currentPlant: null,
+            exp: 0,
+            level: 0,
+            unlocked: ['sunflower'],
+            grown: []
+        };
+        
+        let gardenTimer = null;
+        
+        function initGarden() {
+            loadGardenData();
+            renderPlantSelector();
+            renderPlantCollection();
+            
+            if (gardenData.currentPlant) {
+                showPlantDisplay();
+            }
+            
+            // 启动自动增长
+            startAutoGrowth();
+        }
+        
+        function loadGardenData() {
+            const saved = localStorage.getItem('gardenData');
+            if (saved) {
+                gardenData = JSON.parse(saved);
+            }
+        }
+        
+        function saveGardenData() {
+            localStorage.setItem('gardenData', JSON.stringify(gardenData));
+        }
+        
+        function renderPlantSelector() {
+            const grid = document.getElementById('plantGrid');
+            grid.innerHTML = plants.map(plant => {
+                const isUnlocked = gardenData.unlocked.includes(plant.id);
+                const isGrown = gardenData.grown.includes(plant.id);
+                const isSelected = gardenData.currentPlant === plant.id;
+                
+                return `
+                    <div class="plant-card ${!isUnlocked ? 'locked' : ''} ${isSelected ? 'selected' : ''}" 
+                         onclick="${isUnlocked ? `selectPlant('${plant.id}')` : ''}">
+                        <div class="plant-card-icon">${isUnlocked ? plant.icon : '🔒'}</div>
+                        <div class="plant-card-name">${plant.name}</div>
+                        <div class="plant-card-status ${isUnlocked ? 'unlocked' : ''}">
+                            ${isGrown ? '✅ 已养成' : isUnlocked ? '🔓 已解锁' : '🔒 未解锁'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderPlantCollection() {
+            const grid = document.getElementById('collectionGrid');
+            grid.innerHTML = plants.map(plant => {
+                const isGrown = gardenData.grown.includes(plant.id);
+                return `
+                    <div class="plant-card ${!isGrown ? 'locked' : ''}">
+                        <div class="plant-card-icon">${isGrown ? plant.icon : '❓'}</div>
+                        <div class="plant-card-name">${isGrown ? plant.name : '???'}</div>
+                        <div class="plant-card-status">
+                            ${isGrown ? '🌟 已完成' : '🔒 未解锁'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function selectPlant(plantId) {
+            const plant = plants.find(p => p.id === plantId);
+            if (!plant) return;
+            
+            gardenData.currentPlant = plantId;
+            gardenData.exp = 0;
+            gardenData.level = 0;
+            saveGardenData();
+            
+            showPlantDisplay();
+            renderPlantSelector();
+        }
+        
+        function showPlantDisplay() {
+            const plant = plants.find(p => p.id === gardenData.currentPlant);
+            if (!plant) return;
+            
+            document.getElementById('plantSelector').style.display = 'none';
+            document.getElementById('plantDisplay').style.display = 'block';
+            document.getElementById('gardenActions').style.display = 'grid';
+            document.getElementById('autoGain').style.display = 'block';
+            
+            updatePlantDisplay();
+        }
+        
+        function updatePlantDisplay() {
+            const plant = plants.find(p => p.id === gardenData.currentPlant);
+            if (!plant) return;
+            
+            const stage = plant.stages[gardenData.level] || plant.stages[plant.stages.length - 1];
+            const stageName = plant.names[gardenData.level] || plant.names[plant.names.length - 1];
+            const maxExp = plant.maxExp[gardenData.level] || plant.maxExp[plant.maxExp.length - 1];
+            const progress = (gardenData.exp / maxExp) * 100;
+            
+            document.getElementById('plantStage').textContent = stage;
+            document.getElementById('plantName').textContent = `${plant.name} - ${stageName}`;
+            document.getElementById('plantLevel').textContent = gardenData.level + 1;
+            document.getElementById('currentExp').textContent = gardenData.exp;
+            document.getElementById('maxExp').textContent = maxExp;
+            document.getElementById('expFill').style.width = `${progress}%`;
+        }
+        
+        function gardenAction(action) {
+            if (!gardenData.currentPlant) return;
+            
+            const expMap = {
+                water: 10,
+                fertilize: 20,
+                weed: 15,
+                bug: 15
+            };
+            
+            const exp = expMap[action] || 0;
+            addExp(exp);
+            
+            // 显示动画效果
+            showActionEffect(action);
+        }
+        
+        function showActionEffect(action) {
+            const effects = {
+                water: '💧',
+                fertilize: '✨',
+                weed: '🌿',
+                bug: '🛡️'
+            };
+            
+            const plantStage = document.getElementById('plantStage');
+            const original = plantStage.textContent;
+            plantStage.textContent = effects[action] || original;
+            
+            setTimeout(() => {
+                updatePlantDisplay();
+            }, 500);
+        }
+        
+        function addExp(amount) {
+            const plant = plants.find(p => p.id === gardenData.currentPlant);
+            if (!plant) return;
+            
+            gardenData.exp += amount;
+            const maxExp = plant.maxExp[gardenData.level];
+            
+            if (gardenData.exp >= maxExp && gardenData.level < plant.stages.length - 1) {
+                // 升级
+                gardenData.exp -= maxExp;
+                gardenData.level++;
+                
+                if (gardenData.level === plant.stages.length - 1) {
+                    // 植物成熟
+                    onPlantMature(plant);
+                }
+            }
+            
+            saveGardenData();
+            updatePlantDisplay();
+        }
+        
+        function onPlantMature(plant) {
+            if (!gardenData.grown.includes(plant.id)) {
+                gardenData.grown.push(plant.id);
+                
+                // 解锁下一个植物
+                const nextPlant = plants.find(p => p.unlock === plant.id);
+                if (nextPlant && !gardenData.unlocked.includes(nextPlant.id)) {
+                    gardenData.unlocked.push(nextPlant.id);
+                    setTimeout(() => {
+                        alert(`🎉 恭喜！${plant.name} 已养成！\n解锁新植物：${nextPlant.name}`);
+                        renderPlantSelector();
+                        renderPlantCollection();
+                    }, 500);
+                } else {
+                    setTimeout(() => {
+                        alert(`🎉 恭喜！${plant.name} 已养成！`);
+                    }, 500);
+                }
+            }
+        }
+        
+        function startAutoGrowth() {
+            if (gardenTimer) clearInterval(gardenTimer);
+            
+            gardenTimer = setInterval(() => {
+                if (gardenData.currentPlant) {
+                    addExp(5); // 每分钟自动获得5经验
+                }
+            }, 60000); // 每分钟执行一次
         }
         
         // ==================== AI算命功能 ====================
